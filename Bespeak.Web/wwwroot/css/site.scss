@@ -1,0 +1,26 @@
+﻿@import '../lib/mdb-ui-kit/scss/mdb.free.scss';
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap';
+
+:root {
+    --mdb-body-font-family: 'Inter', sans-serif;
+}
+
+html {
+    overflow-y: scroll !important;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
+
+body, nav, footer {
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+}
+
