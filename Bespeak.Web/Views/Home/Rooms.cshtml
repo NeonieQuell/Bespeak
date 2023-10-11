@@ -2,4 +2,67 @@
     ViewData["Title"] = "Rooms";
 }
 
-<h1 class="display-6 mb-3">@ViewData["Title"]</h1>
+<div class="row">
+    <div class="col-12">
+        <h1 class="display-6 mb-3">@ViewData["Title"]</h1>
+        <button type="button" class="btn btn-success">Add New</button>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="fs-4 text-body">All</h5>
+                <div class="table-responsive mt-3">
+                    <table id="rooms-tbl" class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Room No.</th>
+                                <th>Room Name</th>
+                                <th>Status</th>
+                                <th>Floor No.</th>
+                                <th>Type</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <tr>
+                                    <td>RM@(i + 1)</td>
+                                    <td>Room</td>
+                                    <td>Available</td>
+                                    <td>1</td>
+                                    <td>Boardroom</td>
+                                    <td class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-sm btn-outline-info d-inline-flex" title="Edit">
+                                            <span class="material-symbols-rounded" style="font-size: 1rem;">
+                                                edit
+                                            </span>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex" title="Archive">
+                                            <span class="material-symbols-rounded" style="font-size: 1rem;">
+                                                archive
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+}
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#rooms-tbl').DataTable();
+        });
+    </script>
+}

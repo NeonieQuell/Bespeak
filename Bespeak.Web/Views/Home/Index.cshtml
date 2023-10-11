@@ -2,7 +2,7 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="row pb-3">
+<div class="row">
     <div class="col-12">
         <h1 class="display-6 mb-3">Dashboard</h1>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -12,7 +12,7 @@
                         <div>
                             <h5 class="card-title">Total Rooms</h5>
                             <p class="card-text fs-1">
-                                0
+                                50
                             </p>
                         </div>
                         <span class="material-symbols-rounded text-primary bg-primary bg-opacity-10 p-2 rounded" style="font-size: 4rem;">
@@ -27,7 +27,7 @@
                         <div>
                             <h5 class="card-title">Available Rooms</h5>
                             <p class="card-text fs-1">
-                                0
+                                26
                             </p>
                         </div>
                         <span class="material-symbols-rounded text-success bg-success bg-opacity-10 p-2 rounded" style="font-size: 4rem;">
@@ -42,7 +42,7 @@
                         <div>
                             <h5 class="card-title">Occupied Rooms</h5>
                             <p class="card-text fs-1">
-                                0
+                                24
                             </p>
                         </div>
                         <span class="material-symbols-rounded text-danger bg-danger bg-opacity-10 p-2 rounded" style="font-size: 4rem;">
@@ -56,7 +56,7 @@
             <div class="card-body">
                 <h5 class="fs-4 text-body">Recent Bookings (Within 7 days Ago)</h5>
                 <div class="table-responsive mt-3">
-                    <table id="myTable" class="table table-bordered table-striped table-hover">
+                    <table id="recent-tbl" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr>
                                 <th>Room No.</th>
@@ -77,12 +77,12 @@
                                     <td>@DateTime.Now</td>
                                     <td>1 day</td>
                                     <td class="d-flex justify-content-center">
-                                        <button type="button" class="btn btn-sm btn-outline-primary d-inline-flex">
+                                        <button type="button" class="btn btn-sm btn-outline-primary d-inline-flex" title="View">
                                             <span class="material-symbols-rounded" style="font-size: 1rem;">
                                                 visibility
                                             </span>
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-outline-info d-inline-flex">
+                                        <button type="button" class="btn btn-sm btn-outline-info d-inline-flex" title="Edit">
                                             <span class="material-symbols-rounded" style="font-size: 1rem;">
                                                 edit
                                             </span>
@@ -108,7 +108,7 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#myTable').DataTable();
+            $('#recent-tbl').DataTable();
         });
     </script>
 }
