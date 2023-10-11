@@ -2,4 +2,113 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<h1 class="display-4">Dashboard</h1>
+<div class="row pb-3">
+    <div class="col-12">
+        <h1 class="display-6 mb-3">Dashboard</h1>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col">
+                <div class="card h-100 text-body">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5 class="card-title">Total Rooms</h5>
+                            <p class="card-text fs-1">
+                                0
+                            </p>
+                        </div>
+                        <span class="material-symbols-rounded text-primary bg-primary bg-opacity-10 p-2 rounded" style="font-size: 4rem;">
+                            meeting_room
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 text-body">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5 class="card-title">Available Rooms</h5>
+                            <p class="card-text fs-1">
+                                0
+                            </p>
+                        </div>
+                        <span class="material-symbols-rounded text-success bg-success bg-opacity-10 p-2 rounded" style="font-size: 4rem;">
+                            event_available
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 text-body">
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5 class="card-title">Occupied Rooms</h5>
+                            <p class="card-text fs-1">
+                                0
+                            </p>
+                        </div>
+                        <span class="material-symbols-rounded text-danger bg-danger bg-opacity-10 p-2 rounded" style="font-size: 4rem;">
+                            block
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-5">
+            <div class="card-body">
+                <h5 class="fs-4 text-body">Recent Bookings (Within 7 days Ago)</h5>
+                <div class="table-responsive mt-3">
+                    <table id="myTable" class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Room No.</th>
+                                <th>Room Name</th>
+                                <th>Booked By</th>
+                                <th>Start Date</th>
+                                <th>Duration</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                <tr>
+                                    <td>RM@(i + 1)</td>
+                                    <td>Room</td>
+                                    <td>Booker</td>
+                                    <td>@DateTime.Now</td>
+                                    <td>1 day</td>
+                                    <td class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-sm btn-outline-primary d-inline-flex">
+                                            <span class="material-symbols-rounded" style="font-size: 1rem;">
+                                                visibility
+                                            </span>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-info d-inline-flex">
+                                            <span class="material-symbols-rounded" style="font-size: 1rem;">
+                                                edit
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+}
+
+@section Scripts {
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}

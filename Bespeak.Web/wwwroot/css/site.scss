@@ -1,4 +1,6 @@
-﻿@import '../lib/mdb-ui-kit/scss/mdb.free.scss';
+﻿$display-font-weight: 400;
+
+@import '../lib/mdb-ui-kit/scss/mdb.free.scss';
 @import 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap';
 
 :root {
@@ -15,6 +17,7 @@ body {
     flex-direction: column;
     margin-right: 0 !important;
     padding-right: 0 !important;
+    background-color: #fbfbfb;
 }
 
 footer {
@@ -49,6 +52,14 @@ nav {
 
 main {
     margin-top: 58px;
+}
+
+.fw-medium {
+    font-weight: 500;
+}
+
+.fw-semi-bold {
+    font-weight: 600;
 }
 
 @media (min-width: 991.98px) {
