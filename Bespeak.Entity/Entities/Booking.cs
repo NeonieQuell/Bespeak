@@ -2,7 +2,7 @@
 {
     public class Booking
     {
-        public string BookId { get; set; } = string.Empty;
+        public string BookingId { get; set; } = string.Empty;
 
         public string RoomId { get; set; } = string.Empty;
 

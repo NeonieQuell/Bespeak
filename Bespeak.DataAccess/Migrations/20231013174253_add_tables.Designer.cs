@@ -4,6 +4,7 @@ using Bespeak.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bespeak.DataAccess.Migrations
 {
     [DbContext(typeof(BespeakDbContext))]
-    partial class BespeakDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231013174253_add_tables")]
+    partial class add_tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace Bespeak.DataAccess.Migrations
                     b.HasIndex("RoomId")
                         .IsUnique();
 
-                    b.ToTable("Bookings");
+                    b.ToTable("Booking");
                 });
 
             modelBuilder.Entity("Bespeak.Entity.Entities.Room", b =>
@@ -76,7 +78,7 @@ namespace Bespeak.DataAccess.Migrations
                     b.HasIndex("RoomTypeId")
                         .IsUnique();
 
-                    b.ToTable("Rooms");
+                    b.ToTable("Room");
                 });
 
             modelBuilder.Entity("Bespeak.Entity.Entities.RoomType", b =>
@@ -96,7 +98,7 @@ namespace Bespeak.DataAccess.Migrations
 
                     b.HasKey("RoomTypeId");
 
-                    b.ToTable("RoomTypes");
+                    b.ToTable("RoomType");
                 });
 
             modelBuilder.Entity("Bespeak.Entity.Entities.Booking", b =>

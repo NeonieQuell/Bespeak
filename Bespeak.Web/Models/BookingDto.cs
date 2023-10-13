@@ -4,7 +4,7 @@ namespace Bespeak.Web.Models
 {
     public class BookingDto
     {
-        public string BookId { get; set; } = string.Empty;
+        public string BookingId { get; set; } = string.Empty;
 
         public Room? Room { get; set; }
 
