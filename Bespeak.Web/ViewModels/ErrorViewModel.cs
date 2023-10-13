@@ -1,4 +1,4 @@
-namespace Bespeak.Web.Models
+namespace Bespeak.Web.ViewModels
 {
     public class ErrorViewModel
     {

@@ -1,4 +1,4 @@
-﻿using Bespeak.Web.Models;
+﻿using Bespeak.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
