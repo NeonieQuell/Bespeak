@@ -1,8 +1,18 @@
+using Bespeak.DataAccess.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+builder.Services.AddDbContext<BespeakDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllersWithViews();
+
+builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
 var app = builder.Build();
 

@@ -11,18 +11,6 @@ namespace Bespeak.Web.Controllers
             return View();
         }
 
-        [Route("[action]")]
-        public IActionResult Rooms()
-        {
-            return View();
-        }
-
-        [Route("[action]")]
-        public IActionResult Bookings()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

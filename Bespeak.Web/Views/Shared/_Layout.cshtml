@@ -7,6 +7,7 @@
     <title>@ViewData["Title"] - Bespeak</title>
     @* Google Static Font Icon *@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+    @* jQuery Data Tables Plugin *@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -22,12 +23,12 @@
                        asp-controller="Home" asp-action="Index">
                         Dashboard
                     </a>
-                    <a class="list-group-item list-group-item-action py-2 @Html.IsActive("Home", "Rooms")"
-                       asp-controller="Home" asp-action="Rooms">
+                    <a class="list-group-item list-group-item-action py-2 @Html.IsActive("Rooms", "Index")"
+                       asp-controller="Rooms" asp-action="Index">
                         Rooms
                     </a>
-                    <a class="list-group-item list-group-item-action py-2 @Html.IsActive("Home", "Bookings")"
-                       asp-controller="Home" asp-action="Bookings">
+                    <a class="list-group-item list-group-item-action py-2 @Html.IsActive("Bookings", "Index")"
+                       asp-controller="Bookings" asp-action="Index">
                         Bookings
                     </a>
                 </div>

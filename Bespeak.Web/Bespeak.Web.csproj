@@ -22,4 +22,17 @@
     <None Include="wwwroot\js\dashboard.html.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.19">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bespeak.DataAccess\Bespeak.DataAccess.csproj" />
+    <ProjectReference Include="..\Bespeak.Entity\Bespeak.Entity.csproj" />
+  </ItemGroup>
+
 </Project>
