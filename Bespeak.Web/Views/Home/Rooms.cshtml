@@ -5,9 +5,13 @@
 <div class="row">
     <div class="col-12">
         <h1 class="display-6 mb-3" id="header">All Rooms</h1>
+        <div class="d-flex flex-column flex-sm-row">
+            <button type="button" class="btn btn-primary">New Room</button>
+            <button type="button" class="btn btn-secondary mt-3 mt-sm-0 ms-sm-3">New Room Type</button>
+        </div>
         <div class="card mt-4">
             <div class="card-body">
-                <ul class="nav nav-tabs nav-justified mb-4 border-bottom" role="tablist">
+                <ul class="nav nav-tabs nav-justified mb-2 border-bottom" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="tab-all-rooms" data-mdb-toggle="tab" href="#tabs-all-rooms"
                            role="tab" aria-controls="tabs-all-rooms" aria-selected="true">
@@ -24,8 +28,7 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tabs-all-rooms" role="tabpanel" 
                         aria-labelledby="tab-all-rooms">
-                        <button type="button" class="btn btn-success">New Room</button>
-                        <div class="table-responsive mt-4">
+                        <div class="table-responsive">
                             <table id="all-rooms-tbl" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
@@ -66,12 +69,11 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="tabs-room-types" role="tabpanel" aria-labelledby="tab-room-types">
-                        <button type="button" class="btn btn-success">New Room Type</button>
-                        <div class="table-responsive mt-4">
+                        <div class="table-responsive">
                             <table id="room-types-tbl" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Type #</th>
+                                        <th>Room Type #</th>
                                         <th class="w-25">Type</th>
                                         <th>Rooms</th>
                                         <th>Booked</th>
