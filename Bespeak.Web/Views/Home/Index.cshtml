@@ -12,7 +12,7 @@
                         <div>
                             <h5 class="card-title">Total Rooms</h5>
                             <p class="card-text fs-1">
-                                50
+                                0
                             </p>
                         </div>
                         <span class="material-symbols-rounded text-primary bg-primary bg-opacity-10 p-2 rounded" style="font-size: 4rem;">
@@ -27,7 +27,7 @@
                         <div>
                             <h5 class="card-title">Available Rooms</h5>
                             <p class="card-text fs-1">
-                                26
+                                0
                             </p>
                         </div>
                         <span class="material-symbols-rounded text-success bg-success bg-opacity-10 p-2 rounded" style="font-size: 4rem;">
@@ -42,7 +42,7 @@
                         <div>
                             <h5 class="card-title">Occupied Rooms</h5>
                             <p class="card-text fs-1">
-                                24
+                                0
                             </p>
                         </div>
                         <span class="material-symbols-rounded text-danger bg-danger bg-opacity-10 p-2 rounded" style="font-size: 4rem;">
@@ -59,10 +59,11 @@
                     <table id="recent-tbl" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Room No.</th>
-                                <th>Room Name</th>
+                                <th>Book #</th>
+                                <th>Room #</th>
+                                <th>Room Type</th>
                                 <th>Booked By</th>
-                                <th>Start Date</th>
+                                <th>Schedule (mm-dd-yyy)</th>
                                 <th>Duration</th>
                                 <th>Actions</th>
                             </tr>
@@ -71,10 +72,11 @@
                             @for (int i = 0; i < 5; i++)
                             {
                                 <tr>
+                                    <td>BK@(i + 1)</td>
                                     <td>RM@(i + 1)</td>
-                                    <td>Room</td>
-                                    <td>Booker</td>
-                                    <td>@DateTime.Now</td>
+                                    <td>Boardroom</td>
+                                    <td>Booker T</td>
+                                    <td>@DateTime.Now.ToString("d") - @DateTime.Now.AddDays(1).ToString("d")</td>
                                     <td>1 day</td>
                                     <td class="d-flex justify-content-center">
                                         <button type="button" class="btn btn-sm btn-outline-primary d-inline-flex" title="View">

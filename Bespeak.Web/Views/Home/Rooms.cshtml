@@ -4,48 +4,108 @@
 
 <div class="row">
     <div class="col-12">
-        <h1 class="display-6 mb-3">@ViewData["Title"]</h1>
-        <button type="button" class="btn btn-success">Add Room</button>
+        <h1 class="display-6 mb-3" id="header">All Rooms</h1>
         <div class="card mt-4">
             <div class="card-body">
-                <h5 class="fs-4 text-body">All</h5>
-                <div class="table-responsive mt-3">
-                    <table id="rooms-tbl" class="table table-bordered table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Room No.</th>
-                                <th>Room Name</th>
-                                <th>Status</th>
-                                <th>Floor No.</th>
-                                <th>Type</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for (int i = 0; i < 5; i++)
-                            {
-                                <tr>
-                                    <td>RM@(i + 1)</td>
-                                    <td>Room</td>
-                                    <td>Available</td>
-                                    <td>1</td>
-                                    <td>Boardroom</td>
-                                    <td class="d-flex justify-content-center">
-                                        <button type="button" class="btn btn-sm btn-outline-info d-inline-flex" title="Edit">
-                                            <span class="material-symbols-rounded" style="font-size: 1rem;">
-                                                edit
-                                            </span>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-outline-danger d-inline-flex" title="Archive">
-                                            <span class="material-symbols-rounded" style="font-size: 1rem;">
-                                                archive
-                                            </span>
-                                        </button>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                <ul class="nav nav-tabs nav-justified mb-4 border-bottom" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="tab-all-rooms" data-mdb-toggle="tab" href="#tabs-all-rooms"
+                           role="tab" aria-controls="tabs-all-rooms" aria-selected="true">
+                           All Rooms
+                       </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="tab-room-types" data-mdb-toggle="tab" href="#tabs-room-types"
+                           role="tab" aria-controls="tabs-room-types" aria-selected="false">
+                            Room Types
+                       </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tabs-all-rooms" role="tabpanel" 
+                        aria-labelledby="tab-all-rooms">
+                        <button type="button" class="btn btn-success">New Room</button>
+                        <div class="table-responsive mt-4">
+                            <table id="all-rooms-tbl" class="table table-bordered table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Room #</th>
+                                        <th>Type</th>
+                                        <th>Status</th>
+                                        <th>Floor No.</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        <tr>
+                                            <td>RM@(i + 1)</td>
+                                            <td>Boardroom</td>
+                                            <td>Available</td>
+                                            <td>1</td>
+                                            <td class="d-flex justify-content-center">
+                                                <button type="button" 
+                                                    class="btn btn-sm btn-outline-info d-inline-flex" title="Edit">
+                                                    <span class="material-symbols-rounded" style="font-size: 1rem;">
+                                                        edit
+                                                    </span>
+                                                </button>
+                                                <button type="button" 
+                                                    class="btn btn-sm btn-outline-danger d-inline-flex" 
+                                                    title="Archive">
+                                                    <span class="material-symbols-rounded" style="font-size: 1rem;">
+                                                        archive
+                                                    </span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tabs-room-types" role="tabpanel" aria-labelledby="tab-room-types">
+                        <button type="button" class="btn btn-success">New Room Type</button>
+                        <div class="table-responsive mt-4">
+                            <table id="room-types-tbl" class="table table-bordered table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Type #</th>
+                                        <th class="w-25">Type</th>
+                                        <th>Rooms</th>
+                                        <th>Booked</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        <tr>
+                                            <td>RMTYPE@(i + 1)</td>
+                                            <td>Boardroom</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td class="d-flex justify-content-center">
+                                                <button type="button" 
+                                                    class="btn btn-sm btn-outline-info d-inline-flex" title="Edit">
+                                                    <span class="material-symbols-rounded" style="font-size: 1rem;">
+                                                        edit
+                                                    </span>
+                                                </button>
+                                                <button type="button" 
+                                                    class="btn btn-sm btn-outline-danger d-inline-flex" title="Archive">
+                                                    <span class="material-symbols-rounded" style="font-size: 1rem;">
+                                                        archive
+                                                    </span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
