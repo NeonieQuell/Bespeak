@@ -2,4 +2,56 @@
     ViewData["Title"] = "Bookings";
 }
 
-<h1 class="display-6 mb-3">@ViewData["Title"]</h1>
+<div class="row">
+    <div class="col-12">
+        <h1 class="display-6 mb-3">@ViewData["Title"]</h1>
+        <button type="button" class="btn btn-success">Book Room</button>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="fs-4 text-body">All</h5>
+                <div class="table-responsive mt-3">
+                    <table id="bookings-tbl" class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Room No.</th>
+                                <th>Room Name</th>
+                                <th>Booked By</th>
+                                <th>Start Date</th>
+                                <th>Duration</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < 25; i++)
+                            {
+                                <tr>
+                                    <td>RM@(i + 1)</td>
+                                    <td>Room</td>
+                                    <td>Booker</td>
+                                    <td>@DateTime.Now</td>
+                                    <td>1 day</td>
+                                    <td class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-sm btn-outline-primary d-inline-flex" title="View">
+                                            <span class="material-symbols-rounded" style="font-size: 1rem;">
+                                                visibility
+                                            </span>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-info d-inline-flex" title="Edit">
+                                            <span class="material-symbols-rounded" style="font-size: 1rem;">
+                                                edit
+                                            </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/bookings.html.js"></script>
+}
