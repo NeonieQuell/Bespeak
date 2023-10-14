@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Bespeak.Web.Models
 {
@@ -20,7 +19,6 @@ namespace Bespeak.Web.Models
     {
         [Required]
         [MaxLength(32)]
-        [DisplayName("Type")]
         public string TypeName { get; set; } = string.Empty;
 
         [MaxLength(512)]

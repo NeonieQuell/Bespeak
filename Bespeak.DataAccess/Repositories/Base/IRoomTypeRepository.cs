@@ -9,5 +9,7 @@ namespace Bespeak.DataAccess.Repositories.Base
         Task<IEnumerable<RoomType>> GetRoomTypesAsync();
 
         Task AddAsync(RoomType roomType);
+
+        Task<bool> IsRoomTypeExistsAsync(string typeName);
     }
 }

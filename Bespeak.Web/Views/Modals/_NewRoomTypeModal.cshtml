@@ -1,33 +1,33 @@
-﻿@model RoomTypeDtoForCreate
-
-<button type="button" class="btn btn-secondary mt-3 mt-sm-0 ms-sm-3" data-mdb-toggle="modal"
-    data-mdb-target="#new-room-type-modal">
+﻿<button type="button" class="btn btn-secondary mt-3 mt-sm-0 ms-sm-3" data-mdb-toggle="modal"
+    data-mdb-target="#nrt-modal">
     New Room Type
 </button>
 
-<div class="modal fade" id="new-room-type-modal" tabindex="-1" aria-labelledby="new-room-type-modal-label" 
+<div class="modal fade" id="nrt-modal" tabindex="-1" aria-labelledby="nrt-modal-label" 
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="new-room-type-modal-label">New Room Type</h5>
+                <h5 class="modal-title" id="nrt-modal-label">New Room Type</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="form-new-room-type">
+                <form method="post" id="form-nrt">
                     <div class="form-outline mb-4">
-                        <input asp-for="TypeName" class="form-control" required />
-                        <label asp-for="TypeName" class="form-label"></label>
+                        <input type="text" id="form-nrt-type-name" name="@nameof(RoomTypeDtoForCreate.TypeName)" 
+                            class="form-control" maxlength="32" required />
+                        <label class="form-label" for="form-nrt-type-name">Type</label>
                     </div>
                     <div class="form-outline">
-                        <textarea asp-for="Description" class="form-control" rows="6"></textarea>
-                        <label asp-for="Description" class="form-label"></label>
+                        <textarea id="form-nrt-description" name="@nameof(RoomTypeDtoForCreate.Description)"
+                            class="form-control" rows="6" maxlength="512"></textarea>
+                        <label class="form-label" for="form-nrt-description">Description</label>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" form="form-new-room-type">Save</button>
+                <button type="submit" class="btn btn-primary" form="form-nrt">Save</button>
             </div>
         </div>
     </div>

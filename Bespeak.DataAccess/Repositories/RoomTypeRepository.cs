@@ -32,5 +32,11 @@ namespace Bespeak.DataAccess.Repositories
         {
             return await _dbContext.RoomTypes.ToListAsync();
         }
+
+        public async Task<bool> IsRoomTypeExistsAsync(string typeName)
+        {
+            return await _dbContext.RoomTypes.AnyAsync(rt =>
+                rt.TypeName.ToLower() == typeName.ToLower());
+        }
     }
 }

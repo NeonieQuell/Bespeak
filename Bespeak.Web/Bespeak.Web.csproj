@@ -7,19 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\bookings.html.js" />
-    <Content Remove="wwwroot\js\dashboard.html.js" />
-    <Content Remove="wwwroot\js\rooms.html.js" />
+    <Content Remove="wwwroot\js\bookings.js" />
+    <Content Remove="wwwroot\js\dashboard.js" />
+    <Content Remove="wwwroot\js\rooms.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\js\dashboard.html.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\js\bookings.html.js" />
-    <None Include="wwwroot\js\rooms.html.js" />
-    <None Include="wwwroot\js\dashboard.html.js" />
+    <None Include="wwwroot\js\bookings.js" />
+    <None Include="wwwroot\js\rooms.js" />
+    <None Include="wwwroot\js\dashboard.js" />
   </ItemGroup>
 
   <ItemGroup>
