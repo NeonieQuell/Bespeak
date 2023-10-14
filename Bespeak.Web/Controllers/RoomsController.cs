@@ -2,6 +2,7 @@
 using Bespeak.DataAccess.Repositories.Base;
 using Bespeak.Entity.Entities;
 using Bespeak.Web.Models;
+using Bespeak.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bespeak.Web.Controllers
@@ -19,9 +20,19 @@ namespace Bespeak.Web.Controllers
             _roomTypeRepository = roomTypeRepository;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var roomTypesFromDb = await _roomTypeRepository.GetRoomTypesAsync();
+
+            // Convert to dto
+            var roomTypes = _mapper.Map<List<RoomTypeDto>>(roomTypesFromDb);
+
+            var viewModel = new RoomsViewModel()
+            {
+                RoomTypes = roomTypes
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]

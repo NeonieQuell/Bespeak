@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RoomsViewModel
+@{
     ViewData["Title"] = "Rooms";
 }
 <div class="row">
@@ -81,22 +82,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for (int i = 0; i < 5; i++)
+                                    @foreach (var roomType in Model.RoomTypes)
                                     {
                                         <tr>
-                                            <td>RMTYPE@(i + 1)</td>
-                                            <td>Boardroom</td>
-                                            <td>0</td>
-                                            <td>0</td>
+                                            <td>@roomType.RoomTypeId</td>
+                                            <td>@roomType.TypeName</td>
+                                            <td>@roomType.TotalRoomsOfType</td>
+                                            <td>@roomType.TotalBookedOfType</td>
                                             <td class="d-flex justify-content-center">
-                                                <button type="button" 
-                                                    class="btn btn-sm btn-outline-info d-inline-flex" title="Edit">
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-info d-inline-flex" title="Edit">
                                                     <span class="material-symbols-rounded" style="font-size: 1rem;">
                                                         edit
                                                     </span>
                                                 </button>
-                                                <button type="button" 
-                                                    class="btn btn-sm btn-outline-danger d-inline-flex" title="Archive">
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-danger d-inline-flex" title="Archive">
                                                     <span class="material-symbols-rounded" style="font-size: 1rem;">
                                                         archive
                                                     </span>
