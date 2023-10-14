@@ -1,4 +1,7 @@
-﻿namespace Bespeak.Web.Models
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace Bespeak.Web.Models
 {
     public class RoomTypeDto
     {
@@ -11,5 +14,16 @@
         public int TotalRoomsOfType { get; set; }
 
         public int TotalBookedOfType { get; set; }
+    }
+
+    public class RoomTypeDtoForCreate
+    {
+        [Required]
+        [MaxLength(32)]
+        [DisplayName("Type")]
+        public string TypeName { get; set; } = string.Empty;
+
+        [MaxLength(512)]
+        public string? Description { get; set; }
     }
 }

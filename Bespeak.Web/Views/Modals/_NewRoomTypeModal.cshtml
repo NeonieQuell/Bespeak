@@ -1,17 +1,33 @@
-﻿<button type="button" class="btn btn-secondary mt-3 mt-sm-0 ms-sm-3" data-mdb-toggle="modal"
-    data-mdb-target="#new-room-type-modal">New Room Type</button>
+﻿@model RoomTypeDtoForCreate
 
-<div class="modal fade" id="new-room-type-modal" tabindex="-1" aria-labelledby="new-room-type-modal-label" aria-hidden="true">
-    <div class="modal-dialog">
+<button type="button" class="btn btn-secondary mt-3 mt-sm-0 ms-sm-3" data-mdb-toggle="modal"
+    data-mdb-target="#new-room-type-modal">
+    New Room Type
+</button>
+
+<div class="modal fade" id="new-room-type-modal" tabindex="-1" aria-labelledby="new-room-type-modal-label" 
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="new-room-type-modal-label">New Room Type</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">...</div>
+            <div class="modal-body">
+                <form id="form-new-room-type">
+                    <div class="form-outline mb-4">
+                        <input asp-for="TypeName" class="form-control" required />
+                        <label asp-for="TypeName" class="form-label"></label>
+                    </div>
+                    <div class="form-outline">
+                        <textarea asp-for="Description" class="form-control" rows="6"></textarea>
+                        <label asp-for="Description" class="form-label"></label>
+                    </div>
+                </form>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary" form="form-new-room-type">Save</button>
             </div>
         </div>
     </div>
