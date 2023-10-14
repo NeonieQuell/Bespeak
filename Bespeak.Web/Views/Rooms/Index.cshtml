@@ -2,12 +2,14 @@
     ViewData["Title"] = "Rooms";
 }
 
+
 <div class="row">
     <div class="col-12">
         <h1 class="display-6 mb-3" id="header">All Rooms</h1>
         <div class="d-flex flex-column flex-sm-row">
             <button type="button" class="btn btn-primary">New Room</button>
-            <button type="button" class="btn btn-secondary mt-3 mt-sm-0 ms-sm-3">New Room Type</button>
+            @* New Room Type Button *@
+            <partial name="~/Views/Modals/_NewRoomTypeModal.cshtml" />
         </div>
         <div class="card mt-4">
             <div class="card-body">
