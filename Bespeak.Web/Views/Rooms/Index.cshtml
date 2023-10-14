@@ -2,6 +2,69 @@
 @{
     ViewData["Title"] = "Rooms";
 }
+
+@* New room modal *@
+<div class="modal fade" id="nr-modal" tabindex="-1" aria-labelledby="nr-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nr-modal-label">New Room</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="form-nr">
+                    <select class="form-control mb-4" name="" required>
+                        <option value="" disabled selected>Select Type</option>
+                        @foreach (var roomType in Model.RoomTypes)
+                        {
+                            <option value="@roomType.RoomTypeId">@roomType.TypeName</option>
+                        }
+                    </select>
+                    <div class="form-outline">
+                        <input type="number" id="form-nr-floor-num" name=""
+                               class="form-control" required />
+                        <label class="form-label" for="form-nr-floor-num">Floor Number</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="form-nr">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+@* New room type modal *@
+<div class="modal fade" id="nrt-modal" tabindex="-1" aria-labelledby="nrt-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nrt-modal-label">New Room Type</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="form-nrt">
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form-nrt-type-name" name="@nameof(RoomTypeDtoForCreate.TypeName)"
+                               class="form-control" maxlength="32" required />
+                        <label class="form-label" for="form-nrt-type-name">Type</label>
+                    </div>
+                    <div class="form-outline">
+                        <textarea id="form-nrt-description" name="@nameof(RoomTypeDtoForCreate.Description)"
+                                  class="form-control" rows="6" maxlength="512"></textarea>
+                        <label class="form-label" for="form-nrt-description">Description</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="form-nrt">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-12">
         <h1 class="display-6 mb-3" id="header">All Rooms</h1>
@@ -26,8 +89,10 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tabs-all-rooms" role="tabpanel" 
                         aria-labelledby="tab-all-rooms">
-                        @* New Room Button *@
-                        <partial name="~/Views/Modals/_NewRoomModal.cshtml" />
+                        <button type="button" class="btn btn-primary mt-2 mb-3" data-mdb-toggle="modal" 
+                            data-mdb-target="#nr-modal">
+                            New Room
+                        </button>
                         <div class="table-responsive">
                             <table id="all-rooms-tbl" class="table table-bordered table-striped table-hover">
                                 <thead>
@@ -69,8 +134,10 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="tabs-room-types" role="tabpanel" aria-labelledby="tab-room-types">
-                        @* New Room Type Button *@
-                        <partial name="~/Views/Modals/_NewRoomTypeModal.cshtml" />
+                        <button type="button" class="btn btn-primary mt-2 mb-3" data-mdb-toggle="modal"
+                                data-mdb-target="#nrt-modal">
+                            New Room Type
+                        </button>
                         <div class="table-responsive">
                             <table id="room-types-tbl" class="table table-bordered table-striped table-hover">
                                 <thead>
