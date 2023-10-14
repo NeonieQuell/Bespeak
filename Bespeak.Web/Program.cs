@@ -1,4 +1,6 @@
 using Bespeak.DataAccess.Context;
+using Bespeak.DataAccess.Repositories;
+using Bespeak.DataAccess.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,8 @@ builder.Services.AddDbContext<BespeakDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<IRoomTypeRepository, RoomTypeRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllersWithViews();
