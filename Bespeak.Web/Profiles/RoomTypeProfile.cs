@@ -10,6 +10,7 @@ namespace Bespeak.Web.Profiles
         {
             CreateMap<RoomTypeDtoForCreate, RoomType>();
             CreateMap<RoomType, RoomTypeDto>();
+            CreateMap<RoomDtoForCreate, Room>();
         }
     }
 }

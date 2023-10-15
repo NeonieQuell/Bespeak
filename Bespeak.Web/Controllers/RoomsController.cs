@@ -11,14 +11,19 @@ namespace Bespeak.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IRoomTypeRepository _roomTypeRepository;
+        private readonly IRoomRepository _roomRepository;
 
+        #region Constructor
         public RoomsController(
             IMapper mapper,
-            IRoomTypeRepository roomTypeRepository)
+            IRoomTypeRepository roomTypeRepository,
+            IRoomRepository roomRepository)
         {
             _mapper = mapper;
             _roomTypeRepository = roomTypeRepository;
+            _roomRepository = roomRepository;
         }
+        #endregion
 
         public async Task<ActionResult> Index()
         {
@@ -53,6 +58,17 @@ namespace Bespeak.Web.Controllers
             {
                 result = true,
                 text = "Type saved successfully"
+            });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateRoom(RoomDtoForCreate room)
+        {
+            await _roomRepository.AddAsync(_mapper.Map<Room>(room));
+
+            return Json(new
+            {
+                text = "Room saved successfully"
             });
         }
     }

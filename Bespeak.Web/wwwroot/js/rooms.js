@@ -1,4 +1,5 @@
-﻿const mdb_primary_color = '#3b71ca';
+﻿const mdbPrimaryColor = '#3b71ca';
+const defaultSwalErrorMsg = 'An error occured while processing your request';
 
 function swalInfoWait() {
     Swal.fire({
@@ -16,17 +17,9 @@ function swalSuccess(text) {
         text: text,
         allowOutsideClick: false,
         allowEscapeKey: false,
-        confirmButtonColor: mdb_primary_color
+        confirmButtonColor: mdbPrimaryColor
     }).then(() => {
         location.reload(true);
-    });
-}
-
-function swalError() {
-    Swal.fire({
-        icon: 'error',
-        text: 'An error occured while processing your request',
-        confirmButtonColor: mdb_primary_color
     });
 }
 
@@ -34,19 +27,46 @@ function swalError(text) {
     Swal.fire({
         icon: 'error',
         text: text,
-        confirmButtonColor: mdb_primary_color
+        confirmButtonColor: mdbPrimaryColor
     });
 }
 
 $(document).ready(function () {
+    // Data tables
+    $('#all-rooms-tbl').DataTable();
+    $('#room-types-tbl').DataTable();
+
     // Change header on tab click
     $('.nav-link').click(function() {
         $('#header').html($(this).text());
     });
 
-    // Data tables
-    $('#all-rooms-tbl').DataTable();
-    $('#room-types-tbl').DataTable();
+    // Submit for new room
+    $('#form-nr').submit(function (e) {
+        e.preventDefault();
+
+        var formData = new FormData($(this)[0]);
+
+        $.ajax({
+            type: 'post',
+            url: 'rooms/createroom',
+            cache: false,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            data: formData,
+            beforeSend: function () {
+                $('#nr-modal').modal('hide');
+                swalInfoWait();
+            },
+            success: function (response) {
+                swalSuccess(response.text);
+            },
+            error: function () {
+                swalError(defaultSwalErrorMsg);
+            }
+        });
+    });
 
     // Submit for new room type
     $('#form-nrt').submit(function(e) {
@@ -74,7 +94,7 @@ $(document).ready(function () {
                 }
             },
             error: function () {
-                swalError();
+                swalError(defaultSwalErrorMsg);
             }
         });
     })

@@ -14,7 +14,7 @@
             </div>
             <div class="modal-body">
                 <form method="post" id="form-nr">
-                    <select class="form-control mb-4" name="" required>
+                    <select class="form-control mb-4" name="@nameof(RoomDtoForCreate.RoomTypeId)" required>
                         <option value="" disabled selected>Select Type</option>
                         @foreach (var roomType in Model.RoomTypes)
                         {
@@ -22,7 +22,7 @@
                         }
                     </select>
                     <div class="form-outline">
-                        <input type="number" id="form-nr-floor-num" name=""
+                        <input type="number" id="form-nr-floor-num" name="@nameof(RoomDtoForCreate.FloorNumber)"
                                class="form-control" required />
                         <label class="form-label" for="form-nr-floor-num">Floor Number</label>
                     </div>
