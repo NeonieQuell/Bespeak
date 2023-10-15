@@ -2,12 +2,33 @@
     ViewData["Title"] = "Bookings";
 }
 
+<div class="modal fade" id="br-modal" tabindex="-1" aria-labelledby="br-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="br-modal-label">Book a Room</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-12">
         <h1 class="display-6 mb-3">@ViewData["Title"]</h1>
-        <button type="button" class="btn btn-primary">New Book</button>
-        <div class="card mt-4">
+        <div class="card">
             <div class="card-body">
+                <button type="button" class="btn btn-primary mb-4" data-mdb-toggle="modal"
+                    data-mdb-target="#br-modal">
+                    Book a Room
+                </button>
                 <div class="table-responsive">
                     <table id="bookings-tbl" class="table table-bordered table-striped table-hover">
                         <thead>
