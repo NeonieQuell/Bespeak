@@ -8,9 +8,13 @@ namespace Bespeak.Web.Profiles
     {
         public RoomTypeProfile()
         {
+            // Dto for create to entity
             CreateMap<RoomTypeDtoForCreate, RoomType>();
-            CreateMap<RoomType, RoomTypeDto>();
             CreateMap<RoomDtoForCreate, Room>();
+
+            // Entity to base dto
+            CreateMap<RoomType, RoomTypeDto>();
+            CreateMap<Room, RoomDto>();
         }
     }
 }

@@ -28,13 +28,16 @@ namespace Bespeak.Web.Controllers
         public async Task<ActionResult> Index()
         {
             var roomTypesFromDb = await _roomTypeRepository.GetRoomTypesAsync();
+            var roomsFromDb = await _roomRepository.GetRoomsAsync();
 
             // Convert to dto
             var roomTypes = _mapper.Map<List<RoomTypeDto>>(roomTypesFromDb);
+            var rooms = _mapper.Map<List<RoomDto>>(roomsFromDb);
 
             var viewModel = new RoomsViewModel()
             {
-                RoomTypes = roomTypes
+                RoomTypes = roomTypes,
+                Rooms = rooms
             };
 
             return View(viewModel);

@@ -105,13 +105,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for (int i = 0; i < 5; i++)
+                                    @foreach (var room in Model.Rooms)
                                     {
                                         <tr>
-                                            <td>RM@(i + 1)</td>
-                                            <td>Boardroom</td>
-                                            <td>Available</td>
-                                            <td>1</td>
+                                            <td>@room.RoomId</td>
+                                            <td>@room.RoomType!.TypeName</td>
+                                            <td>@room.Status</td>
+                                            <td>@room.FloorNumber</td>
                                             <td class="d-flex justify-content-center">
                                                 <button type="button" 
                                                     class="btn btn-sm btn-outline-info d-inline-flex" title="Edit">

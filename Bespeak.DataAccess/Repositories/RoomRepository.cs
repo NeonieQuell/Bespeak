@@ -31,7 +31,7 @@ namespace Bespeak.DataAccess.Repositories
 
         public async Task<IEnumerable<Room>> GetRoomsAsync()
         {
-            return await _dbContext.Rooms.ToListAsync();
+            return await _dbContext.Rooms.Include(r => r.RoomType).ToListAsync();
         }
     }
 }
