@@ -13,6 +13,7 @@ namespace Bespeak.DataAccess.Repositories
         {
             _dbContext = dbContext;
         }
+
         public async Task AddAsync(Room room)
         {
             var count = Convert.ToString(await _dbContext.Rooms.CountAsync() + 1);
@@ -32,6 +33,15 @@ namespace Bespeak.DataAccess.Repositories
         public async Task<IEnumerable<Room>> GetRoomsAsync()
         {
             return await _dbContext.Rooms.Include(r => r.RoomType).ToListAsync();
+        }
+
+        public async Task<(int total, int available, int occupied)> GetRoomsCountAsync()
+        {
+            int totalCount = await _dbContext.Rooms.CountAsync();
+            int availableCount = 0;
+            int occupiedCount = 0;
+
+            return (totalCount, availableCount, occupiedCount);
         }
     }
 }

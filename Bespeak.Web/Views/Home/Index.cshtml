@@ -1,4 +1,5 @@
-﻿@{
+﻿@model DashboardViewModel
+@{
     ViewData["Title"] = "Dashboard";
 }
 
@@ -12,7 +13,7 @@
                         <div>
                             <h5 class="card-title">Total Rooms</h5>
                             <p class="card-text fs-1">
-                                0
+                                @Model.TotalRoomsCount
                             </p>
                         </div>
                         <span class="material-symbols-rounded text-primary bg-primary bg-opacity-10 p-2 rounded" style="font-size: 4rem;">
@@ -27,7 +28,7 @@
                         <div>
                             <h5 class="card-title">Available Rooms</h5>
                             <p class="card-text fs-1">
-                                0
+                                @Model.AvailableRoomsCount
                             </p>
                         </div>
                         <span class="material-symbols-rounded text-success bg-success bg-opacity-10 p-2 rounded" style="font-size: 4rem;">
@@ -42,7 +43,7 @@
                         <div>
                             <h5 class="card-title">Occupied Rooms</h5>
                             <p class="card-text fs-1">
-                                0
+                                @Model.OccupiedRoomsCount
                             </p>
                         </div>
                         <span class="material-symbols-rounded text-danger bg-danger bg-opacity-10 p-2 rounded" style="font-size: 4rem;">
