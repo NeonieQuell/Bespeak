@@ -21,7 +21,9 @@ namespace Bespeak.Web.Controllers
 
             var viewModel = new DashboardViewModel()
             {
-                TotalRoomsCount = totalRoomsCount
+                TotalRoomsCount = totalRoomsCount,
+                AvailableRoomsCount = availableRoomsCount,
+                OccupiedRoomsCount = occupiedRoomsCount
             };
 
             return View(viewModel);

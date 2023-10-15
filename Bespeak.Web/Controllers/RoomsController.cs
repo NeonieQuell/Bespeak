@@ -46,7 +46,7 @@ namespace Bespeak.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateRoomType(RoomTypeDtoForCreate roomType)
         {
-            if (await _roomTypeRepository.IsRoomTypeExistsAsync(roomType.TypeName))
+            if (await _roomTypeRepository.IsRoomTypeExistsAsync(roomType.TypeName.Trim()))
             {
                 return Json(new
                 {

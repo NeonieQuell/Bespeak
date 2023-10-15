@@ -38,8 +38,8 @@ namespace Bespeak.DataAccess.Repositories
         public async Task<(int total, int available, int occupied)> GetRoomsCountAsync()
         {
             int totalCount = await _dbContext.Rooms.CountAsync();
-            int availableCount = 0;
-            int occupiedCount = 0;
+            int availableCount = await _dbContext.Rooms.CountAsync(r => r.Status == "Available");
+            int occupiedCount = await _dbContext.Rooms.CountAsync(r => r.Status == "Occupied");
 
             return (totalCount, availableCount, occupiedCount);
         }
