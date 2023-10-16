@@ -1,4 +1,5 @@
-﻿@{
+﻿@model BookingsViewModel
+@{
     ViewData["Title"] = "Bookings";
 }
 
@@ -11,7 +12,21 @@
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+                @* TODO: Continue design on this form *@
+                <form method="post" id="form-br">
+                    <select class="form-control mb-4" name="" required>
+                        <option value="" disabled selected>Select Room</option>
+                        @foreach (var rooms in Model.Rooms)
+                        {
+                            <option value="@rooms.RoomId">@rooms.RoomId</option>
+                        }
+                    </select>
+                    <div class="form-outline">
+                        <input type="text" id="form-br-booked-by" name=""
+                               class="form-control" required />
+                        <label class="form-label" for="form-br-booked-by">Booked By</label>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
@@ -52,17 +67,23 @@
                                     <td>Booker</td>
                                     <td>@DateTime.Now.ToString("d") - @DateTime.Now.AddDays(1).ToString("d")</td>
                                     <td>1 day</td>
-                                    <td class="d-flex justify-content-center">
-                                        <button type="button" class="btn btn-sm btn-outline-primary d-inline-flex" title="View">
-                                            <span class="material-symbols-rounded" style="font-size: 1rem;">
-                                                visibility
-                                            </span>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-outline-info d-inline-flex" title="Edit">
-                                            <span class="material-symbols-rounded" style="font-size: 1rem;">
-                                                edit
-                                            </span>
-                                        </button>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <button type="button"
+                                                    class="btn btn-sm btn-outline-primary d-inline-flex"
+                                                    title="View">
+                                                <span class="material-symbols-rounded" style="font-size: 1rem;">
+                                                    visibility
+                                                </span>
+                                            </button>
+                                            <button type="button"
+                                                    class="btn btn-sm btn-outline-info d-inline-flex"
+                                                    title="Edit">
+                                                <span class="material-symbols-rounded" style="font-size: 1rem;">
+                                                    edit
+                                                </span>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             }
