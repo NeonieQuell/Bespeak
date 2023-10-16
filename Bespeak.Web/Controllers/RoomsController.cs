@@ -12,26 +12,38 @@ namespace Bespeak.Web.Controllers
         private readonly IMapper _mapper;
         private readonly IRoomTypeRepository _roomTypeRepository;
         private readonly IRoomRepository _roomRepository;
+        private readonly IBookingRepository _bookingRepository;
 
         #region Constructor
         public RoomsController(
             IMapper mapper,
             IRoomTypeRepository roomTypeRepository,
-            IRoomRepository roomRepository)
+            IRoomRepository roomRepository,
+            IBookingRepository bookingRepository)
         {
             _mapper = mapper;
             _roomTypeRepository = roomTypeRepository;
             _roomRepository = roomRepository;
+            _bookingRepository = bookingRepository;
         }
         #endregion
 
         public async Task<ActionResult> Index()
         {
             var roomTypesFromDb = await _roomTypeRepository.GetRoomTypesAsync();
-            var roomsFromDb = await _roomRepository.GetRoomsAsync();
-
-            // Convert to dto
             var roomTypes = _mapper.Map<List<RoomTypeDto>>(roomTypesFromDb);
+
+            // Get metadata for dto
+            foreach (var rt in roomTypes)
+            {
+                rt.TotalRoomsOfType =
+                    await _roomRepository.GetRoomsCountByRoomTypeAsync(rt.TypeName);
+
+                rt.TotalBookedOfType =
+                    await _bookingRepository.GetBookingsCountByRoomTypeAsync(rt.TypeName);
+            }
+
+            var roomsFromDb = await _roomRepository.GetRoomsAsync();
             var rooms = _mapper.Map<List<RoomDto>>(roomsFromDb);
 
             var viewModel = new RoomsViewModel()

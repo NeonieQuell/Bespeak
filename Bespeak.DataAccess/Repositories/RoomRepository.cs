@@ -43,5 +43,10 @@ namespace Bespeak.DataAccess.Repositories
 
             return (totalCount, availableCount, occupiedCount);
         }
+
+        public async Task<int> GetRoomsCountByRoomTypeAsync(string typeName)
+        {
+            return await _dbContext.Rooms.CountAsync(r => r.RoomType!.TypeName == typeName);
+        }
     }
 }

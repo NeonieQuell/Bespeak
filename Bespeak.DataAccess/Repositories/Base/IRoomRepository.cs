@@ -11,5 +11,7 @@ namespace Bespeak.DataAccess.Repositories.Base
         Task AddAsync(Room room);
 
         Task<(int total, int available, int occupied)> GetRoomsCountAsync();
+
+        Task<int> GetRoomsCountByRoomTypeAsync(string typeName);
     }
 }

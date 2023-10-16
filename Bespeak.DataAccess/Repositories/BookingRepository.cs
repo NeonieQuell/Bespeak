@@ -37,5 +37,10 @@ namespace Bespeak.DataAccess.Repositories
                 .ThenInclude(r => r!.RoomType)
                 .ToListAsync();
         }
+
+        public async Task<int> GetBookingsCountByRoomTypeAsync(string typeName)
+        {
+            return await _dbContext.Bookings.CountAsync(b => b.Room!.RoomType!.TypeName == typeName);
+        }
     }
 }

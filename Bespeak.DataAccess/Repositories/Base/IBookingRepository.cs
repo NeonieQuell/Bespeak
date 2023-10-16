@@ -9,5 +9,7 @@ namespace Bespeak.DataAccess.Repositories.Base
         Task<IEnumerable<Booking>> GetBookingsAsync();
 
         Task<string> AddAsync(Booking booking);
+
+        Task<int> GetBookingsCountByRoomTypeAsync(string typeName);
     }
 }
