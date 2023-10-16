@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Bespeak.DataAccess.Repositories.Base;
+using Bespeak.Entity.Entities;
 using Bespeak.Web.Models;
 using Bespeak.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -10,14 +11,17 @@ namespace Bespeak.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IRoomRepository _roomRepository;
+        private readonly IBookingRepository _bookingRepository;
 
         #region Constructor
         public BookingsController(
             IMapper mapper,
-            IRoomRepository roomRepository)
+            IRoomRepository roomRepository,
+            IBookingRepository bookingRepository)
         {
             _mapper = mapper;
             _roomRepository = roomRepository;
+            _bookingRepository = bookingRepository;
         }
         #endregion
 
@@ -26,12 +30,28 @@ namespace Bespeak.Web.Controllers
             var roomsFromDb = await _roomRepository.GetRoomsAsync();
             var rooms = _mapper.Map<List<RoomDto>>(roomsFromDb);
 
+            var bookingsFromDb = await _bookingRepository.GetBookingsAsync();
+            var bookings = _mapper.Map<List<BookingDto>>(bookingsFromDb);
+
             var viewModel = new BookingsViewModel()
             {
-                Rooms = rooms
+                Rooms = rooms,
+                Bookings = bookings
             };
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateBook(BookingDtoForCreate booking)
+        {
+            var bookingIdResult = await _bookingRepository.AddAsync(_mapper.Map<Booking>(booking));
+
+            return Json(new
+            {
+                title = "Booked successfully",
+                text = $"Your booking ID is: {bookingIdResult}"
+            });
         }
     }
 }

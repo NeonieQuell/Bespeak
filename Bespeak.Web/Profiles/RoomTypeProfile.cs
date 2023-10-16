@@ -11,10 +11,12 @@ namespace Bespeak.Web.Profiles
             // Dto for create to entity
             CreateMap<RoomTypeDtoForCreate, RoomType>();
             CreateMap<RoomDtoForCreate, Room>();
+            CreateMap<BookingDtoForCreate, Booking>();
 
             // Entity to base dto
             CreateMap<RoomType, RoomTypeDto>();
             CreateMap<Room, RoomDto>();
+            CreateMap<Booking, BookingDto>();
         }
     }
 }

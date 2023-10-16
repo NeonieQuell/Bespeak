@@ -37,7 +37,7 @@ $(document).ready(function () {
     $('#room-types-tbl').DataTable();
 
     // Change header on tab click
-    $('.nav-link').click(function() {
+    $('.nav-link').click(function () {
         $('#header').html($(this).text());
     });
 
@@ -69,7 +69,7 @@ $(document).ready(function () {
     });
 
     // Submit for new room type
-    $('#form-nrt').submit(function(e) {
+    $('#form-nrt').submit(function (e) {
         e.preventDefault();
 
         var formData = new FormData($(this)[0]);
