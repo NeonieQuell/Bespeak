@@ -10,6 +10,8 @@ namespace Bespeak.Web.Models
 
         public string BookedBy { get; set; } = string.Empty;
 
+        public DateTime DateBooked { get; set; }
+
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }

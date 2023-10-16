@@ -8,16 +8,26 @@ namespace Bespeak.DataAccess.Repositories
     public class BookingRepository : IBookingRepository
     {
         private readonly BespeakDbContext _dbContext;
+        private readonly IRoomRepository _roomRepository;
 
-        public BookingRepository(BespeakDbContext dbContext)
+        #region Constructor
+        public BookingRepository(
+            BespeakDbContext dbContext,
+            IRoomRepository roomRepository)
         {
             _dbContext = dbContext;
+            _roomRepository = roomRepository;
         }
+        #endregion
 
         public async Task<string> AddAsync(Booking booking)
         {
             var count = Convert.ToString(await _dbContext.Bookings.CountAsync() + 1);
             booking.BookingId = $"BK{count}";
+            booking.DateBooked = DateTime.Now;
+
+            // Change status of booked room
+            await _roomRepository.UpdateStatusAsync(booking.RoomId, "Occupied");
 
             await _dbContext.Bookings.AddAsync(booking);
             await _dbContext.SaveChangesAsync();
@@ -33,6 +43,15 @@ namespace Bespeak.DataAccess.Repositories
         public async Task<IEnumerable<Booking>> GetBookingsAsync()
         {
             return await _dbContext.Bookings
+                .Include(b => b.Room)
+                .ThenInclude(r => r!.RoomType)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Booking>> GetRecentBookingsAsync()
+        {
+            return await _dbContext.Bookings
+                .Where(b => b.DateBooked > DateTime.Now.AddDays(-7))
                 .Include(b => b.Room)
                 .ThenInclude(r => r!.RoomType)
                 .ToListAsync();

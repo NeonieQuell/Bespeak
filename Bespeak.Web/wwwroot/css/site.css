@@ -16336,6 +16336,18 @@ main {
   font-weight: 600;
 }
 
+span.status-Available, span.status-Occupied {
+  border-radius: 4px;
+  color: #fff;
+  padding: 4px 12px;
+}
+span.status-Available {
+  background-color: #14a44d;
+}
+span.status-Occupied {
+  background-color: #dc4c64;
+}
+
 @media (min-width: 991.98px) {
   .sidebar {
     bottom: 0;
