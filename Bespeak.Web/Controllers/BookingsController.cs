@@ -53,5 +53,13 @@ namespace Bespeak.Web.Controllers
                 text = $"Your booking ID is: {bookingIdResult}"
             });
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetBooking(string bookingId)
+        {
+            var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(bookingId);
+            var booking = _mapper.Map<BookingDto>(bookingFromDb);
+            return PartialView("_ViewBookingModal", booking);
+        }
     }
 }

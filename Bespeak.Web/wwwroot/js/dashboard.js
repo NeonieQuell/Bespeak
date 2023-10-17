@@ -38,7 +38,7 @@ $(document).ready(function () {
     $('.btn-view').click(function () {
         $.ajax({
             type: 'get',
-            url: 'home/getbooking',
+            url: 'bookings/getbooking',
             data: { bookingId: $(this).closest('tr').attr('data-booking-id') },
             beforeSend: function () {
                 swalInfoWait();

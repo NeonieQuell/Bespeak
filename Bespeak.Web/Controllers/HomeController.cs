@@ -44,14 +44,6 @@ namespace Bespeak.Web.Controllers
             return View(viewModel);
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetBooking(string bookingId)
-        {
-            var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(bookingId);
-            var booking = _mapper.Map<BookingDto>(bookingFromDb);
-            return PartialView("_ViewBookingModal", booking);
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
