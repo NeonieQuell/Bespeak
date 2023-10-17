@@ -1,6 +1,4 @@
-﻿using Bespeak.Entity.Entities;
-
-namespace Bespeak.Web.Models
+﻿namespace Bespeak.Web.Models
 {
     public class RoomDto
     {
@@ -8,7 +6,7 @@ namespace Bespeak.Web.Models
 
         public string RoomTypeId { get; set; } = string.Empty;
 
-        public RoomType? RoomType { get; set; }
+        public RoomTypeDto RoomType { get; set; } = null!;
 
         public string Status { get; set; } = string.Empty;
 

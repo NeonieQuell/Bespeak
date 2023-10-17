@@ -49,9 +49,6 @@ namespace Bespeak.Web.Controllers
         {
             var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(bookingId);
             var booking = _mapper.Map<BookingDto>(bookingFromDb);
-
-            Thread.Sleep(2000);
-
             return PartialView("_ViewBookingModal", booking);
         }
 

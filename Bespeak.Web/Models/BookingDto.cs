@@ -1,12 +1,10 @@
-﻿using Bespeak.Entity.Entities;
-
-namespace Bespeak.Web.Models
+﻿namespace Bespeak.Web.Models
 {
     public class BookingDto
     {
         public string BookingId { get; set; } = string.Empty;
 
-        public Room? Room { get; set; }
+        public RoomDto Room { get; set; } = null!;
 
         public string BookedBy { get; set; } = string.Empty;
 
@@ -15,6 +13,14 @@ namespace Bespeak.Web.Models
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
+
+        public DateOnly DateBookedFormatted
+        {
+            get
+            {
+                return DateOnly.FromDateTime(DateBooked);
+            }
+        }
 
         public DateOnly StartDateFormatted
         {
