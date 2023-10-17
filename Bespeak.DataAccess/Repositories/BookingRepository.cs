@@ -37,7 +37,10 @@ namespace Bespeak.DataAccess.Repositories
 
         public async Task<Booking?> GetBookingByIdAsync(string bookingId)
         {
-            return await _dbContext.Bookings.FindAsync(bookingId);
+            return await _dbContext.Bookings
+                .Include(b => b.Room)
+                .ThenInclude(r => r!.RoomType)
+                .FirstOrDefaultAsync(b => b.BookingId == bookingId);
         }
 
         public async Task<IEnumerable<Booking>> GetBookingsAsync()
