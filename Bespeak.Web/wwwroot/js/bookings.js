@@ -22,26 +22,6 @@ $(document).ready(function () {
     // Data table
     $('#bookings-tbl').DataTable();
 
-    // View booking modal
-    $('.btn-view').click(function () {
-        $.ajax({
-            type: 'get',
-            url: 'bookings/getbooking',
-            data: { bookingId: $(this).closest('tr').attr('data-booking-id') },
-            beforeSend: function () {
-                swalInfoWait();
-            },
-            success: function (response) {
-                Swal.close();
-                $('#modal-container').html(response);
-                $('#view-booking-modal').modal('show');
-            },
-            error: function () {
-                swalError(defaultSwalErrorMsg);
-            }
-        });
-    });
-
     // Start & end date validation
     $('#form-br-start-date').on({
         // Set minimum start date as current date
@@ -87,6 +67,46 @@ $(document).ready(function () {
             },
             error: function () {
                 swalError();
+            }
+        });
+    });
+
+    // View booking modal
+    $('.btn-view').click(function () {
+        $.ajax({
+            type: 'get',
+            url: 'bookings/getbooking',
+            data: { bookingId: $(this).closest('tr').attr('data-booking-id') },
+            beforeSend: function () {
+                swalInfoWait();
+            },
+            success: function (response) {
+                Swal.close();
+                $('#modal-container').html(response);
+                $('#view-booking-modal').modal('show');
+            },
+            error: function () {
+                swalError(defaultSwalErrorMsg);
+            }
+        });
+    });
+
+    // Edit booking modal
+    $('.btn-edit').click(function () {
+        $.ajax({
+            type: 'get',
+            url: 'bookings/editbooking',
+            data: { bookingId: $(this).closest('tr').attr('data-booking-id') },
+            beforeSend: function () {
+                swalInfoWait();
+            },
+            success: function (response) {
+                Swal.close();
+                $('#modal-container').html(response);
+                $('#edit-booking-modal').modal('show');
+            },
+            error: function () {
+                swalError(defaultSwalErrorMsg);
             }
         });
     });

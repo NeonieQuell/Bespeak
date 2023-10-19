@@ -25,6 +25,7 @@ namespace Bespeak.Web.Controllers
         }
         #endregion
 
+        [HttpGet]
         public async Task<ActionResult> Index()
         {
             var roomsFromDb = await _roomRepository.GetRoomsAsync();
@@ -60,6 +61,26 @@ namespace Bespeak.Web.Controllers
             var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(bookingId);
             var booking = _mapper.Map<BookingDto>(bookingFromDb);
             return PartialView("_ViewBookingModal", booking);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> EditBooking(string bookingId)
+        {
+            // Get booking object
+            var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(bookingId);
+            var booking = _mapper.Map<BookingDto>(bookingFromDb);
+
+            // Get rooms list
+            var roomsFromDb = await _roomRepository.GetRoomsAsync();
+            var rooms = _mapper.Map<List<RoomDto>>(roomsFromDb);
+
+            var viewModel = new EditBookingViewModel()
+            {
+                Booking = booking,
+                Rooms = rooms
+            };
+
+            return PartialView("_EditBookingModal", viewModel);
         }
     }
 }

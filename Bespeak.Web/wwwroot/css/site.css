@@ -16348,6 +16348,11 @@ span.status-Occupied {
   background-color: #dc4c64;
 }
 
+form .editable {
+  background: #54b4d3;
+  color: #fff;
+}
+
 @media (min-width: 991.98px) {
   .sidebar {
     bottom: 0;

@@ -79,6 +79,13 @@ span {
     }
 }
 
+form {
+    .editable {
+        background: $info;
+        color: $white;
+    }
+}
+
 @media (min-width: 991.98px) {
     .sidebar {
         bottom: 0;
