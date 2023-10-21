@@ -1,4 +1,5 @@
 ﻿const mdbPrimaryColor = '#3b71ca';
+const currentDate = new Date().toISOString().split('T')[0];
 
 function swalInfoWait() {
     Swal.fire({
@@ -10,7 +11,7 @@ function swalInfoWait() {
     });
 }
 
-function swalError() {
+function swalErrorDefault() {
     Swal.fire({
         icon: 'error',
         text: 'An error occured while processing your request',
@@ -22,20 +23,24 @@ $(document).ready(function () {
     // Data table
     $('#bookings-tbl').DataTable();
 
-    // Start & end date validation
-    $('#form-br-start-date').on({
-        // Set minimum start date as current date
-        click: function () {
-            const currentDate = new Date().toISOString().split('T')[0];
-            $(this).attr('min', currentDate);
-        }, change: function () {
-            // Set minimum end date depending not later than start date
-            const startDate = $(this).val();
-            $('#form-br-end-date').attr('min', startDate);
+    // Start date validation for #form-br
+    $('#form-br-start-date').click(function () {
+        $(this).attr('min', currentDate);
+
+        if ($('#form-br-end-date').val()) {
+            $(this).attr('max', $('#form-br-end-date').val());
         }
     });
 
-    // Submit for booking a room
+    // End date validation for #form-br
+    $('#form-br-end-date').click(function () {
+        if ($('#form-br-start-date').val()) {
+            $(this).attr('min', $('#form-br-start-date').val());
+        } else {
+            $(this).attr('min', currentDate);
+        }
+    });
+
     $('#form-br').submit(function (e) {
         e.preventDefault();
 
@@ -66,7 +71,7 @@ $(document).ready(function () {
                 });
             },
             error: function () {
-                swalError();
+                swalErrorDefault();
             }
         });
     });
@@ -86,7 +91,7 @@ $(document).ready(function () {
                 $('#view-booking-modal').modal('show');
             },
             error: function () {
-                swalError(defaultSwalErrorMsg);
+                swalErrorDefault();
             }
         });
     });
@@ -106,8 +111,22 @@ $(document).ready(function () {
                 $('#edit-booking-modal').modal('show');
             },
             error: function () {
-                swalError(defaultSwalErrorMsg);
+                swalErrorDefault();
             }
         });
+    });
+
+    // Start date validation for #form-eb
+    $(document).on('click', '#form-eb-start-date', function () {
+        $(this).attr('min', currentDate);
+
+        if ($('#form-eb-end-date').val()) {
+            $(this).attr('max', $('#form-eb-end-date').val());
+        }
+    });
+
+    // End date validation for #form-eb
+    $(document).on('click', '#form-eb-end-date', function () {
+        $(this).attr('min', $('#form-eb-start-date').val());
     });
 });

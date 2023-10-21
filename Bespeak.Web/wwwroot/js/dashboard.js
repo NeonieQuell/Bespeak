@@ -1,5 +1,4 @@
 ﻿const mdbPrimaryColor = '#3b71ca';
-const defaultSwalErrorMsg = 'An error occured while processing your request';
 
 function swalInfoWait() {
     Swal.fire({
@@ -11,22 +10,10 @@ function swalInfoWait() {
     });
 }
 
-function swalSuccess(text) {
-    Swal.fire({
-        icon: 'success',
-        text: text,
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        confirmButtonColor: mdbPrimaryColor
-    }).then(() => {
-        location.reload(true);
-    });
-}
-
-function swalError(text) {
+function swalErrorDefault() {
     Swal.fire({
         icon: 'error',
-        text: text,
+        text: 'An error occured while processing your request',
         confirmButtonColor: mdbPrimaryColor
     });
 }
@@ -49,7 +36,7 @@ $(document).ready(function () {
                 $('#view-booking-modal').modal('show');
             },
             error: function () {
-                swalError(defaultSwalErrorMsg);
+                swalErrorDefault();
             }
         });
     });
@@ -68,7 +55,7 @@ $(document).ready(function () {
                 $('#edit-booking-modal').modal('show');
             },
             error: function () {
-                swalError(defaultSwalErrorMsg);
+                swalErrorDefault();
             }
         });
     });
@@ -79,5 +66,19 @@ $(document).ready(function () {
         const floorNum = $(this).find('option:selected').attr('data-floor-num');
         $('#form-eb-room-type').val(roomType);
         $('#form-eb-floor-num').val(floorNum);
+    });
+
+    // Start date validation for #form-eb
+    $(document).on('click', '#form-eb-start-date', function () {
+        $(this).attr('min', currentDate);
+
+        if ($('#form-eb-end-date').val()) {
+            $(this).attr('max', $('#form-eb-end-date').val());
+        }
+    });
+
+    // End date validation for #form-eb
+    $(document).on('click', '#form-eb-end-date', function () {
+        $(this).attr('min', $('#form-eb-start-date').val());
     });
 });
