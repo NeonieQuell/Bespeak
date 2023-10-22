@@ -82,5 +82,11 @@ namespace Bespeak.Web.Controllers
 
             return PartialView("_EditBookingModal", viewModel);
         }
+
+        [HttpPost]
+        public Task<ActionResult> UpdateBooking(BookingDtoForUpdate booking)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

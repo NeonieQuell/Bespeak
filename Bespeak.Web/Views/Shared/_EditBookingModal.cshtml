@@ -10,6 +10,8 @@
             </div>
             <div class="modal-body">
                 <form id="form-eb" method="post">
+                    <input type="hidden" class="form-control" value="@Model.Booking.BookingId"
+                        name="@nameof(BookingDtoForUpdate.BookingId)" />
                     <div class="mb-3">
                         <label asp-for="Booking.BookedBy" class="form-label">Booked By</label>
                         <input asp-for="Booking.BookedBy" class="form-control" disabled />
@@ -22,7 +24,9 @@
                     <div class="row mt-3">
                         <div class="col-3">
                             <label for="form-eb-room-id" class="form-label">Room No.</label>
-                            <select class="form-control editable" id="form-eb-room-id" name="" required>
+                            <select class="form-control editable" id="form-eb-room-id" 
+                                name="@nameof(BookingDtoForUpdate.RoomId)" required>
+                                <option value="" disabled>Select Room</option>
                                 @{
                                     var bookingRoomId = Model.Booking.Room.RoomId;
                                     foreach (var room in Model.Rooms)
@@ -55,12 +59,12 @@
                         }
                         <div class="col-6">
                             <label class="form-label" for="form-eb-start-date">Start Date</label>
-                            <input type="date" id="form-eb-start-date" name=""
+                            <input type="date" id="form-eb-start-date" name="@nameof(BookingDtoForUpdate.StartDate)"
                                 class="form-control editable" value="@startDateVal" min="" required />
                         </div>
                         <div class="col-6">
                             <label class="form-label" for="form-eb-end-date">End Date</label>
-                            <input type="date" id="form-eb-end-date" name=""
+                            <input type="date" id="form-eb-end-date" name="@nameof(BookingDtoForUpdate.EndDate)"
                                 class="form-control editable" value="@endDateVal" min="" required />
                         </div>
                     </div>
@@ -68,6 +72,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="form-eb">Save</button>
             </div>
         </div>
     </div>

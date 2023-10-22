@@ -1,37 +1,4 @@
-﻿const mdbPrimaryColor = '#3b71ca';
-const defaultSwalErrorMsg = 'An error occured while processing your request';
-
-function swalInfoWait() {
-    Swal.fire({
-        icon: 'info',
-        text: 'Please wait...',
-        showConfirmButton: false,
-        allowOutsideClick: false,
-        allowEscapeKey: false
-    });
-}
-
-function swalSuccess(text) {
-    Swal.fire({
-        icon: 'success',
-        text: text,
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        confirmButtonColor: mdbPrimaryColor
-    }).then(() => {
-        location.reload(true);
-    });
-}
-
-function swalError(text) {
-    Swal.fire({
-        icon: 'error',
-        text: text,
-        confirmButtonColor: mdbPrimaryColor
-    });
-}
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     // Data tables
     $('#all-rooms-tbl').DataTable();
     $('#room-types-tbl').DataTable();
@@ -63,7 +30,7 @@ $(document).ready(function () {
                 swalSuccess(response.text);
             },
             error: function () {
-                swalError(defaultSwalErrorMsg);
+                swalErrorDefault();
             }
         });
     });
@@ -90,11 +57,11 @@ $(document).ready(function () {
                 if (response.result) {
                     swalSuccess(response.text);
                 } else {
-                    swalError(response.text);
+                    swalErrorCustom(response.text);
                 }
             },
             error: function () {
-                swalError(defaultSwalErrorMsg);
+                swalErrorDefault();
             }
         });
     })
