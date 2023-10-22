@@ -46,12 +46,13 @@ namespace Bespeak.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateBook(BookingDtoForCreate booking)
         {
-            var bookingIdResult = await _bookingRepository.AddAsync(_mapper.Map<Booking>(booking));
+            var bookingToSave = _mapper.Map<Booking>(booking);
+            await _bookingRepository.AddAsync(bookingToSave);
 
             return Json(new
             {
                 title = "Booked successfully",
-                text = $"Your booking ID is: {bookingIdResult}"
+                text = $"Your booking ID is: {bookingToSave.BookingId}"
             });
         }
 
@@ -84,9 +85,18 @@ namespace Bespeak.Web.Controllers
         }
 
         [HttpPost]
-        public Task<ActionResult> UpdateBooking(BookingDtoForUpdate booking)
+        public async Task<ActionResult> UpdateBooking(BookingDtoForUpdate booking)
         {
-            throw new NotImplementedException();
+            var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(booking.BookingId);
+
+            _mapper.Map(booking, bookingFromDb);
+
+            await _bookingRepository.UpdateAsync(bookingFromDb!);
+
+            return Json(new
+            {
+                text = "Booking updated successfully"
+            });
         }
     }
 }

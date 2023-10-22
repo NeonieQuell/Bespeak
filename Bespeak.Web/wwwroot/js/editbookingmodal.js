@@ -11,7 +11,7 @@ $(document).ready(function () {
             success: function (response) {
                 Swal.close();
                 $('#modal-container').html(response);
-                $('#edit-booking-modal').modal('show');
+                $('#eb-modal').modal('show');
             },
             error: function () {
                 swalErrorDefault();
@@ -55,10 +55,11 @@ $(document).ready(function () {
             dataType: 'json',
             data: formData,
             beforeSend: function () {
+                $('#eb-modal').modal('hide');
                 swalInfoWait();
             },
             success: function (response) {
-
+                swalSuccess(response.text);
             },
             error: function () {
                 swalErrorDefault();

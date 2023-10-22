@@ -20,7 +20,7 @@ namespace Bespeak.DataAccess.Repositories
         }
         #endregion
 
-        public async Task<string> AddAsync(Booking booking)
+        public async Task AddAsync(Booking booking)
         {
             var count = Convert.ToString(await _dbContext.Bookings.CountAsync() + 1);
             booking.BookingId = $"BK{count}";
@@ -31,8 +31,6 @@ namespace Bespeak.DataAccess.Repositories
 
             await _dbContext.Bookings.AddAsync(booking);
             await _dbContext.SaveChangesAsync();
-
-            return booking.BookingId;
         }
 
         public async Task<Booking?> GetBookingByIdAsync(string bookingId)
@@ -63,6 +61,12 @@ namespace Bespeak.DataAccess.Repositories
         public async Task<int> GetBookingsCountByRoomTypeAsync(string typeName)
         {
             return await _dbContext.Bookings.CountAsync(b => b.Room!.RoomType!.TypeName == typeName);
+        }
+
+        public async Task UpdateAsync(Booking booking)
+        {
+            _dbContext.Update(booking);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BespeakDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+    // options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 });
 
 builder.Services.AddScoped<IRoomTypeRepository, RoomTypeRepository>();
