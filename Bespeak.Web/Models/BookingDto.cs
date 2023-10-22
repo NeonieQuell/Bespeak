@@ -48,7 +48,7 @@
                 }
                 else
                 {
-                    var timeDifference = (int)EndDate.Subtract(StartDate).TotalDays;
+                    var timeDifference = (int)EndDate.Subtract(StartDate).TotalDays + 1;
                     string suffix = timeDifference > 1 ? "days" : "day";
                     return $"{timeDifference} {suffix}";
                 }
