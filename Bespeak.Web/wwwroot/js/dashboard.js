@@ -1,4 +1,5 @@
 ﻿const mdbPrimaryColor = '#3b71ca';
+const currentDate = new Date().toISOString().split('T')[0];
 
 function swalInfoWait() {
     Swal.fire({
