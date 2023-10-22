@@ -4,7 +4,7 @@ namespace Bespeak.DataAccess.Repositories.Base
 {
     public interface IRoomTypeRepository
     {
-        Task<RoomType?> GetRoomTypeByIdAsync(string roomTypeId);
+        Task<RoomType?> GetRoomTypeByIdAsync(string roomTypeId, bool trackEntity);
 
         Task<IEnumerable<RoomType>> GetRoomTypesAsync();
 

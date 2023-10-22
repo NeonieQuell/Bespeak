@@ -33,9 +33,14 @@ namespace Bespeak.DataAccess.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Booking?> GetBookingByIdAsync(string bookingId)
+        public async Task<Booking?> GetBookingByIdAsync(string bookingId, bool trackEntity)
         {
-            return await _dbContext.Bookings
+            var bookings = _dbContext.Bookings as IQueryable<Booking>;
+
+            if (!trackEntity)
+                bookings = bookings.AsNoTracking();
+
+            return await bookings
                 .Include(b => b.Room)
                 .ThenInclude(r => r!.RoomType)
                 .FirstOrDefaultAsync(b => b.BookingId == bookingId);
@@ -46,6 +51,7 @@ namespace Bespeak.DataAccess.Repositories
             return await _dbContext.Bookings
                 .Include(b => b.Room)
                 .ThenInclude(r => r!.RoomType)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
@@ -55,6 +61,7 @@ namespace Bespeak.DataAccess.Repositories
                 .Where(b => b.DateBooked > DateTime.Now.AddDays(-7))
                 .Include(b => b.Room)
                 .ThenInclude(r => r!.RoomType)
+                .AsNoTracking()
                 .ToListAsync();
         }
 

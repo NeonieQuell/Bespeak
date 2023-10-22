@@ -59,7 +59,7 @@ namespace Bespeak.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> GetBooking(string bookingId)
         {
-            var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(bookingId);
+            var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(bookingId, false);
             var booking = _mapper.Map<BookingDto>(bookingFromDb);
             return PartialView("_ViewBookingModal", booking);
         }
@@ -68,7 +68,7 @@ namespace Bespeak.Web.Controllers
         public async Task<ActionResult> EditBooking(string bookingId)
         {
             // Get booking object
-            var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(bookingId);
+            var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(bookingId, false);
             var booking = _mapper.Map<BookingDto>(bookingFromDb);
 
             // Get rooms list
@@ -87,7 +87,7 @@ namespace Bespeak.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> UpdateBooking(BookingDtoForUpdate booking)
         {
-            var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(booking.BookingId);
+            var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(booking.BookingId, true);
 
             _mapper.Map(booking, bookingFromDb);
 

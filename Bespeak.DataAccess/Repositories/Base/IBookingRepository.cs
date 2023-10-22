@@ -4,7 +4,7 @@ namespace Bespeak.DataAccess.Repositories.Base
 {
     public interface IBookingRepository
     {
-        Task<Booking?> GetBookingByIdAsync(string bookingId);
+        Task<Booking?> GetBookingByIdAsync(string bookingId, bool trackEntity);
 
         Task<IEnumerable<Booking>> GetBookingsAsync();
 

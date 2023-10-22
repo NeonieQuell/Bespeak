@@ -25,14 +25,19 @@ namespace Bespeak.DataAccess.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Room?> GetRoomByIdAsync(string roomId)
+        public async Task<Room?> GetRoomByIdAsync(string roomId, bool trackEntity)
         {
-            return await _dbContext.Rooms.FindAsync(roomId);
+            var rooms = _dbContext.Rooms as IQueryable<Room>;
+
+            if (!trackEntity)
+                rooms = rooms.AsNoTracking();
+
+            return await rooms.FirstOrDefaultAsync(r => r.RoomId == roomId);
         }
 
         public async Task<IEnumerable<Room>> GetRoomsAsync()
         {
-            return await _dbContext.Rooms.Include(r => r.RoomType).ToListAsync();
+            return await _dbContext.Rooms.Include(r => r.RoomType).AsNoTracking().ToListAsync();
         }
 
         public async Task<(int total, int available, int occupied)> GetRoomsCountAsync()
