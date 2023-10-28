@@ -39,6 +39,10 @@ $(document).ready(function () {
     // End date validation for #form-eb
     $(document).on('click', '#form-eb-end-date', function () {
         $(this).attr('min', $('#form-eb-start-date').val());
+
+        if (currentDate > $(this).val()) {
+            $(this).attr('max', $(this).val());
+        }
     });
 
     $(document).on('submit', '#form-eb', function (e) {
