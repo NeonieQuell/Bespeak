@@ -4,7 +4,7 @@ namespace Bespeak.Web.ViewModels
 {
     public class EditBookingViewModel
     {
-        public BookingDto Booking { get; set; } = null!;
+        public BookingDtoForUpdate Booking { get; set; } = null!;
 
         public List<RoomDto> Rooms { get; set; }
 

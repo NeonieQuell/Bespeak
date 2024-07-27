@@ -82,7 +82,7 @@ namespace Bespeak.Web.Controllers
         {
             // Get booking object
             var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(bookingId, false);
-            var booking = _mapper.Map<BookingDto>(bookingFromDb);
+            var booking = _mapper.Map<BookingDtoForUpdate>(bookingFromDb);
 
             // Get rooms list
             var roomsFromDb = await _roomRepository.GetRoomsAsync();

@@ -10,7 +10,7 @@ namespace Bespeak.Web.Profiles
         {
             CreateMap<BookingDtoForCreate, Booking>();
             CreateMap<Booking, BookingDto>();
-            CreateMap<BookingDtoForUpdate, Booking>();
+            CreateMap<Booking, BookingDtoForUpdate>();
         }
     }
 }

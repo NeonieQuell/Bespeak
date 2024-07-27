@@ -67,14 +67,8 @@
         public DateTime EndDate { get; set; }
     }
 
-    public class BookingDtoForUpdate
+    public class BookingDtoForUpdate : BookingDto
     {
-        public string BookingId { get; set; } = string.Empty;
 
-        public string RoomId { get; set; } = string.Empty;
-
-        public DateTime StartDate { get; set; }
-
-        public DateTime EndDate { get; set; }
     }
 }
