@@ -1,6 +1,4 @@
 ﻿$(document).ready(function () {
-    
-
     // Data tables
     $('#all-rooms-tbl').DataTable();
     $('#room-types-tbl').DataTable();
