@@ -1,5 +1,6 @@
 ﻿using Bespeak.Entity.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace Bespeak.DataAccess.Context
 {
@@ -19,6 +20,7 @@ namespace Bespeak.DataAccess.Context
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
             configurationBuilder.Properties<string>().HaveColumnType("varchar");
+            configurationBuilder.Conventions.Remove(typeof(ForeignKeyIndexConvention));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,6 +28,8 @@ namespace Bespeak.DataAccess.Context
             modelBuilder.Entity<RoomType>(rt =>
             {
                 rt.HasKey(rt => rt.RoomTypeId);
+                rt.HasIndex(rt => rt.RoomTypeId).IsClustered(false);
+
                 rt.Property(rt => rt.RoomTypeId).HasMaxLength(32);
                 rt.Property(rt => rt.TypeName).HasMaxLength(32);
                 rt.Property(rt => rt.Description).HasMaxLength(512);
@@ -34,21 +38,23 @@ namespace Bespeak.DataAccess.Context
             modelBuilder.Entity<Room>(r =>
             {
                 r.HasKey(r => r.RoomId);
+                r.HasIndex(r => r.RoomId).IsClustered(false);
+                r.HasOne(r => r.RoomType).WithOne().HasForeignKey<Room>(r => r.RoomTypeId);
+
                 r.Property(r => r.RoomId).HasMaxLength(32);
                 r.Property(r => r.RoomTypeId).HasMaxLength(32);
                 r.Property(r => r.Status).HasMaxLength(32);
-
-                r.HasOne(r => r.RoomType).WithOne().HasForeignKey<Room>(r => r.RoomTypeId);
             });
 
             modelBuilder.Entity<Booking>(b =>
             {
                 b.HasKey(b => b.BookingId);
+                b.HasIndex(b => b.BookingId).IsClustered(false);
+                b.HasOne(b => b.Room).WithOne().HasForeignKey<Booking>(b => b.RoomId);
+
                 b.Property(b => b.BookingId).HasMaxLength(32);
                 b.Property(b => b.RoomId).HasMaxLength(32);
                 b.Property(b => b.BookedBy).HasMaxLength(128);
-
-                b.HasOne(b => b.Room).WithOne().HasForeignKey<Booking>(b => b.RoomId);
             });
         }
     }
