@@ -10,6 +10,8 @@ namespace Bespeak.DataAccess.Repositories.Base
 
         Task<IEnumerable<Booking>> GetRecentBookingsAsync();
 
+        Task<bool> IsAvailable(Booking booking);
+
         Task AddAsync(Booking booking);
 
         Task UpdateAsync(Booking booking);

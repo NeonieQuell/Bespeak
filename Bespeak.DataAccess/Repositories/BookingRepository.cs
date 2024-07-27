@@ -75,5 +75,12 @@ namespace Bespeak.DataAccess.Repositories
             _dbContext.Update(booking);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<bool> IsAvailable(Booking booking)
+        {
+            return await _dbContext.Bookings.AnyAsync(b => b.RoomId == booking.RoomId
+                && booking.StartDate >= b.StartDate && booking.StartDate <= b.EndDate
+                && booking.EndDate >= b.StartDate && booking.EndDate <= b.EndDate);
+        }
     }
 }
