@@ -38,16 +38,29 @@
                 swalInfoWait();
             },
             success: function (response) {
-                Swal.fire({
-                    icon: 'success',
-                    title: response.title,
-                    text: response.text,
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    confirmButtonColor: '#3b71ca'
-                }).then(() => {
-                    location.reload(true);
-                });
+                if (response.result) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: response.title,
+                        text: response.text,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        confirmButtonColor: '#3b71ca'
+                    }).then(() => {
+                        location.reload(true);
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: response.title,
+                        text: response.text,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        confirmButtonColor: '#3b71ca'
+                    }).then(() => {
+                        location.reload(true);
+                    });
+                }
             },
             error: function () {
                 swalErrorDefault();
