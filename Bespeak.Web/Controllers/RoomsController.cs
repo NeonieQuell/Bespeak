@@ -86,5 +86,20 @@ namespace Bespeak.Web.Controllers
                 text = "Room saved successfully"
             });
         }
+
+        [HttpGet]
+        public async Task<ActionResult> EditRoom(string roomId)
+        {
+            // Get room object
+            var roomFromDb = await _roomRepository.GetRoomByIdAsync(roomId, true, false);
+            var room = _mapper.Map<RoomDto>(roomFromDb);
+
+            var viewModel = new EditRoomViewModel()
+            {
+                Room = room
+            };
+
+            return PartialView("~/Views/Rooms/EditRoomModal.cshtml", viewModel);
+        }
     }
 }

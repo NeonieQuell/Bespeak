@@ -37,7 +37,19 @@
 
     // Load edit room modal
     $('.btn-edit-room').click(function () {
-        $('#er-modal').modal('show');
+        $.ajax({
+            type: 'get',
+            url: 'rooms/editroom',
+            data: { roomId: $(this).closest('tr').attr('data-room-id') },
+            beforeSend: function () {
+                swalInfoWait();
+            },
+            success: function (response) {
+                Swal.close();
+                $('#modal-container').html(response);
+                $('#er-modal').modal('show');
+            }
+        });
     });
 
     // Submit for new room type

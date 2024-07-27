@@ -1,0 +1,27 @@
+﻿@model EditRoomViewModel
+
+<div class="modal fade" id="er-modal" tabindex="-1" aria-labelledby="er-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="er-modal-label">Edit Room</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="form-er">
+                    <input type="hidden" class="form-control" value="@Model.Room.RoomId"
+                           name="@nameof(RoomDtoForUpdate.RoomId)" />
+                </form>
+                <div class="mb-3">
+                    <label asp-for="Room.RoomType.TypeName" class="form-label">Room Type</label>
+                    <input asp-for="Room.RoomType.TypeName" class="form-control" disabled />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="form-er">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

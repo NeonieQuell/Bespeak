@@ -25,9 +25,12 @@ namespace Bespeak.DataAccess.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Room?> GetRoomByIdAsync(string roomId, bool trackEntity)
+        public async Task<Room?> GetRoomByIdAsync(string roomId, bool includeType, bool trackEntity)
         {
             var rooms = _dbContext.Rooms as IQueryable<Room>;
+
+            if (includeType)
+                rooms = rooms.Include(r => r.RoomType);
 
             if (!trackEntity)
                 rooms = rooms.AsNoTracking();
