@@ -94,9 +94,14 @@ namespace Bespeak.Web.Controllers
             var roomFromDb = await _roomRepository.GetRoomByIdAsync(roomId, true, false);
             var room = _mapper.Map<RoomDto>(roomFromDb);
 
+            // Get room type list
+            var roomTypesFromDb = await _roomTypeRepository.GetRoomTypesAsync();
+            var roomTypes = _mapper.Map<List<RoomTypeDto>>(roomTypesFromDb);
+
             var viewModel = new EditRoomViewModel()
             {
-                Room = room
+                Room = room,
+                RoomTypes = roomTypes
             };
 
             return PartialView("~/Views/Rooms/EditRoomModal.cshtml", viewModel);
