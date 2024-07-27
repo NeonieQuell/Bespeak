@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+    
+
     // Data tables
     $('#all-rooms-tbl').DataTable();
     $('#room-types-tbl').DataTable();
@@ -33,6 +35,11 @@
                 swalErrorDefault();
             }
         });
+    });
+
+    // Load edit room modal
+    $('.btn-edit-room').click(function () {
+        $('#er-modal').modal('show');
     });
 
     // Submit for new room type

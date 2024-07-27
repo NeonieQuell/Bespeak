@@ -35,6 +35,37 @@
         </div>
     </div>
 </div>
+@* Edit room modal *@
+<div class="modal fade" id="er-modal" tabindex="-1" aria-labelledby="er-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="er-modal-label">Edit Room</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="form-er">
+                    <select class="form-control mb-4" name="" required>
+                        <option value="" disabled selected>Type</option>
+                    </select>
+                    <div class="form-outline mb-4">
+                        <input type="number" id="form-er-floor-num" name=""
+                               class="form-control" required />
+                        <label class="form-label" for="form-nr-floor-num">Floor Number</label>
+                    </div>
+                    <select class="form-control" name="" required>
+                        <option value="" disabled selected>Status</option>
+                    </select>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="form-er">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 @* New room type modal *@
 <div class="modal fade" id="nrt-modal" tabindex="-1" aria-labelledby="nrt-modal-label"
      aria-hidden="true">
@@ -113,7 +144,7 @@
                                             <td>
                                                 <div class="d-flex justify-content-center">
                                                     <button type="button"
-                                                            class="btn btn-sm btn-outline-info d-inline-flex"
+                                                            class="btn btn-sm btn-outline-info btn-edit-room d-inline-flex"
                                                             title="Edit">
                                                         <span class="material-symbols-rounded" 
                                                               style="font-size: 1rem;">
