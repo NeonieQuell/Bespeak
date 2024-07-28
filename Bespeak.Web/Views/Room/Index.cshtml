@@ -146,7 +146,6 @@
                             <table id="room-types-tbl" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Room Type ID</th>
                                         <th class="w-25">Type</th>
                                         <th>Rooms</th>
                                         <th>Reserved</th>
@@ -157,7 +156,6 @@
                                     @foreach (var rt in Model.RoomTypes)
                                     {
                                         <tr>
-                                            <td>@rt.RoomTypeId</td>
                                             <td>@rt.Name</td>
                                             <td>@rt.TotalRoomsOfType</td>
                                             <td>@rt.TotalReservedOfType</td>
