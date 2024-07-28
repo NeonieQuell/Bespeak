@@ -54,7 +54,7 @@ namespace Bespeak.DataAccess.Repositories
 
         public async Task<int> GetRoomsCountByRoomTypeAsync(string typeName)
         {
-            return await _dbContext.Rooms.CountAsync(r => r.RoomType!.TypeName == typeName);
+            return await _dbContext.Rooms.CountAsync(r => r.RoomType!.Name == typeName);
         }
 
         public async Task UpdateStatusAsync(string roomId, string status)

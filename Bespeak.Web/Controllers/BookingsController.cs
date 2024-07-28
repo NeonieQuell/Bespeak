@@ -46,7 +46,7 @@ namespace Bespeak.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateBook(BookingDtoForCreate booking)
         {
-            var bookingToSave = _mapper.Map<Booking>(booking);
+            var bookingToSave = _mapper.Map<Reservation>(booking);
 
             // Default results
             bool result = false;
@@ -58,7 +58,7 @@ namespace Bespeak.Web.Controllers
                 await _bookingRepository.AddAsync(bookingToSave);
                 result = true;
                 titleResult = "Booked successfully";
-                textResult = $"Your booking ID is: {bookingToSave.BookingId}";
+                textResult = $"Your booking ID is: {bookingToSave.ReservationId}";
             }
 
             return Json(new

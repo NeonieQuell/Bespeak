@@ -8,9 +8,9 @@ namespace Bespeak.Web.Profiles
     {
         public BookingProfile()
         {
-            CreateMap<BookingDtoForCreate, Booking>();
-            CreateMap<Booking, BookingDto>();
-            CreateMap<Booking, BookingDtoForUpdate>();
+            CreateMap<BookingDtoForCreate, Reservation>();
+            CreateMap<Reservation, BookingDto>();
+            CreateMap<Reservation, BookingDtoForUpdate>();
         }
     }
 }

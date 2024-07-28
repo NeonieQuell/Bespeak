@@ -20,11 +20,11 @@ namespace Bespeak.DataAccess.Repositories
         }
         #endregion
 
-        public async Task AddAsync(Booking booking)
+        public async Task AddAsync(Reservation booking)
         {
             var count = Convert.ToString(await _dbContext.Bookings.CountAsync() + 1);
-            booking.BookingId = $"BK{count}";
-            booking.DateBooked = DateTime.Now;
+            booking.ReservationId = $"BK{count}";
+            booking.CreateDate = DateTime.Now;
 
             // Change status of booked room
             await _roomRepository.UpdateStatusAsync(booking.RoomId, "Occupied");
@@ -33,9 +33,9 @@ namespace Bespeak.DataAccess.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Booking?> GetBookingByIdAsync(string bookingId, bool trackEntity)
+        public async Task<Reservation?> GetBookingByIdAsync(string bookingId, bool trackEntity)
         {
-            var bookings = _dbContext.Bookings as IQueryable<Booking>;
+            var bookings = _dbContext.Bookings as IQueryable<Reservation>;
 
             if (!trackEntity)
                 bookings = bookings.AsNoTracking();
@@ -43,10 +43,10 @@ namespace Bespeak.DataAccess.Repositories
             return await bookings
                 .Include(b => b.Room)
                 .ThenInclude(r => r!.RoomType)
-                .FirstOrDefaultAsync(b => b.BookingId == bookingId);
+                .FirstOrDefaultAsync(b => b.ReservationId == bookingId);
         }
 
-        public async Task<IEnumerable<Booking>> GetBookingsAsync()
+        public async Task<IEnumerable<Reservation>> GetBookingsAsync()
         {
             return await _dbContext.Bookings
                 .Include(b => b.Room)
@@ -55,10 +55,10 @@ namespace Bespeak.DataAccess.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Booking>> GetRecentBookingsAsync()
+        public async Task<IEnumerable<Reservation>> GetRecentBookingsAsync()
         {
             return await _dbContext.Bookings
-                .Where(b => b.DateBooked > DateTime.Now.AddDays(-7))
+                .Where(b => b.CreateDate > DateTime.Now.AddDays(-7))
                 .Include(b => b.Room)
                 .ThenInclude(r => r!.RoomType)
                 .AsNoTracking()
@@ -67,16 +67,16 @@ namespace Bespeak.DataAccess.Repositories
 
         public async Task<int> GetBookingsCountByRoomTypeAsync(string typeName)
         {
-            return await _dbContext.Bookings.CountAsync(b => b.Room!.RoomType!.TypeName == typeName);
+            return await _dbContext.Bookings.CountAsync(b => b.Room!.RoomType!.Name == typeName);
         }
 
-        public async Task UpdateAsync(Booking booking)
+        public async Task UpdateAsync(Reservation booking)
         {
             _dbContext.Update(booking);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<bool> IsAvailable(Booking booking)
+        public async Task<bool> IsAvailable(Reservation booking)
         {
             bool isAvailable = await _dbContext.Bookings.AnyAsync(b => (b.RoomId == booking.RoomId)
                 && ((booking.StartDate >= b.StartDate && booking.StartDate <= b.EndDate)

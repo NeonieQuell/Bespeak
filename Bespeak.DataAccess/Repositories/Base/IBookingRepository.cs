@@ -4,17 +4,17 @@ namespace Bespeak.DataAccess.Repositories.Base
 {
     public interface IBookingRepository
     {
-        Task<Booking?> GetBookingByIdAsync(string bookingId, bool trackEntity);
+        Task<Reservation?> GetBookingByIdAsync(string bookingId, bool trackEntity);
 
-        Task<IEnumerable<Booking>> GetBookingsAsync();
+        Task<IEnumerable<Reservation>> GetBookingsAsync();
 
-        Task<IEnumerable<Booking>> GetRecentBookingsAsync();
+        Task<IEnumerable<Reservation>> GetRecentBookingsAsync();
 
-        Task<bool> IsAvailable(Booking booking);
+        Task<bool> IsAvailable(Reservation booking);
 
-        Task AddAsync(Booking booking);
+        Task AddAsync(Reservation booking);
 
-        Task UpdateAsync(Booking booking);
+        Task UpdateAsync(Reservation booking);
 
         Task<int> GetBookingsCountByRoomTypeAsync(string typeName);
     }

@@ -10,7 +10,7 @@ namespace Bespeak.DataAccess.Context
 
         public DbSet<Room> Rooms { get; set; } = null!;
 
-        public DbSet<Booking> Bookings { get; set; } = null!;
+        public DbSet<Reservation> Bookings { get; set; } = null!;
 
         public BespeakDbContext(DbContextOptions<BespeakDbContext> options) : base(options)
         {
@@ -31,7 +31,7 @@ namespace Bespeak.DataAccess.Context
                 rt.HasIndex(rt => rt.RoomTypeId).IsClustered(false);
 
                 rt.Property(rt => rt.RoomTypeId).HasMaxLength(32);
-                rt.Property(rt => rt.TypeName).HasMaxLength(32);
+                rt.Property(rt => rt.Name).HasMaxLength(32);
                 rt.Property(rt => rt.Description).HasMaxLength(512);
             });
 
@@ -46,15 +46,15 @@ namespace Bespeak.DataAccess.Context
                 r.Property(r => r.Status).HasMaxLength(32);
             });
 
-            modelBuilder.Entity<Booking>(b =>
+            modelBuilder.Entity<Reservation>(b =>
             {
-                b.HasKey(b => b.BookingId);
-                b.HasIndex(b => b.BookingId).IsClustered(false);
-                b.HasOne(b => b.Room).WithOne().HasForeignKey<Booking>(b => b.RoomId);
+                b.HasKey(b => b.ReservationId);
+                b.HasIndex(b => b.ReservationId).IsClustered(false);
+                b.HasOne(b => b.Room).WithOne().HasForeignKey<Reservation>(b => b.RoomId);
 
-                b.Property(b => b.BookingId).HasMaxLength(32);
+                b.Property(b => b.ReservationId).HasMaxLength(32);
                 b.Property(b => b.RoomId).HasMaxLength(32);
-                b.Property(b => b.BookedBy).HasMaxLength(128);
+                b.Property(b => b.Reserver).HasMaxLength(128);
             });
         }
     }

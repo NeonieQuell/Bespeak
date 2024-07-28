@@ -1,14 +1,22 @@
-﻿namespace Bespeak.Entity.Entities
+﻿using Bespeak.Constants.Enums;
+
+namespace Bespeak.Entity.Entities
 {
     public class Room
     {
-        public string RoomId { get; set; } = string.Empty;
+        public Guid RoomId { get; set; }
+        
+        /// <summary>
+        /// The RoomTypeId of RoomType Object
+        /// </summary>
+        public Guid RoomTypeId { get; set; }
 
-        public string RoomTypeId = string.Empty;
-
+        /// <summary>
+        /// The RoomType Object of RoomTypeId Property
+        /// </summary>
         public RoomType? RoomType { get; set; }
 
-        public string Status { get; set; } = string.Empty;
+        public RoomStatus Status { get; set; }
 
         public int FloorNumber { get; set; }
     }

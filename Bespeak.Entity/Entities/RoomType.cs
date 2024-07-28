@@ -2,9 +2,9 @@
 {
     public class RoomType
     {
-        public string RoomTypeId { get; set; } = string.Empty;
+        public Guid RoomTypeId { get; set; }
 
-        public string TypeName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         public string? Description { get; set; }
     }
