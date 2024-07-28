@@ -56,7 +56,7 @@ namespace Bespeak.Web.Controllers
                 return Json(new
                 {
                     result = false,
-                    text = "Type already exists"
+                    text = "This type already exists"
                 });
             }
 
@@ -65,7 +65,7 @@ namespace Bespeak.Web.Controllers
             return Json(new
             {
                 result = true,
-                text = "Type saved successfully"
+                text = "Type saved"
             });
         }
 
@@ -76,7 +76,7 @@ namespace Bespeak.Web.Controllers
 
             return Json(new
             {
-                text = "Room saved successfully"
+                text = "Room saved"
             });
         }
 

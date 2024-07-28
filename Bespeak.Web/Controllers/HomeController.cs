@@ -27,15 +27,13 @@ namespace Bespeak.Web.Controllers
             var reservationsFromDb = await this.reservationRepository.GetRecentReservationsAsync();
             var reservations = this.mapper.Map<List<ReservationDto>>(reservationsFromDb);
 
-            var viewModel = new DashboardViewModel()
+            return View(new DashboardViewModel()
             {
                 TotalRooms = total,
                 AvailableRooms = available,
                 OccupiedRooms = occupied,
                 Reservations = reservations
-            };
-
-            return View(viewModel);
+            });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

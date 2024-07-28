@@ -22,7 +22,7 @@ namespace Bespeak.DataAccess.Repositories.Base
         Task<List<Reservation>> GetListAsync(bool includeRoom = true, bool trackEntity = true);
 
         /// <summary>
-        /// Retrieves a list Reservation
+        /// Retrieves a list Reservation. Automatically includes the rooms' RoomType if includeRoom parameter is TRUE
         /// </summary>
         /// <param name="includeRoom">Include the Reservations' related Room and its Type</param>
         /// <param name="trackEntity">Specifies if the entity needs to be tracked by the DbContext</param>

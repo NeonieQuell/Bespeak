@@ -86,9 +86,11 @@ namespace Bespeak.DataAccess.Repositories
 
         public async Task<bool> IsAvailable(Reservation reservation)
         {
-            return !await this.dbContext.Reservation.AnyAsync(r => (r.RoomId == reservation.RoomId)
+            bool result = await this.dbContext.Reservation.AnyAsync(r => (r.RoomId == reservation.RoomId)
                 && ((reservation.StartDate >= r.StartDate && reservation.StartDate <= r.EndDate)
                 || (reservation.EndDate >= r.StartDate && reservation.EndDate <= r.EndDate)));
+
+            return !result;
         }
 
         public async Task UpdateAsync(Reservation reservation)

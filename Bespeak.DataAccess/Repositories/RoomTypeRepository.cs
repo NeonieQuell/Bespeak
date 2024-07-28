@@ -48,8 +48,7 @@ namespace Bespeak.DataAccess.Repositories
 
         public async Task<bool> IsRoomTypeExistsAsync(string name)
         {
-            return await this.dbContext.RoomType.AnyAsync(rt =>
-                string.Equals(rt.Name, name, StringComparison.InvariantCultureIgnoreCase));
+            return await this.dbContext.RoomType.AnyAsync(rt => rt.Name.ToLower() == name.ToLower());
         }
     }
 }

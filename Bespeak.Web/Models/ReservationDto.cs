@@ -72,12 +72,10 @@ namespace Bespeak.Web.Models
     public class ReservationDtoForCreate
     {
         [Required]
-        public int RoomId { get; set; }
+        public Guid RoomId { get; set; }
 
         [Required]
         public string Reserver { get; set; } = string.Empty;
-
-        public DateTime CreateDate { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }

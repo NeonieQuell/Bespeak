@@ -36,16 +36,16 @@
     </div>
 </div>
 @* New room type modal *@
-<div class="modal fade" id="new-new-room-type-modal" tabindex="-1" aria-labelledby="new-new-room-type-modal-label"
+<div class="modal fade" id="new-room-type-modal" tabindex="-1" aria-labelledby="new-room-type-modal-label"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="new-new-room-type-modal-label">New Room Type</h5>
+                <h5 class="modal-title" id="new-room-type-modal-label">New Room Type</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" id="form-new-room-type">
+                <form method="POST" id="form-new-room-type">
                     <div class="form-outline mb-4">
                         <input type="text" id="form-new-room-type-name" name="@nameof(RoomTypeDtoForCreate.Name)"
                                class="form-control" maxlength="32" required />

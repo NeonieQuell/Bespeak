@@ -26,13 +26,13 @@ namespace Bespeak.Web.Controllers
             var roomsFromDb = await this.roomRepository.GetListAsync(false, false);
             var rooms = this.mapper.Map<List<RoomDto>>(roomsFromDb);
 
-            var reservationsFromDb = await this.reservationRepository.GetListAsync(false, false);
-            var bookings = this.mapper.Map<List<ReservationDto>>(reservationsFromDb);
+            var reservationsFromDb = await this.reservationRepository.GetListAsync(true, false);
+            var reservations = this.mapper.Map<List<ReservationDto>>(reservationsFromDb);
 
             return View(new ReservationViewModel()
             {
                 Rooms = rooms,
-                Reservations = bookings
+                Reservations = reservations
             });
         }
 
@@ -41,36 +41,34 @@ namespace Bespeak.Web.Controllers
         {
             var reservationToSave = this.mapper.Map<Reservation>(reservationDtoForCreate);
 
-            // Default results
-            bool result = false;
-            string titleResult = "Reservation unsuccessful";
-            string textResult = "Conflict on the room's date of reservation";
-
             if (await this.reservationRepository.IsAvailable(reservationToSave))
             {
                 await this.reservationRepository.AddAsync(reservationToSave);
-                result = true;
-                titleResult = "Reserved successfully";
-                textResult = $"Reservation Reference No.: {reservationToSave.ReservationId}";
+                return Json(new
+                {
+                    result = true,
+                    title = "Reserved",
+                    text = $"Reservation Reference No.: {reservationToSave.ReservationId}"
+                });
             }
 
             return Json(new
             {
-                result,
-                title = titleResult,
-                text = textResult
+                result = false,
+                title = "Reservation failed",
+                text = "Conflict on the room's date of reservation"
             });
         }
 
         [HttpGet]
         public async Task<ActionResult> GetReservation(int reservationId)
         {
-            var reservationFromDb = await this.reservationRepository.GetByIdAsync(reservationId, false);
+            var reservationFromDb = await this.reservationRepository.GetByIdAsync(reservationId, trackEntity: false);
             var reservation = this.mapper.Map<ReservationDto>(reservationFromDb);
             return PartialView("_ViewReservationModal", reservation);
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public async Task<ActionResult> EditReservation(int reservationId)
         {
             var reservationFromDb = await this.reservationRepository.GetByIdAsync(reservationId, false);
@@ -84,9 +82,9 @@ namespace Bespeak.Web.Controllers
                 Reservation = reservation,
                 Rooms = rooms
             });
-        }
+        }*/
 
-        [HttpPost]
+        /*[HttpPost]
         public async Task<ActionResult> UpdateReservation(ReservationDtoForUpdate reservation)
         {
             var reservationFromDb = await this.reservationRepository.GetByIdAsync(reservation.ReservationId);
@@ -99,6 +97,6 @@ namespace Bespeak.Web.Controllers
             {
                 text = "Reservation was updated"
             });
-        }
+        }*/
     }
 }
