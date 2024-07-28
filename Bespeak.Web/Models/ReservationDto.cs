@@ -27,6 +27,8 @@ namespace Bespeak.Web.Models
 
         public DateTime EndDate { get; set; }
 
+        public bool IsArchived { get; set; }
+
         public DateOnly CreateDateFormatted
         {
             get
