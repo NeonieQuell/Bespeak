@@ -12,14 +12,14 @@ namespace Bespeak.Web.Controllers
         private readonly IMapper _mapper;
         private readonly IRoomTypeRepository _roomTypeRepository;
         private readonly IRoomRepository _roomRepository;
-        private readonly IBookingRepository _bookingRepository;
+        private readonly IReservationRepository _bookingRepository;
 
         #region Constructor
         public RoomsController(
             IMapper mapper,
             IRoomTypeRepository roomTypeRepository,
             IRoomRepository roomRepository,
-            IBookingRepository bookingRepository)
+            IReservationRepository bookingRepository)
         {
             _mapper = mapper;
             _roomTypeRepository = roomTypeRepository;
@@ -30,20 +30,20 @@ namespace Bespeak.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var roomTypesFromDb = await _roomTypeRepository.GetRoomTypesAsync();
+            var roomTypesFromDb = await _roomTypeRepository.GetListAsync();
             var roomTypes = _mapper.Map<List<RoomTypeDto>>(roomTypesFromDb);
 
             // Get metadata for dto
             foreach (var rt in roomTypes)
             {
                 rt.TotalRoomsOfType =
-                    await _roomRepository.GetRoomsCountByRoomTypeAsync(rt.TypeName);
+                    await _roomRepository.GetRoomCountByRoomTypeAsync(rt.TypeName);
 
                 rt.TotalBookedOfType =
-                    await _bookingRepository.GetBookingsCountByRoomTypeAsync(rt.TypeName);
+                    await _bookingRepository.GetReservationsCountByRoomTypeAsync(rt.TypeName);
             }
 
-            var roomsFromDb = await _roomRepository.GetRoomsAsync();
+            var roomsFromDb = await _roomRepository.GetListAsync();
             var rooms = _mapper.Map<List<RoomDto>>(roomsFromDb);
 
             var viewModel = new RoomsViewModel()
@@ -91,11 +91,11 @@ namespace Bespeak.Web.Controllers
         public async Task<ActionResult> EditRoom(string roomId)
         {
             // Get room object
-            var roomFromDb = await _roomRepository.GetRoomByIdAsync(roomId, true, false);
+            var roomFromDb = await _roomRepository.GetByIdAsync(roomId, true, false);
             var room = _mapper.Map<RoomDto>(roomFromDb);
 
             // Get room type list
-            var roomTypesFromDb = await _roomTypeRepository.GetRoomTypesAsync();
+            var roomTypesFromDb = await _roomTypeRepository.GetListAsync();
             var roomTypes = _mapper.Map<List<RoomTypeDto>>(roomTypesFromDb);
 
             var viewModel = new EditRoomViewModel()

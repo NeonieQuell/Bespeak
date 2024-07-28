@@ -1,11 +1,9 @@
-﻿using Bespeak.Constants.Enums;
-
-namespace Bespeak.Entity.Entities
+﻿namespace Bespeak.Entity.Entities
 {
     public class Room
     {
         public Guid RoomId { get; set; }
-        
+
         /// <summary>
         /// The RoomTypeId of RoomType Object
         /// </summary>
@@ -16,7 +14,15 @@ namespace Bespeak.Entity.Entities
         /// </summary>
         public RoomType? RoomType { get; set; }
 
-        public RoomStatus Status { get; set; }
+        /// <summary>
+        /// The RoomStatusId of RoomStatus Object
+        /// </summary>
+        public int RoomStatusId { get; set; }
+
+        /// <summary>
+        /// The RoomStatus Object of RoomStatusId Property
+        /// </summary>
+        public RoomStatus? RoomStatus { get; set; }
 
         public int FloorNumber { get; set; }
     }

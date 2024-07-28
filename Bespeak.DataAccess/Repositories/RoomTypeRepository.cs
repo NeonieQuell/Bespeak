@@ -7,41 +7,49 @@ namespace Bespeak.DataAccess.Repositories
 {
     public class RoomTypeRepository : IRoomTypeRepository
     {
-        private readonly BespeakDbContext _dbContext;
+        private readonly BespeakDbContext dbContext;
 
         public RoomTypeRepository(BespeakDbContext dbContext)
         {
-            _dbContext = dbContext;
+            this.dbContext = dbContext;
         }
 
         public async Task AddAsync(RoomType roomType)
         {
-            string count = Convert.ToString(await _dbContext.RoomTypes.CountAsync() + 1);
-            roomType.RoomTypeId = $"RMTYPE{count}";
+            roomType.RoomTypeId = Guid.NewGuid();
 
-            await _dbContext.RoomTypes.AddAsync(roomType);
-            await _dbContext.SaveChangesAsync();
+            await this.dbContext.RoomType.AddAsync(roomType);
+            await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task<RoomType?> GetRoomTypeByIdAsync(string roomTypeId, bool trackEntity)
+        public async Task<RoomType?> GetByIdAsync(Guid roomTypeId, bool trackEntity = true)
         {
-            var roomTypes = _dbContext.RoomTypes as IQueryable<RoomType>;
+            var query = this.dbContext.RoomType as IQueryable<RoomType>;
 
             if (!trackEntity)
-                roomTypes = roomTypes.AsNoTracking();
+            {
+                query = query.AsNoTracking();
+            }
 
-            return await roomTypes.FirstOrDefaultAsync(rt => rt.RoomTypeId == roomTypeId);
+            return await query.FirstOrDefaultAsync(rt => rt.RoomTypeId == roomTypeId);
         }
 
-        public async Task<IEnumerable<RoomType>> GetRoomTypesAsync()
+        public async Task<List<RoomType>> GetListAsync(bool trackEntity = true)
         {
-            return await _dbContext.RoomTypes.AsNoTracking().ToListAsync();
+            var query = this.dbContext.RoomType as IQueryable<RoomType>;
+
+            if (!trackEntity)
+            {
+                query = query.AsNoTracking();
+            }
+
+            return await query.ToListAsync();
         }
 
-        public async Task<bool> IsRoomTypeExistsAsync(string typeName)
+        public async Task<bool> IsRoomTypeExistsAsync(string name)
         {
-            return await _dbContext.RoomTypes.AnyAsync(rt =>
-                rt.Name.ToLower() == typeName.ToLower());
+            return await this.dbContext.RoomType.AnyAsync(rt =>
+                string.Equals(rt.Name, name, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }

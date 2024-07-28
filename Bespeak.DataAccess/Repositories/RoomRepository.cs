@@ -2,66 +2,86 @@
 using Bespeak.DataAccess.Repositories.Base;
 using Bespeak.Entity.Entities;
 using Microsoft.EntityFrameworkCore;
+using Enums = Bespeak.Constants.Enums;
 
 namespace Bespeak.DataAccess.Repositories
 {
     public class RoomRepository : IRoomRepository
     {
-        private readonly BespeakDbContext _dbContext;
+        private readonly BespeakDbContext dbContext;
 
         public RoomRepository(BespeakDbContext dbContext)
         {
-            _dbContext = dbContext;
+            this.dbContext = dbContext;
         }
 
         public async Task AddAsync(Room room)
         {
-            var count = Convert.ToString(await _dbContext.Rooms.CountAsync() + 1);
-            room.RoomId = $"RM{count}";
+            room.RoomId = Guid.NewGuid();
+            room.RoomStatusId = (int)Enums.RoomStatus.Available;
 
-            room.Status = "Available";
-
-            await _dbContext.Rooms.AddAsync(room);
-            await _dbContext.SaveChangesAsync();
+            await this.dbContext.Room.AddAsync(room);
+            await this.dbContext.SaveChangesAsync();
         }
 
-        public async Task<Room?> GetRoomByIdAsync(string roomId, bool includeType, bool trackEntity)
+        public async Task<(int total, int available, int occupied)> GetAllCountsAsync()
         {
-            var rooms = _dbContext.Rooms as IQueryable<Room>;
-
-            if (includeType)
-                rooms = rooms.Include(r => r.RoomType);
-
-            if (!trackEntity)
-                rooms = rooms.AsNoTracking();
-
-            return await rooms.FirstOrDefaultAsync(r => r.RoomId == roomId);
-        }
-
-        public async Task<IEnumerable<Room>> GetRoomsAsync()
-        {
-            return await _dbContext.Rooms.Include(r => r.RoomType).AsNoTracking().ToListAsync();
-        }
-
-        public async Task<(int total, int available, int occupied)> GetRoomsCountAsync()
-        {
-            int totalCount = await _dbContext.Rooms.CountAsync();
-            int availableCount = await _dbContext.Rooms.CountAsync(r => r.Status == "Available");
-            int occupiedCount = await _dbContext.Rooms.CountAsync(r => r.Status == "Occupied");
+            int totalCount = await this.dbContext.Room.CountAsync();
+            int availableCount = await this.dbContext.Room.CountAsync(r => r.RoomStatusId == (int)Enums.RoomStatus.Available);
+            int occupiedCount = await this.dbContext.Room.CountAsync(r => r.RoomStatusId == (int)Enums.RoomStatus.Occupied);
 
             return (totalCount, availableCount, occupiedCount);
         }
 
-        public async Task<int> GetRoomsCountByRoomTypeAsync(string typeName)
+        public async Task<Room?> GetByIdAsync(Guid roomId, bool includeType, bool trackEntity = true)
         {
-            return await _dbContext.Rooms.CountAsync(r => r.RoomType!.Name == typeName);
+            var query = this.dbContext.Room as IQueryable<Room>;
+
+            // Always include the status
+            query = query.Include(r => r.RoomStatus);
+
+            if (includeType)
+            {
+                query = query.Include(r => r.RoomType);
+            }
+
+            if (!trackEntity)
+            {
+                query = query.AsNoTracking();
+            }
+
+            return await query.FirstOrDefaultAsync(r => r.RoomId == roomId);
         }
 
-        public async Task UpdateStatusAsync(string roomId, string status)
+        public async Task<List<Room>> GetListAsync(bool includeType, bool trackEntity = true)
         {
-            await _dbContext.Rooms
+            var query = this.dbContext.Room as IQueryable<Room>;
+
+            // Always include the status
+            query = query.Include(r => r.RoomStatus);
+
+            if (includeType)
+            {
+                query = query.Include(r => r.RoomType);
+            }
+
+            if (!trackEntity)
+            {
+                query = query.AsNoTracking();
+            }
+            return await query.ToListAsync();
+        }
+
+        public async Task<int> GetRoomCountByRoomTypeAsync(Guid roomTypeId)
+        {
+            return await this.dbContext.Room.CountAsync(r => r.RoomType!.RoomTypeId == roomTypeId);
+        }
+
+        public async Task UpdateStatusAsync(Guid roomId, Enums.RoomStatus status)
+        {
+            await this.dbContext.Room
                 .Where(r => r.RoomId == roomId)
-                .ExecuteUpdateAsync(r => r.SetProperty(r => r.Status, status));
+                .ExecuteUpdateAsync(r => r.SetProperty(r => r.RoomStatusId, (int)status));
         }
     }
 }

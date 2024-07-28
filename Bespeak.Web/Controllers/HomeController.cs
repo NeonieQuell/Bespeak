@@ -11,13 +11,13 @@ namespace Bespeak.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IRoomRepository _roomRepository;
-        private readonly IBookingRepository _bookingRepository;
+        private readonly IReservationRepository _bookingRepository;
 
         #region Constructor
         public HomeController(
             IMapper mapper,
             IRoomRepository roomRepository,
-            IBookingRepository bookingRepository)
+            IReservationRepository bookingRepository)
         {
             _mapper = mapper;
             _roomRepository = roomRepository;
@@ -28,9 +28,9 @@ namespace Bespeak.Web.Controllers
         public async Task<ActionResult> Index()
         {
             (int totalRoomsCount, int availableRoomsCount, int occupiedRoomsCount) =
-                await _roomRepository.GetRoomsCountAsync();
+                await _roomRepository.GetAllCountsAsync();
 
-            var bookingsFromDb = await _bookingRepository.GetRecentBookingsAsync();
+            var bookingsFromDb = await _bookingRepository.GetRecentReservationsAsync();
             var bookings = _mapper.Map<List<BookingDto>>(bookingsFromDb);
 
             var viewModel = new DashboardViewModel()

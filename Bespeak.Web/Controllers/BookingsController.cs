@@ -11,13 +11,13 @@ namespace Bespeak.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IRoomRepository _roomRepository;
-        private readonly IBookingRepository _bookingRepository;
+        private readonly IReservationRepository _bookingRepository;
 
         #region Constructor
         public BookingsController(
             IMapper mapper,
             IRoomRepository roomRepository,
-            IBookingRepository bookingRepository)
+            IReservationRepository bookingRepository)
         {
             _mapper = mapper;
             _roomRepository = roomRepository;
@@ -28,10 +28,10 @@ namespace Bespeak.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var roomsFromDb = await _roomRepository.GetRoomsAsync();
+            var roomsFromDb = await _roomRepository.GetListAsync();
             var rooms = _mapper.Map<List<RoomDto>>(roomsFromDb);
 
-            var bookingsFromDb = await _bookingRepository.GetBookingsAsync();
+            var bookingsFromDb = await _bookingRepository.GetListAsync();
             var bookings = _mapper.Map<List<BookingDto>>(bookingsFromDb);
 
             var viewModel = new BookingsViewModel()
@@ -72,7 +72,7 @@ namespace Bespeak.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> GetBooking(string bookingId)
         {
-            var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(bookingId, false);
+            var bookingFromDb = await _bookingRepository.GetByIdAsync(bookingId, false);
             var booking = _mapper.Map<BookingDto>(bookingFromDb);
             return PartialView("_ViewBookingModal", booking);
         }
@@ -81,11 +81,11 @@ namespace Bespeak.Web.Controllers
         public async Task<ActionResult> EditBooking(string bookingId)
         {
             // Get booking object
-            var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(bookingId, false);
+            var bookingFromDb = await _bookingRepository.GetByIdAsync(bookingId, false);
             var booking = _mapper.Map<BookingDtoForUpdate>(bookingFromDb);
 
             // Get rooms list
-            var roomsFromDb = await _roomRepository.GetRoomsAsync();
+            var roomsFromDb = await _roomRepository.GetListAsync();
             var rooms = _mapper.Map<List<RoomDto>>(roomsFromDb);
 
             var viewModel = new EditBookingViewModel()
@@ -100,7 +100,7 @@ namespace Bespeak.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> UpdateBooking(BookingDtoForUpdate booking)
         {
-            var bookingFromDb = await _bookingRepository.GetBookingByIdAsync(booking.BookingId, true);
+            var bookingFromDb = await _bookingRepository.GetByIdAsync(booking.BookingId, true);
 
             _mapper.Map(booking, bookingFromDb);
 
