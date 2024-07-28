@@ -28,6 +28,13 @@ namespace Bespeak.DataAccess.Repositories
             await this.dbContext.SaveChangesAsync();
         }
 
+        public async Task Archive(int reservationId)
+        {
+            await this.dbContext.Reservation
+                .Where(r => r.ReservationId == reservationId)
+                .ExecuteUpdateAsync(r => r.SetProperty(r => r.IsArchived, true));
+        }
+
         public async Task<Reservation?> GetByIdAsync(int reservationId, bool includeRoom = true, bool trackEntity = true)
         {
             var query = this.dbContext.Reservation as IQueryable<Reservation>;
@@ -59,7 +66,7 @@ namespace Bespeak.DataAccess.Repositories
                 query = query.AsNoTracking();
             }
 
-            return await query.ToListAsync();
+            return await query.Where(r => r.IsArchived == false).ToListAsync();
         }
 
         public async Task<List<Reservation>> GetRecentReservationsAsync(bool includeRoom = true, bool trackEntity = true)
@@ -76,7 +83,7 @@ namespace Bespeak.DataAccess.Repositories
                 query = query.AsNoTracking();
             }
 
-            return await query.Where(r => r.CreateDate > DateTime.Now.AddDays(-7)).ToListAsync();
+            return await query.Where(r => (r.IsArchived == false) && (r.CreateDate > DateTime.Now.AddDays(-7))).ToListAsync();
         }
 
         public async Task<int> GetReservationsCountByRoomTypeAsync(Guid roomTypeId)
@@ -86,9 +93,11 @@ namespace Bespeak.DataAccess.Repositories
 
         public async Task<bool> IsAvailable(Reservation reservation)
         {
-            bool result = await this.dbContext.Reservation.AnyAsync(r => (r.RoomId == reservation.RoomId)
+            bool result = await this.dbContext.Reservation.AnyAsync(r =>
+                (r.IsArchived == false)
+                && ((r.RoomId == reservation.RoomId)
                 && ((reservation.StartDate >= r.StartDate && reservation.StartDate <= r.EndDate)
-                || (reservation.EndDate >= r.StartDate && reservation.EndDate <= r.EndDate)));
+                || (reservation.EndDate >= r.StartDate && reservation.EndDate <= r.EndDate))));
 
             return !result;
         }

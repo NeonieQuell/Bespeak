@@ -14,7 +14,7 @@ namespace Bespeak.DataAccess.Repositories.Base
         Task<Reservation?> GetByIdAsync(int reservationId, bool includeRoom = true, bool trackEntity = true);
 
         /// <summary>
-        /// Retrieves a list of Reservation
+        /// Retrieves a list of Reservation that IS NOT archived
         /// </summary>
         /// <param name="includeRoom">Include the Reservations' related Room and its Type</param>
         /// <param name="trackEntity">Specifies if the entity needs to be tracked by the DbContext</param>
@@ -22,7 +22,8 @@ namespace Bespeak.DataAccess.Repositories.Base
         Task<List<Reservation>> GetListAsync(bool includeRoom = true, bool trackEntity = true);
 
         /// <summary>
-        /// Retrieves a list Reservation. Automatically includes the rooms' RoomType if includeRoom parameter is TRUE
+        /// Retrieves a list Reservation that IS NOT archived. 
+        /// Automatically includes the rooms' RoomType if includeRoom parameter is TRUE
         /// </summary>
         /// <param name="includeRoom">Include the Reservations' related Room and its Type</param>
         /// <param name="trackEntity">Specifies if the entity needs to be tracked by the DbContext</param>
@@ -56,5 +57,12 @@ namespace Bespeak.DataAccess.Repositories.Base
         /// <param name="roomTypeId">The RoomTypeId</param>
         /// <returns>Total Reservations made based on RoomType</returns>
         Task<int> GetReservationsCountByRoomTypeAsync(Guid roomTypeId);
+
+        /// <summary>
+        /// Sets the IsArchived of Reservation to TRUE
+        /// </summary>
+        /// <param name="reservationId">The ReservationId</param>
+        /// <returns></returns>
+        Task Archive(int reservationId);
     }
 }

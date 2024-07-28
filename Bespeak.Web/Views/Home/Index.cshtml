@@ -87,14 +87,14 @@
                                                     visibility
                                                 </span>
                                             </button>
-                                            @* <button type="button"
-                                                    class="btn btn-sm btn-outline-info btn-edit-reservation d-inline-flex"
-                                                    title="Edit">
-                                                <span class="material-symbols-rounded" 
-                                                    style="font-size: 1rem;">
-                                                    edit
+                                            <button type="button"
+                                                    class="btn btn-sm btn-outline-danger btn-archive-reservation d-inline-flex"
+                                                    title="Edit"
+                                                    data-source-controller="Home">
+                                                <span class="material-symbols-rounded" style="font-size: 1rem;">
+                                                    archive
                                                 </span>
-                                            </button> *@
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -110,5 +110,6 @@
 @section Scripts {    
     <script src="~/js/Dashboard.js"></script>
     <script src="~/js/ViewReservationModal.js"></script>
+    <script src="~/js/ArchiveReservation.js"></script>
     @* <script src="~/js/EditReservationModal.js"></script> *@
 }

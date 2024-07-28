@@ -68,6 +68,13 @@ namespace Bespeak.Web.Controllers
             return PartialView("_ViewReservationModal", reservation);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> ArchiveReservation(int reservationId)
+        {
+            await this.reservationRepository.Archive(reservationId);
+            return Json(new { });
+        }
+
         /*[HttpGet]
         public async Task<ActionResult> EditReservation(int reservationId)
         {
