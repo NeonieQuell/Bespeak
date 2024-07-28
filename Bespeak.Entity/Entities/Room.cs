@@ -25,5 +25,7 @@
         public RoomStatus? RoomStatus { get; set; }
 
         public int FloorNumber { get; set; }
+
+        public IEnumerable<Reservation>? Reservations { get; set; }
     }
 }

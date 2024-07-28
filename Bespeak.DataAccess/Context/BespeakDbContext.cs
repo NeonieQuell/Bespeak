@@ -34,12 +34,18 @@ namespace Bespeak.DataAccess.Context
 
                 rt.Property(rt => rt.Name).HasMaxLength(32);
                 rt.Property(rt => rt.Description).HasMaxLength(512);
+
+                rt.HasMany(rt => rt.Rooms).WithOne(r => r.RoomType).HasForeignKey(r => r.RoomTypeId);
             });
 
             // Add default records to the table
             modelBuilder.Entity<Entities.RoomStatus>(rs =>
             {
                 rs.HasKey(rs => rs.RoomStatusId).IsClustered();
+
+                rs.Property(rs => rs.Name).HasMaxLength(32);
+
+                rs.HasMany(rs => rs.Rooms).WithOne(r => r.RoomStatus).HasForeignKey(r => r.RoomStatusId);
 
                 rs.HasData(
                     new Entities.RoomStatus { RoomStatusId = (int)Enums.Available, Name = nameof(Enums.Available) },
@@ -50,15 +56,15 @@ namespace Bespeak.DataAccess.Context
             modelBuilder.Entity<Entities.Room>(r =>
             {
                 r.HasKey(r => r.RoomId).IsClustered(false);
-                r.HasOne(r => r.RoomType).WithOne().HasForeignKey<Entities.RoomType>(r => r.RoomTypeId);
-                r.HasOne(r => r.RoomStatus).WithOne().HasForeignKey<Entities.RoomStatus>(r => r.RoomStatusId);
+
+                r.HasMany(room => room.Reservations)
+                    .WithOne(reservation => reservation.Room)
+                    .HasForeignKey(reservation => reservation.RoomId);
             });
 
             modelBuilder.Entity<Entities.Reservation>(r =>
             {
                 r.HasKey(r => r.ReservationId).IsClustered();
-                r.HasOne(r => r.Room).WithOne().HasForeignKey<Entities.Room>(r => r.RoomId);
-
                 r.Property(r => r.Reserver).HasMaxLength(128);
             });
         }
