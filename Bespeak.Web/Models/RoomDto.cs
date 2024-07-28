@@ -1,33 +1,53 @@
-﻿namespace Bespeak.Web.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Bespeak.Web.Models
 {
     public class RoomDto
     {
-        public string RoomId { get; set; } = string.Empty;
+        public Guid RoomId { get; set; }
 
-        public string RoomTypeId { get; set; } = string.Empty;
+        /// <summary>
+        /// The RoomTypeId of RoomTypeDto Object
+        /// </summary>
+        public Guid RoomTypeId { get; set; }
 
-        public RoomTypeDto RoomType { get; set; } = null!;
+        /// <summary>
+        /// The RoomTypeDto Object of RoomTypeId Property
+        /// </summary>
+        public RoomTypeDto? RoomType { get; set; }
 
-        public string Status { get; set; } = string.Empty;
+        /// <summary>
+        /// The RoomStatusId of RoomStatusDto Object
+        /// </summary>
+        public int RoomStatusId { get; set; }
+
+        /// <summary>
+        /// The RoomStatusDto Object of RoomStatusId Property
+        /// </summary>
+        public RoomStatusDto? RoomStatus { get; set; }
 
         public int FloorNumber { get; set; }
     }
 
     public class RoomDtoForCreate
     {
-        public string RoomTypeId { get; set; } = string.Empty;
+        [Required]
+        public Guid RoomTypeId { get; set; }
 
+        [Required]
         public int FloorNumber { get; set; }
     }
 
     public class RoomDtoForUpdate
     {
-        public string RoomId { get; set; } = string.Empty;
+        public Guid RoomId { get; set; }
 
-        public string RoomTypeId { get; set; } = string.Empty;
+        public Guid RoomTypeId { get; set; }
 
-        public RoomTypeDto RoomType { get; set; } = null!;
+        public RoomTypeDto? RoomType { get; set; }
 
-        public string Status { get; set; } = string.Empty;
+        public int RoomStatusId { get; set; }
+
+        public RoomStatusDto? RoomStatus { get; set; }
     }
 }

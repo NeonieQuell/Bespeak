@@ -1,36 +1,36 @@
-﻿@model BookingDto
+﻿@model ReservationDto
 
-<div class="modal fade" id="view-booking-modal" tabindex="-1" aria-labelledby="view-booking-modal-label" 
-    aria-hidden="true">
+<div class="modal fade" id="view-reservation-modal" tabindex="-1" aria-labelledby="view-reservation-modal-label"
+     aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="view-booking-modal-label">Viewing #@Model.BookingId</h5>
+                <h5 class="modal-title" id="view-reservation-modal-label">Viewing Reservation #@Model.ReservationId</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        <label asp-for="BookedBy" class="form-label">Booked By</label>
-                        <input asp-for="BookedBy" class="form-control" disabled />
+                        <label asp-for="Reserver" class="form-label">Reserved By</label>
+                        <input asp-for="Reserver" class="form-control" disabled />
                     </div>
                     <div class="mb-4">
-                        <label asp-for="DateBookedFormatted" class="form-label">Booked On</label>
-                        <input asp-for="DateBookedFormatted" class="form-control" disabled />
+                        <label asp-for="CreateDateFormatted" class="form-label">Reserved On</label>
+                        <input asp-for="CreateDateFormatted" class="form-control" disabled />
                     </div>
                     <hr />
                     <div class="row mt-3">
                         <div class="col-3">
-                            <label asp-for="Room.RoomId" class="form-label">Room No.</label>
-                            <input asp-for="Room.RoomId" class="form-control" disabled />
+                            <label asp-for="Room!.RoomId" class="form-label">Room No.</label>
+                            <input asp-for="Room!.RoomId" class="form-control" disabled />
                         </div>
                         <div class="col-6">
-                            <label asp-for="Room.RoomType.TypeName" class="form-label">Room Type</label>
-                            <input asp-for="Room.RoomType.TypeName" class="form-control" disabled />
+                            <label asp-for="Room!.RoomType!.Name" class="form-label">Room Type</label>
+                            <input asp-for="Room!.RoomType!.Name" class="form-control" disabled />
                         </div>
                         <div class="col-3">
-                            <label asp-for="Room.FloorNumber" class="form-label">Floor No.</label>
-                            <input asp-for="Room.FloorNumber" class="form-control" disabled />
+                            <label asp-for="Room!.FloorNumber" class="form-label">Floor No.</label>
+                            <input asp-for="Room!.FloorNumber" class="form-control" disabled />
                         </div>
                     </div>
                     <div class="row mt-3">

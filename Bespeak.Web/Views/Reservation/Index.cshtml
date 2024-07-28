@@ -1,44 +1,44 @@
-﻿@model BookingsViewModel
+﻿@model ReservationViewModel
 @{
-    ViewData["Title"] = "Bookings";
+    ViewData["Title"] = "Reservations";
 }
 
-<div class="modal fade" id="br-modal" tabindex="-1" aria-labelledby="br-modal-label" aria-hidden="true">
+<div class="modal fade" id="reserve-room-modal" tabindex="-1" aria-labelledby="reserve-room-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="br-modal-label">Book a Room</h5>
+                <h5 class="modal-title" id="reserve-room-modal-label">Reserve a Room</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" id="form-br">
-                    <select class="form-control mb-4" name="@nameof(BookingDtoForCreate.RoomId)" required>
+                <form method="POST" id="form-reserve-room">
+                    <select class="form-control mb-4" name="@nameof(ReservationDtoForCreate.RoomId)" required>
                         <option value="" disabled selected>Select Room</option>
-                        @foreach (var rooms in Model.Rooms)
+                        @foreach (var r in Model.Rooms)
                         {
-                            <option value="@rooms.RoomId">@rooms.RoomId</option>
+                            <option value="@r.RoomId">@r.RoomId</option>
                         }
                     </select>
                     <div class="form-outline mb-4">
-                        <input type="text" id="form-br-booked-by" 
-                            name="@nameof(BookingDtoForCreate.BookedBy)" class="form-control" maxlength="128" required />
-                        <label class="form-label" for="form-br-booked-by">Booked By</label>
+                        <input type="text" id="form-reserve-room-reserver" 
+                            name="@nameof(ReservationDtoForCreate.Reserver)" class="form-control" maxlength="128" required />
+                        <label class="form-label" for="form-reserve-room-reserver">Reserved By</label>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-outline">
-                                <input type="date" id="form-br-start-date"
-                                       name="@nameof(BookingDtoForCreate.StartDate)" 
+                                <input type="date" id="form-reserve-room-start-date"
+                                       name="@nameof(ReservationDtoForCreate.StartDate)" 
                                        class="form-control" min="" required />
-                                <label class="form-label" for="form-br-start-date">Start Date</label>
+                                <label class="form-label" for="form-reserve-room-start-date">Start Date</label>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-outline">
-                                <input type="date" id="form-br-end-date"
-                                       name="@nameof(BookingDtoForCreate.EndDate)" 
+                                <input type="date" id="form-reserve-room-end-date"
+                                       name="@nameof(ReservationDtoForCreate.EndDate)" 
                                        class="form-control" min="" required />
-                                <label class="form-label" for="form-br-end-date">End Date</label>
+                                <label class="form-label" for="form-reserve-room-end-date">End Date</label>
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" form="form-br">Save</button>
+                <button type="submit" class="btn btn-primary" form="form-reserve-room">Save</button>
             </div>
         </div>
     </div>
@@ -58,48 +58,48 @@
         <div class="card">
             <div class="card-body">
                 <button type="button" class="btn btn-primary mb-4" data-mdb-toggle="modal"
-                    data-mdb-target="#br-modal">
-                    Book a Room
+                    data-mdb-target="#reserve-room-modal">
+                    Reserve a Room
                 </button>
                 <div class="table-responsive">
-                    <table id="bookings-tbl" class="table table-bordered table-striped table-hover">
+                    <table id="reservations-tbl" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Book #</th>
-                                <th>Room #</th>
+                                <th>Reservation No.</th>
+                                <th>Room No.</th>
                                 <th>Room Type</th>
-                                <th>Booked By</th>
+                                <th>Reserved By</th>
                                 <th>Schedule (dd-mm-yyy)</th>
                                 <th>Duration</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var booking in Model.Bookings)
+                            @foreach (var r in Model.Reservations)
                             {
-                                <tr data-booking-id="@booking.BookingId">
-                                    <td>@booking.BookingId</td>
-                                    <td>@booking.Room!.RoomId</td>
-                                    <td>@booking.Room.RoomType!.TypeName</td>
-                                    <td>@booking.BookedBy</td>
-                                    <td>@booking.StartDateFormatted - @booking.EndDateFormatted</td>
-                                    <td>@booking.Duration</td>
+                                <tr data-reservation-id="@r.ReservationId">
+                                    <td>@r.ReservationId</td>
+                                    <td>@r.Room!.RoomId</td>
+                                    <td>@r.Room.RoomType!.Name</td>
+                                    <td>@r.Reserver</td>
+                                    <td>@r.StartDateFormatted - @r.EndDateFormatted</td>
+                                    <td>@r.Duration</td>
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <button type="button"
-                                                    class="btn btn-sm btn-outline-primary btn-view-booking d-inline-flex"
+                                                    class="btn btn-sm btn-outline-primary btn-view-reservation d-inline-flex"
                                                     title="View">
                                                 <span class="material-symbols-rounded" style="font-size: 1rem;">
                                                     visibility
                                                 </span>
                                             </button>
-                                            <button type="button"
-                                                    class="btn btn-sm btn-outline-info btn-edit-booking d-inline-flex"
+                                            @* <button type="button"
+                                                    class="btn btn-sm btn-outline-info btn-edit-reservation d-inline-flex"
                                                     title="Edit">
                                                 <span class="material-symbols-rounded" style="font-size: 1rem;">
                                                     edit
                                                 </span>
-                                            </button>
+                                            </button> *@
                                         </div>
                                     </td>
                                 </tr>
@@ -113,7 +113,7 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/bookings.js"></script>
-    <script src="~/js/viewbookingmodal.js"></script>
-    <script src="~/js/editbookingmodal.js"></script>
+    <script src="~/js/Reservation.js"></script>
+    <script src="~/js/ViewReservationModal.js"></script>
+    @* <script src="~/js/EditReservationModal.js"></script> *@
 }

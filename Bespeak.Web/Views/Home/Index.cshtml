@@ -13,9 +13,7 @@
                     <div class="card-body d-flex align-items-center justify-content-between">
                         <div>
                             <h5 class="card-title">Total Rooms</h5>
-                            <p class="card-text fs-1">
-                                @Model.TotalRoomsCount
-                            </p>
+                            <p class="card-text fs-1">@Model.TotalRooms</p>
                         </div>
                         <span class="material-symbols-rounded text-primary bg-primary bg-opacity-10 p-2 rounded" 
                             style="font-size: 4rem;">
@@ -29,9 +27,7 @@
                     <div class="card-body d-flex align-items-center justify-content-between">
                         <div>
                             <h5 class="card-title">Available Rooms</h5>
-                            <p class="card-text fs-1">
-                                @Model.AvailableRoomsCount
-                            </p>
+                            <p class="card-text fs-1">@Model.AvailableRooms</p>
                         </div>
                         <span class="material-symbols-rounded text-success bg-success bg-opacity-10 p-2 rounded" 
                             style="font-size: 4rem;">
@@ -45,9 +41,7 @@
                     <div class="card-body d-flex align-items-center justify-content-between">
                         <div>
                             <h5 class="card-title">Occupied Rooms</h5>
-                            <p class="card-text fs-1">
-                                @Model.OccupiedRoomsCount
-                            </p>
+                            <p class="card-text fs-1">@Model.OccupiedRooms</p>
                         </div>
                         <span class="material-symbols-rounded text-danger bg-danger bg-opacity-10 p-2 rounded" 
                             style="font-size: 4rem;">
@@ -59,48 +53,48 @@
         </div>
         <div class="card mt-5">
             <div class="card-body">
-                <h5 class="fs-4 text-body">Recent Bookings (Within 7 days Ago)</h5>
+                <h5 class="fs-4 text-body">Recent Reservations (Within 7 days Ago)</h5>
                 <div class="table-responsive mt-3">
                     <table id="recent-tbl" class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Book #</th>
-                                <th>Room #</th>
+                                <th>Reservation No.</th>
+                                <th>Room No.</th>
                                 <th>Room Type</th>
-                                <th>Booked By</th>
+                                <th>Reserved By</th>
                                 <th>Schedule (mm-dd-yyy)</th>
                                 <th>Duration</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var booking in Model.Bookings)
+                            @foreach (var r in Model.Reservations)
                             {
-                                <tr data-booking-id="@booking.BookingId">
-                                    <td>@booking.BookingId</td>
-                                    <td>@booking.Room!.RoomId</td>
-                                    <td>@booking.Room.RoomType!.TypeName</td>
-                                    <td>@booking.BookedBy</td>
-                                    <td>@booking.StartDateFormatted - @booking.EndDateFormatted</td>
-                                    <td>@booking.Duration</td>
+                                <tr data-reservation-id="@r.ReservationId">
+                                    <td>@r.ReservationId</td>
+                                    <td>@r.Room!.RoomId</td>
+                                    <td>@r.Room.RoomType!.Name</td>
+                                    <td>@r.Reserver</td>
+                                    <td>@r.StartDateFormatted - @r.EndDateFormatted</td>
+                                    <td>@r.Duration</td>
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <button type="button"
-                                                    class="btn btn-sm btn-outline-primary btn-view-booking d-inline-flex"
+                                                    class="btn btn-sm btn-outline-primary btn-view-reservation d-inline-flex"
                                                     title="View">
                                                 <span class="material-symbols-rounded" 
                                                     style="font-size: 1rem;">
                                                     visibility
                                                 </span>
                                             </button>
-                                            <button type="button"
-                                                    class="btn btn-sm btn-outline-info btn-edit-booking d-inline-flex"
+                                            @* <button type="button"
+                                                    class="btn btn-sm btn-outline-info btn-edit-reservation d-inline-flex"
                                                     title="Edit">
                                                 <span class="material-symbols-rounded" 
                                                     style="font-size: 1rem;">
                                                     edit
                                                 </span>
-                                            </button>
+                                            </button> *@
                                         </div>
                                     </td>
                                 </tr>
@@ -114,7 +108,7 @@
 </div>
 
 @section Scripts {    
-    <script src="~/js/dashboard.js"></script>
-    <script src="~/js/viewbookingmodal.js"></script>
-    <script src="~/js/editbookingmodal.js"></script>
+    <script src="~/js/Dashboard.js"></script>
+    <script src="~/js/ViewReservationModal.js"></script>
+    @* <script src="~/js/EditReservationModal.js"></script> *@
 }

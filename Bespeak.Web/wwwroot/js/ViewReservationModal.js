@@ -1,16 +1,16 @@
 ﻿$(document).ready(function () {
-    $('.btn-view-booking').click(function () {
+    $('.btn-view-reservation').click(function () {
         $.ajax({
-            type: 'get',
-            url: 'bookings/getbooking',
-            data: { bookingId: $(this).closest('tr').attr('data-booking-id') },
+            type: 'GET',
+            url: 'Reservation/GetReservation',
+            data: { reservationId: $(this).closest('tr').attr('data-reservation-id') },
             beforeSend: function () {
                 swalInfoWait();
             },
             success: function (response) {
                 Swal.close();
                 $('#modal-container').html(response);
-                $('#view-booking-modal').modal('show');
+                $('#view-reservation-modal').modal('show');
             },
             error: function () {
                 swalErrorDefault();

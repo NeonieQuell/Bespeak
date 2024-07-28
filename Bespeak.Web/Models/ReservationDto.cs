@@ -1,24 +1,37 @@
-﻿namespace Bespeak.Web.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Bespeak.Web.Models
 {
-    public class BookingDto
+    public class ReservationDto
     {
-        public string BookingId { get; set; } = string.Empty;
+        public int ReservationId { get; set; }
 
-        public RoomDto Room { get; set; } = null!;
+        /// <summary>
+        /// The RoomId of RoomDto Object
+        /// </summary>
+        public Guid RoomId { get; set; }
 
-        public string BookedBy { get; set; } = string.Empty;
+        /// <summary>
+        /// The Room Object of RoomId Property
+        /// </summary>
+        public RoomDto? Room { get; set; }
 
-        public DateTime DateBooked { get; set; }
+        /// <summary>
+        /// The person's name who reserved
+        /// </summary>
+        public string Reserver { get; set; } = string.Empty;
+
+        public DateTime CreateDate { get; set; }
 
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
 
-        public DateOnly DateBookedFormatted
+        public DateOnly CreateDateFormatted
         {
             get
             {
-                return DateOnly.FromDateTime(DateBooked);
+                return DateOnly.FromDateTime(CreateDate);
             }
         }
 
@@ -56,18 +69,25 @@
         }
     }
 
-    public class BookingDtoForCreate
+    public class ReservationDtoForCreate
     {
-        public string RoomId { get; set; } = string.Empty;
+        [Required]
+        public int RoomId { get; set; }
 
-        public string BookedBy { get; set; } = string.Empty;
+        [Required]
+        public string Reserver { get; set; } = string.Empty;
 
+        public DateTime CreateDate { get; set; }
+
+        [Required]
         public DateTime StartDate { get; set; }
 
+        [Required]
         public DateTime EndDate { get; set; }
     }
 
-    public class BookingDtoForUpdate : BookingDto
+    // Unused
+    public class ReservationDtoForUpdate : ReservationDto
     {
 
     }

@@ -9,21 +9,21 @@
     });
 
     // Submit for new room
-    $('#form-nr').submit(function (e) {
+    $('#form-new-room').submit(function (e) {
         e.preventDefault();
 
         var formData = new FormData($(this)[0]);
 
         $.ajax({
-            type: 'post',
-            url: 'rooms/createroom',
+            type: 'POST',
+            url: 'Room/CreateRoom',
             cache: false,
             processData: false,
             contentType: false,
-            dataType: 'json',
+            dataType: 'JSON',
             data: formData,
             beforeSend: function () {
-                $('#nr-modal').modal('hide');
+                $('#new-room-modal').modal('hide');
                 swalInfoWait();
             },
             success: function (response) {
@@ -38,8 +38,8 @@
     // Load edit room modal
     $('.btn-edit-room').click(function () {
         $.ajax({
-            type: 'get',
-            url: 'rooms/editroom',
+            type: 'GET',
+            url: 'Room/EditRoom',
             data: { roomId: $(this).closest('tr').attr('data-room-id') },
             beforeSend: function () {
                 swalInfoWait();
@@ -47,27 +47,27 @@
             success: function (response) {
                 Swal.close();
                 $('#modal-container').html(response);
-                $('#er-modal').modal('show');
+                $('#edit-room-modal').modal('show');
             }
         });
     });
 
     // Submit for new room type
-    $('#form-nrt').submit(function (e) {
+    $('#form-new-room-type').submit(function (e) {
         e.preventDefault();
 
         var formData = new FormData($(this)[0]);
 
         $.ajax({
-            type: 'post',
-            url: 'rooms/createroomtype',
+            type: 'POST',
+            url: 'Room/CreateRoomType',
             cache: false,
             processData: false,
             contentType: false,
-            dataType: 'json',
+            dataType: 'JSON',
             data: formData,
             beforeSend: function () {
-                $('#nrt-modal').modal('hide');
+                $('#new-room-type-modal').modal('hide');
                 swalInfoWait();
             },
             success: function (response) {

@@ -9,36 +9,30 @@ namespace Bespeak.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IMapper _mapper;
-        private readonly IRoomRepository _roomRepository;
-        private readonly IReservationRepository _bookingRepository;
+        private readonly IMapper mapper;
+        private readonly IRoomRepository roomRepository;
+        private readonly IReservationRepository reservationRepository;
 
-        #region Constructor
-        public HomeController(
-            IMapper mapper,
-            IRoomRepository roomRepository,
-            IReservationRepository bookingRepository)
+        public HomeController(IMapper mapper, IRoomRepository roomRepository, IReservationRepository reservationRepository)
         {
-            _mapper = mapper;
-            _roomRepository = roomRepository;
-            _bookingRepository = bookingRepository;
+            this.mapper = mapper;
+            this.roomRepository = roomRepository;
+            this.reservationRepository = reservationRepository;
         }
-        #endregion
 
         public async Task<ActionResult> Index()
         {
-            (int totalRoomsCount, int availableRoomsCount, int occupiedRoomsCount) =
-                await _roomRepository.GetAllCountsAsync();
+            (int total, int available, int occupied) = await this.roomRepository.GetAllCountsAsync();
 
-            var bookingsFromDb = await _bookingRepository.GetRecentReservationsAsync();
-            var bookings = _mapper.Map<List<BookingDto>>(bookingsFromDb);
+            var reservationsFromDb = await this.reservationRepository.GetRecentReservationsAsync();
+            var reservations = this.mapper.Map<List<ReservationDto>>(reservationsFromDb);
 
             var viewModel = new DashboardViewModel()
             {
-                TotalRoomsCount = totalRoomsCount,
-                AvailableRoomsCount = availableRoomsCount,
-                OccupiedRoomsCount = occupiedRoomsCount,
-                Bookings = bookings
+                TotalRooms = total,
+                AvailableRooms = available,
+                OccupiedRooms = occupied,
+                Reservations = reservations
             };
 
             return View(viewModel);

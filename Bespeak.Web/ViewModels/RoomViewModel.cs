@@ -2,14 +2,15 @@
 
 namespace Bespeak.Web.ViewModels
 {
-    public class EditBookingViewModel
+    public class RoomViewModel
     {
-        public BookingDtoForUpdate Booking { get; set; } = null!;
+        public List<RoomTypeDto> RoomTypes { get; set; }
 
         public List<RoomDto> Rooms { get; set; }
 
-        public EditBookingViewModel()
+        public RoomViewModel()
         {
+            RoomTypes = new List<RoomTypeDto>();
             Rooms = new List<RoomDto>();
         }
     }

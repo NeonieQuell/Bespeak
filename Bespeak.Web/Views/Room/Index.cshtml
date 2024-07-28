@@ -1,66 +1,66 @@
-﻿@model RoomsViewModel
+﻿@model RoomViewModel
 @{
     ViewData["Title"] = "Rooms";
 }
 
 @* New room modal *@
-<div class="modal fade" id="nr-modal" tabindex="-1" aria-labelledby="nr-modal-label"
+<div class="modal fade" id="new-room-modal" tabindex="-1" aria-labelledby="new-room-modal-label"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="nr-modal-label">New Room</h5>
+                <h5 class="modal-title" id="new-room-modal-label">New Room</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" id="form-nr">
+                <form method="post" id="form-new-room">
                     <select class="form-control mb-4" name="@nameof(RoomDtoForCreate.RoomTypeId)" required>
                         <option value="" disabled selected>Select Type</option>
-                        @foreach (var roomType in Model.RoomTypes)
+                        @foreach (var rt in Model.RoomTypes)
                         {
-                            <option value="@roomType.RoomTypeId">@roomType.TypeName</option>
+                            <option value="@rt.RoomTypeId">@rt.Name</option>
                         }
                     </select>
                     <div class="form-outline">
-                        <input type="number" id="form-nr-floor-num" name="@nameof(RoomDtoForCreate.FloorNumber)"
+                        <input type="number" id="form-new-room-floor-num" name="@nameof(RoomDtoForCreate.FloorNumber)"
                                class="form-control" required />
-                        <label class="form-label" for="form-nr-floor-num">Floor Number</label>
+                        <label class="form-label" for="form-new-room-floor-num">Floor Number</label>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" form="form-nr">Save</button>
+                <button type="submit" class="btn btn-primary" form="form-new-room">Save</button>
             </div>
         </div>
     </div>
 </div>
 @* New room type modal *@
-<div class="modal fade" id="nrt-modal" tabindex="-1" aria-labelledby="nrt-modal-label"
+<div class="modal fade" id="new-new-room-type-modal" tabindex="-1" aria-labelledby="new-new-room-type-modal-label"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="nrt-modal-label">New Room Type</h5>
+                <h5 class="modal-title" id="new-new-room-type-modal-label">New Room Type</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" id="form-nrt">
+                <form method="post" id="form-new-room-type">
                     <div class="form-outline mb-4">
-                        <input type="text" id="form-nrt-type-name" name="@nameof(RoomTypeDtoForCreate.TypeName)"
+                        <input type="text" id="form-new-room-type-name" name="@nameof(RoomTypeDtoForCreate.Name)"
                                class="form-control" maxlength="32" required />
-                        <label class="form-label" for="form-nrt-type-name">Type</label>
+                        <label class="form-label" for="form-room-type-name">Type</label>
                     </div>
                     <div class="form-outline">
-                        <textarea id="form-nrt-description" name="@nameof(RoomTypeDtoForCreate.Description)"
+                        <textarea id="form-new-room-type-description" name="@nameof(RoomTypeDtoForCreate.Description)"
                                   class="form-control" rows="6" maxlength="512"></textarea>
-                        <label class="form-label" for="form-nrt-description">Description</label>
+                        <label class="form-label" for="form-new-room-type-description">Description</label>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" form="form-nrt">Save</button>
+                <button type="submit" class="btn btn-primary" form="form-new-room-type">Save</button>
             </div>
         </div>
     </div>
@@ -89,14 +89,14 @@
                     <div class="tab-pane fade show active" id="tabs-all-rooms" role="tabpanel" 
                         aria-labelledby="tab-all-rooms">
                         <button type="button" class="btn btn-primary mt-2 mb-4" data-mdb-toggle="modal" 
-                            data-mdb-target="#nr-modal">
+                            data-mdb-target="#new-room-modal">
                             New Room
                         </button>
                         <div class="table-responsive">
                             <table id="all-rooms-tbl" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Room #</th>
+                                        <th>Room No.</th>
                                         <th>Type</th>
                                         <th>Status</th>
                                         <th>Floor No.</th>
@@ -104,13 +104,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var room in Model.Rooms)
+                                    @foreach (var r in Model.Rooms)
                                     {
-                                        <tr data-room-id="@room.RoomId">
-                                            <td>@room.RoomId</td>
-                                            <td>@room.RoomType!.TypeName</td>
-                                            <td><span class="status-@room.Status">@room.Status</span></td>
-                                            <td>@room.FloorNumber</td>
+                                        <tr data-room-id="@r.RoomId">
+                                            <td>@r.RoomId</td>
+                                            <td>@r.RoomType!.Name</td>
+                                            <td><span class="status-@r.RoomStatus!.Name">@r.RoomStatus.Name</span></td>
+                                            <td>@r.FloorNumber</td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
                                                     <button type="button"
@@ -139,28 +139,28 @@
                     </div>
                     <div class="tab-pane fade" id="tabs-room-types" role="tabpanel" aria-labelledby="tab-room-types">
                         <button type="button" class="btn btn-primary mt-2 mb-4" data-mdb-toggle="modal"
-                                data-mdb-target="#nrt-modal">
+                                data-mdb-target="#new-room-type-modal">
                             New Room Type
                         </button>
                         <div class="table-responsive">
                             <table id="room-types-tbl" class="table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Room Type #</th>
+                                        <th>Room Type ID</th>
                                         <th class="w-25">Type</th>
                                         <th>Rooms</th>
-                                        <th>Booked</th>
+                                        <th>Reserved</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var roomType in Model.RoomTypes)
+                                    @foreach (var rt in Model.RoomTypes)
                                     {
                                         <tr>
-                                            <td>@roomType.RoomTypeId</td>
-                                            <td>@roomType.TypeName</td>
-                                            <td>@roomType.TotalRoomsOfType</td>
-                                            <td>@roomType.TotalBookedOfType</td>
+                                            <td>@rt.RoomTypeId</td>
+                                            <td>@rt.Name</td>
+                                            <td>@rt.TotalRoomsOfType</td>
+                                            <td>@rt.TotalReservedOfType</td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
                                                     <button type="button"
@@ -194,5 +194,5 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/rooms.js"></script>
+    <script src="~/js/Room.js"></script>
 }

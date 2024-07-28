@@ -1,0 +1,81 @@
+﻿@model EditReservationViewModel
+
+<div class="modal fade" id="edit-reservation-modal" tabindex="-1" aria-labelledby="edit-reservation-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-reservation-modal-label">
+                    Editing Reservation #@Model.Reservation!.ReservationId
+                </h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form-edit-reservation" method="POST">
+                    <input type="hidden" class="form-control" value="@Model.Reservation.ReservationId"
+                        name="@nameof(ReservationDtoForUpdate.ReservationId)" />
+                    <div class="mb-3">
+                        <label asp-for="Reservation!.Reserver" class="form-label">Reserved By</label>
+                        <input asp-for="Reservation!.Reserver" class="form-control" disabled />
+                    </div>
+                    <div class="mb-4">
+                        <label asp-for="Reservation!.CreateDateFormatted" class="form-label">Reserved On</label>
+                        <input asp-for="Reservation!.CreateDateFormatted" class="form-control" disabled />
+                    </div>
+                    <hr />
+                    <div class="row mt-3">
+                        <div class="col-3">
+                            <label for="form-edit-reservation-room-id" class="form-label">Room No.</label>
+                            <select class="form-control editable" id="form-edit-reservation-room-id"
+                                    name="@nameof(ReservationDtoForUpdate.Room.RoomId)" required>
+                                <option value="" disabled>Select Room</option>
+                                @{
+                                    var reservationRoomId = Model.Reservation.Room!.RoomId;
+                                    foreach (var r in Model.Rooms)
+                                    {
+                                        var selected = reservationRoomId == r.RoomId;
+                                        <option value="@r.RoomId" selected="@selected"
+                                            data-room-type="@r.RoomType!.Name"
+                                            data-floor-num="@r.FloorNumber">
+                                            @r.RoomId
+                                        </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for="form-edit-reservation-room-type" class="form-label">Room Type</label>
+                            <input type="text" id="form-edit-reservation-room-type" class="form-control"
+                                value="@Model.Reservation.Room.RoomType!.Name" disabled />
+                        </div>
+                        <div class="col-3">
+                            <label for="form-edit-reservation-floor-num" class="form-label">Floor No.</label>
+                            <input type="text" id="form-edit-reservation-floor-num" class="form-control"
+                                value="@Model.Reservation.Room.FloorNumber" disabled />
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        @{
+                            var startDateVal = Model.Reservation.StartDate.ToString("yyyy-MM-dd");
+                            var endDateVal = Model.Reservation.EndDate.ToString("yyyy-MM-dd");
+                        }
+                        <div class="col-6">
+                            <label class="form-label" for="form-edit-reservation-start-date">Start Date</label>
+                            <input type="date" id="form-edit-reservation-start-date" name="@nameof(ReservationDtoForUpdate.StartDate)"
+                                class="form-control editable" value="@startDateVal" min="" required />
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label" for="form-edit-reservation-end-date">End Date</label>
+                            <input type="date" id="form-edit-reservation-end-date" name="@nameof(ReservationDtoForUpdate.EndDate)"
+                                class="form-control editable" value="@endDateVal" min="" required />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="form-edit-reservation">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -13,13 +13,14 @@ builder.Services.AddDbContext<BespeakDbContext>(options =>
 });
 
 builder.Services.AddScoped<IRoomTypeRepository, RoomTypeRepository>();
+builder.Services.AddScoped<IRoomStatusRepository, RoomStatusRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllersWithViews();
 
-builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+// builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
 var app = builder.Build();
 

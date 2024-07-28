@@ -1,40 +1,40 @@
 ﻿$(document).ready(function () {
     // Data table
-    $('#bookings-tbl').DataTable();
+    $('#reservations-tbl').DataTable();
 
-    // Start date validation for #form-br
-    $('#form-br-start-date').click(function () {
+    // Start date validation for #form-reserve-room
+    $('#form-reserve-room-start-date').click(function () {
         $(this).attr('min', currentDate);
 
-        if ($('#form-br-end-date').val()) {
-            $(this).attr('max', $('#form-br-end-date').val());
+        if ($('#form-reserve-room-end-date').val()) {
+            $(this).attr('max', $('#form-reserve-room-end-date').val());
         }
     });
 
-    // End date validation for #form-br
-    $('#form-br-end-date').click(function () {
-        if ($('#form-br-start-date').val()) {
-            $(this).attr('min', $('#form-br-start-date').val());
+    // End date validation for #form-reserve-room
+    $('#form-reserve-room-end-date').click(function () {
+        if ($('#form-reserve-room-start-date').val()) {
+            $(this).attr('min', $('#form-reserve-room-start-date').val());
         } else {
             $(this).attr('min', currentDate);
         }
     });
 
-    $('#form-br').submit(function (e) {
+    $('#form-reserve-room').submit(function (e) {
         e.preventDefault();
 
         var formData = new FormData($(this)[0]);
 
         $.ajax({
-            type: 'post',
-            url: 'bookings/createbook',
+            type: 'POST',
+            url: 'Reservation/Reserve',
             cache: false,
             processData: false,
             contentType: false,
             data: formData,
-            dataType: 'json',
+            dataType: 'JSON',
             beforeSend: function () {
-                $('#br-modal').modal('hide');
+                $('#reserve-room-modal').modal('hide');
                 swalInfoWait();
             },
             success: function (response) {
