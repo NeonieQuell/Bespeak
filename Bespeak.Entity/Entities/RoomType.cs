@@ -8,6 +8,6 @@
 
         public string? Description { get; set; }
 
-        public IEnumerable<Room>? Rooms { get; set; }
+        public List<Room>? Rooms { get; set; }
     }
 }

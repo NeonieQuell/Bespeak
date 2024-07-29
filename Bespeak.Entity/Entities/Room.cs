@@ -26,6 +26,6 @@
 
         public int FloorNumber { get; set; }
 
-        public IEnumerable<Reservation>? Reservations { get; set; }
+        public List<Reservation>? Reservations { get; set; }
     }
 }
