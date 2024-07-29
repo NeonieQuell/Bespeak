@@ -1,27 +1,25 @@
 ﻿$(document).ready(function () {
-    $('.btn-archive-reservation').click(function () {
-        var sourceController = $(this).attr('data-source-controller');
+    $(document).on('click', '.btn-archive-reservation', function () {
+        var baseUrl = window.location.origin;
+        var controller = $(this).attr('data-controller');
 
         $.ajax({
             type: 'POST',
-            url: 'Reservation/ArchiveReservation',
+            url: baseUrl + '/Reservation/ArchiveReservation',
+            cache: false,
+            dataType: 'JSON',
             data: { reservationId: $(this).closest('tr').attr('data-reservation-id') },
             beforeSend: function () {
                 swalInfoWait();
             },
             success: function (response) {
                 Swal.close();
-                window.location.href = sourceController + '/Index';
+                var redirectUrl = baseUrl + '/' + controller;
+                window.location.href = redirectUrl
             },
             error: function () {
                 swalErrorDefault();
             }
         });
-    });
+    })
 });
-
-/* Steps to Replicate:
-1. Create a Reservation
-2. Archive the Reservation
-3. Create a new Reservation with the same dates as previous one 
-4. Save > Encounter error */
