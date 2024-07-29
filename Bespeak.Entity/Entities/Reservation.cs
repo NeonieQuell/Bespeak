@@ -7,7 +7,7 @@
         /// <summary>
         /// The RoomId of Room Object
         /// </summary>
-        public Guid RoomId { get; set; }
+        public int RoomId { get; set; }
 
         /// <summary>
         /// The Room Object of RoomId Property
@@ -26,5 +26,7 @@
         public DateTime EndDate { get; set; }
 
         public bool IsArchived { get; set; }
+
+        public string ReasonForArchiving { get; set; } = string.Empty;
     }
 }

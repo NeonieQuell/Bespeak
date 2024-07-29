@@ -2,7 +2,7 @@
 {
     public class Room
     {
-        public Guid RoomId { get; set; }
+        public int RoomId { get; set; }
 
         /// <summary>
         /// The RoomTypeId of RoomType Object

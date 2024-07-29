@@ -4,7 +4,7 @@ namespace Bespeak.Web.Models
 {
     public class RoomDto
     {
-        public Guid RoomId { get; set; }
+        public int RoomId { get; set; }
 
         /// <summary>
         /// The RoomTypeId of RoomTypeDto Object
@@ -40,7 +40,7 @@ namespace Bespeak.Web.Models
 
     public class RoomDtoForUpdate
     {
-        public Guid RoomId { get; set; }
+        public int RoomId { get; set; }
 
         public Guid RoomTypeId { get; set; }
 

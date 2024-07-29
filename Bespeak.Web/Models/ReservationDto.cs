@@ -9,7 +9,7 @@ namespace Bespeak.Web.Models
         /// <summary>
         /// The RoomId of RoomDto Object
         /// </summary>
-        public Guid RoomId { get; set; }
+        public int RoomId { get; set; }
 
         /// <summary>
         /// The Room Object of RoomId Property
@@ -74,7 +74,7 @@ namespace Bespeak.Web.Models
     public class ReservationDtoForCreate
     {
         [Required]
-        public Guid RoomId { get; set; }
+        public int RoomId { get; set; }
 
         [Required]
         public string Reserver { get; set; } = string.Empty;

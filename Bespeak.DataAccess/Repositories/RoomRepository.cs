@@ -17,7 +17,6 @@ namespace Bespeak.DataAccess.Repositories
 
         public async Task AddAsync(Room room)
         {
-            room.RoomId = Guid.NewGuid();
             room.RoomStatusId = (int)Enums.RoomStatus.Available;
 
             await this.dbContext.Room.AddAsync(room);
@@ -33,7 +32,7 @@ namespace Bespeak.DataAccess.Repositories
             return (totalCount, availableCount, occupiedCount);
         }
 
-        public async Task<Room?> GetByIdAsync(Guid roomId, bool includeType, bool trackEntity = true)
+        public async Task<Room?> GetByIdAsync(int roomId, bool includeType, bool trackEntity = true)
         {
             var query = this.dbContext.Room as IQueryable<Room>;
 
@@ -77,7 +76,7 @@ namespace Bespeak.DataAccess.Repositories
             return await this.dbContext.Room.CountAsync(r => r.RoomType!.RoomTypeId == roomTypeId);
         }
 
-        public async Task UpdateStatusAsync(Guid roomId, Enums.RoomStatus status)
+        public async Task UpdateStatusAsync(int roomId, Enums.RoomStatus status)
         {
             await this.dbContext.Room
                 .Where(r => r.RoomId == roomId)

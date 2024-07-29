@@ -31,21 +31,72 @@ namespace Bespeak.DataAccess.Context
             modelBuilder.Entity<Entities.RoomType>(rt =>
             {
                 rt.HasKey(rt => rt.RoomTypeId).IsClustered(false);
+                rt.HasMany(rt => rt.Rooms).WithOne(r => r.RoomType).HasForeignKey(r => r.RoomTypeId);
 
                 rt.Property(rt => rt.Name).HasMaxLength(32);
                 rt.Property(rt => rt.Description).HasMaxLength(512);
 
-                rt.HasMany(rt => rt.Rooms).WithOne(r => r.RoomType).HasForeignKey(r => r.RoomTypeId);
+                rt.HasData(
+                    new Entities.RoomType
+                    {
+                        RoomTypeId = Guid.NewGuid(),
+                        Name = "Boardroom",
+                        Description = @"The boardroom layout features a large central table with chairs surrounding it.
+Participants face each other, which lends itself well to direct communication and encourages interaction.".Trim()
+                    },
+                    new Entities.RoomType
+                    {
+                        RoomTypeId = Guid.NewGuid(),
+                        Name = "U-shape",
+                        Description = @"In this layout, tables are arranged in the shape of the letter ""U"" with 
+chairs placed around the outer edges. Presenters or facilitators can move freely within the U-shape and engage with 
+participants more directly.".Trim()
+                    },
+                    new Entities.RoomType
+                    {
+                        RoomTypeId = Guid.NewGuid(),
+                        Name = "Classroom",
+                        Description = @"The classroom layout consists of rows of tables and chairs facing a visual 
+focal point, such as a screen or whiteboard.".Trim()
+                    },
+                    new Entities.RoomType
+                    {
+                        RoomTypeId = Guid.NewGuid(),
+                        Name = "Auditorium",
+                        Description = @"This layout is similar to the classroom style, but without tables. 
+Chairs are arranged in rows facing a stage, screen, or presenter. The theater layout maximizes seating capacity.".Trim()
+                    },
+                    new Entities.RoomType
+                    {
+                        RoomTypeId = Guid.NewGuid(),
+                        Name = "Crescent",
+                        Description = @"In this layout, round tables are partially surrounded by chairs, with one 
+side of the table left open. This arrangement encourages interaction among smaller groups of attendees and provides 
+clear sightlines to the presenter or focal point.".Trim()
+                    },
+                    new Entities.RoomType
+                    {
+                        RoomTypeId = Guid.NewGuid(),
+                        Name = "Banquet",
+                        Description = @"This layout consists of several round tables with seats all around them, 
+allowing smaller groups to sit facing one another as part of a larger whole.".Trim()
+                    },
+                        new Entities.RoomType
+                        {
+                            RoomTypeId = Guid.NewGuid(),
+                            Name = "Huddle",
+                            Description = @"This casual layout consists of a combination of side tables and 
+comfortable seating options, such as sofas, armchairs, and bean bags, arranged in a relaxed manner.".Trim()
+                        });
             });
 
             // Add default records to the table
             modelBuilder.Entity<Entities.RoomStatus>(rs =>
             {
-                rs.HasKey(rs => rs.RoomStatusId).IsClustered();
+                rs.HasKey(rs => rs.RoomStatusId);
+                rs.HasMany(rs => rs.Rooms).WithOne(r => r.RoomStatus).HasForeignKey(r => r.RoomStatusId);
 
                 rs.Property(rs => rs.Name).HasMaxLength(32);
-
-                rs.HasMany(rs => rs.Rooms).WithOne(r => r.RoomStatus).HasForeignKey(r => r.RoomStatusId);
 
                 rs.HasData(
                     new Entities.RoomStatus { RoomStatusId = (int)Enums.Available, Name = nameof(Enums.Available) },
@@ -55,8 +106,7 @@ namespace Bespeak.DataAccess.Context
 
             modelBuilder.Entity<Entities.Room>(r =>
             {
-                r.HasKey(r => r.RoomId).IsClustered(false);
-
+                r.HasKey(r => r.RoomId);
                 r.HasMany(room => room.Reservations)
                     .WithOne(reservation => reservation.Room)
                     .HasForeignKey(reservation => reservation.RoomId);
@@ -64,8 +114,9 @@ namespace Bespeak.DataAccess.Context
 
             modelBuilder.Entity<Entities.Reservation>(r =>
             {
-                r.HasKey(r => r.ReservationId).IsClustered();
+                r.HasKey(r => r.ReservationId);
                 r.Property(r => r.Reserver).HasMaxLength(128);
+                r.Property(r => r.ReasonForArchiving).HasMaxLength(512);
             });
         }
     }

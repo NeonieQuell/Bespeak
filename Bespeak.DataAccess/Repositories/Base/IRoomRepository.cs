@@ -12,7 +12,7 @@ namespace Bespeak.DataAccess.Repositories.Base
         /// <param name="includeType">Include the Room's Type</param>
         /// <param name="trackEntity">Specifies if the entity needs to be tracked by the DbContext</param>
         /// <returns>Entity of Room</returns>
-        Task<Entities.Room?> GetByIdAsync(Guid roomId, bool includeType, bool trackEntity = true);
+        Task<Entities.Room?> GetByIdAsync(int roomId, bool includeType, bool trackEntity = true);
 
         /// <summary>
         /// Retrieves a list of Room
@@ -48,6 +48,6 @@ namespace Bespeak.DataAccess.Repositories.Base
         /// <param name="roomId">The RoomId</param>
         /// <param name="status">The Room's status</param>
         /// <returns></returns>
-        Task UpdateStatusAsync(Guid roomId, Enums.RoomStatus status);
+        Task UpdateStatusAsync(int roomId, Enums.RoomStatus status);
     }
 }

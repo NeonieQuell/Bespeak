@@ -81,7 +81,7 @@ namespace Bespeak.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> EditRoom(Guid roomId)
+        public async Task<ActionResult> EditRoom(int roomId)
         {
             // Get room object
             var roomFromDb = await this.roomRepository.GetByIdAsync(roomId, true, false);
