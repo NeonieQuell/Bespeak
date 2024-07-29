@@ -3,68 +3,8 @@
     ViewData["Title"] = "Rooms";
 }
 
-@* New room modal *@
-<div class="modal fade" id="new-room-modal" tabindex="-1" aria-labelledby="new-room-modal-label"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="new-room-modal-label">New Room</h5>
-                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" id="form-new-room">
-                    <select class="form-control mb-4" name="@nameof(RoomDtoForCreate.RoomTypeId)" required>
-                        <option value="" disabled selected>Select Type</option>
-                        @foreach (var rt in Model.RoomTypes)
-                        {
-                            <option value="@rt.RoomTypeId">@rt.Name</option>
-                        }
-                    </select>
-                    <div class="form-outline">
-                        <input type="number" id="form-new-room-floor-num" name="@nameof(RoomDtoForCreate.FloorNumber)"
-                               class="form-control" required />
-                        <label class="form-label" for="form-new-room-floor-num">Floor Number</label>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" form="form-new-room">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
-@* New room type modal *@
-<div class="modal fade" id="new-room-type-modal" tabindex="-1" aria-labelledby="new-room-type-modal-label"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="new-room-type-modal-label">New Room Type</h5>
-                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" id="form-new-room-type">
-                    <div class="form-outline mb-4">
-                        <input type="text" id="form-new-room-type-name" name="@nameof(RoomTypeDtoForCreate.Name)"
-                               class="form-control" maxlength="32" required />
-                        <label class="form-label" for="form-room-type-name">Type</label>
-                    </div>
-                    <div class="form-outline">
-                        <textarea id="form-new-room-type-description" name="@nameof(RoomTypeDtoForCreate.Description)"
-                                  class="form-control" rows="6" maxlength="512"></textarea>
-                        <label class="form-label" for="form-new-room-type-description">Description</label>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" form="form-new-room-type">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
+<partial name="~/Views/Room/Modals/NewRoomModal.cshtml" />
+<partial name="~/Views/Room/Modals/NewRoomTypeModal.cshtml" />
 <div id="modal-container"></div>
 <div class="row">
     <div class="col-12">

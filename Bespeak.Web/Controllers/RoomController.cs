@@ -2,7 +2,7 @@
 using Bespeak.DataAccess.Repositories.Base;
 using Bespeak.Entity.Entities;
 using Bespeak.Web.Models;
-using Bespeak.Web.ViewModels;
+using Bespeak.Web.ViewModels.Room;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bespeak.Web.Controllers

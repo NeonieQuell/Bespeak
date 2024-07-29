@@ -1,6 +1,6 @@
 ﻿using Bespeak.Web.Models;
 
-namespace Bespeak.Web.ViewModels
+namespace Bespeak.Web.ViewModels.Reservation
 {
     public class ReservationViewModel
     {

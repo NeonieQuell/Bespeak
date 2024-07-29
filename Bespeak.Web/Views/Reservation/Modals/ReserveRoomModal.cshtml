@@ -1,0 +1,48 @@
+﻿<div class="modal fade" id="reserve-room-modal" tabindex="-1" aria-labelledby="reserve-room-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reserve-room-modal-label">Reserve a Room</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="form-reserve-room">
+                    <select class="form-control mb-4" name="@nameof(ReservationDtoForCreate.RoomId)" required>
+                        <option value="" disabled selected>Select Room</option>
+                        @foreach (var r in Model.Rooms)
+                        {
+                            <option value="@r.RoomId">@r.RoomId</option>
+                        }
+                    </select>
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form-reserve-room-reserver"
+                               name="@nameof(ReservationDtoForCreate.Reserver)" class="form-control" maxlength="128" required />
+                        <label class="form-label" for="form-reserve-room-reserver">Reserved By</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-outline">
+                                <input type="date" id="form-reserve-room-start-date"
+                                       name="@nameof(ReservationDtoForCreate.StartDate)"
+                                       class="form-control" min="" required />
+                                <label class="form-label" for="form-reserve-room-start-date">Start Date</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-outline">
+                                <input type="date" id="form-reserve-room-end-date"
+                                       name="@nameof(ReservationDtoForCreate.EndDate)"
+                                       class="form-control" min="" required />
+                                <label class="form-label" for="form-reserve-room-end-date">End Date</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="form-reserve-room">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
