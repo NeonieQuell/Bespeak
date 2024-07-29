@@ -155,12 +155,20 @@
                                 <tbody>
                                     @foreach (var rt in Model.RoomTypes)
                                     {
-                                        <tr>
+                                        <tr data-room-type-id="@rt.RoomTypeId">
                                             <td>@rt.Name</td>
                                             <td>@rt.TotalRoomsOfType</td>
                                             <td>@rt.TotalReservedOfType</td>
                                             <td>
                                                 <div class="d-flex justify-content-center">
+                                                    <button type="button"
+                                                            class="btn btn-sm btn-outline-primary btn-view-room-type d-inline-flex"
+                                                            title="View">
+                                                        <span class="material-symbols-rounded"
+                                                              style="font-size: 1rem;">
+                                                            visibility
+                                                        </span>
+                                                    </button>
                                                     <button type="button"
                                                             class="btn btn-sm btn-outline-info d-inline-flex"
                                                             title="Edit">

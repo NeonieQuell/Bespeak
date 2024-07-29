@@ -1,0 +1,28 @@
+﻿@model RoomTypeDto
+
+<div class="modal fade" id="view-room-type-modal" tabindex="-1" aria-labelledby="view-room-type-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="view-room-type-modal-label">View Room Type</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-4">
+                        <label asp-for="Name" class="form-label">Type</label>
+                        <input asp-for="Name" class="form-control" disabled />
+                    </div>
+                    <div>
+                        <label asp-for="Description" class="form-label">Description</label>
+                        <textarea asp-for="Description" class="form-control" rows="6" maxlength="512" disabled></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

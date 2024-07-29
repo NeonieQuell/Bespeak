@@ -69,6 +69,15 @@ namespace Bespeak.Web.Controllers
             });
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetRoomType(Guid roomTypeId)
+        {
+            var roomTypeFromDb = await this.roomTypeRepository.GetByIdAsync(roomTypeId, false);
+            var roomType = this.mapper.Map<RoomTypeDto>(roomTypeFromDb);
+
+            return PartialView("~/Views/Room/ViewRoomTypeModal.cshtml", roomType);
+        }
+
         [HttpPost]
         public async Task<ActionResult> CreateRoom(RoomDtoForCreate roomDtoForCreate)
         {
@@ -91,7 +100,7 @@ namespace Bespeak.Web.Controllers
             var roomTypesFromDb = await this.roomTypeRepository.GetListAsync(false);
             var roomTypes = this.mapper.Map<List<RoomTypeDto>>(roomTypesFromDb);
 
-            return PartialView("~/Views/Rooms/EditRoomModal.cshtml", new EditRoomViewModel()
+            return PartialView("~/Views/Room/EditRoomModal.cshtml", new EditRoomViewModel()
             {
                 Room = room,
                 RoomTypes = roomTypes

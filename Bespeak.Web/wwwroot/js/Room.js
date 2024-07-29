@@ -81,5 +81,25 @@
                 swalErrorDefault();
             }
         });
-    })
+    });
+
+    // Load view room type modal
+    $('.btn-view-room-type').click(function () {
+        $.ajax({
+            type: 'GET',
+            url: 'Room/GetRoomType',
+            data: { roomTypeId: $(this).closest('tr').attr('data-room-type-id') },
+            beforeSend: function () {
+                swalInfoWait();
+            },
+            success: function (response) {
+                Swal.close();
+                $('#modal-container').html(response);
+                $('#view-room-type-modal').modal('show');
+            },
+            error: function () {
+                swalErrorDefault();
+            }
+        });
+    });
 });
