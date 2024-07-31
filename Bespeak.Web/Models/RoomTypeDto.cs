@@ -24,4 +24,17 @@ namespace Bespeak.Web.Models
         [MaxLength(512)]
         public string? Description { get; set; }
     }
+
+    public class RoomTypeDtoForUpdate
+    {
+        [Required]
+        public Guid RoomTypeId { get; set; }
+
+        [Required]
+        [MaxLength(32)]
+        public string Name { get; set; } = string.Empty;
+
+        [MaxLength(512)]
+        public string? Description { get; set; }
+    }
 }

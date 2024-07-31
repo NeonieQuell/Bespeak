@@ -3,8 +3,8 @@
     ViewData["Title"] = "Rooms";
 }
 
-<partial name="~/Views/Room/Modals/NewRoomModal.cshtml" />
-<partial name="~/Views/Room/Modals/NewRoomTypeModal.cshtml" />
+<partial name="~/Views/Room/Modals/CreateModal.cshtml" />
+<partial name="~/Views/Room/Modals/RoomType/CreateModal.cshtml" />
 <div id="modal-container"></div>
 <div class="row">
     <div class="col-12">
@@ -29,8 +29,8 @@
                     <div class="tab-pane fade show active" id="tabs-all-rooms" role="tabpanel" 
                         aria-labelledby="tab-all-rooms">
                         <button type="button" class="btn btn-primary mt-2 mb-4" data-mdb-toggle="modal" 
-                            data-mdb-target="#new-room-modal">
-                            New Room
+                            data-mdb-target="#create-room-modal">
+                            Add Room
                         </button>
                         <div class="table-responsive">
                             <table id="all-rooms-tbl" class="table table-bordered table-striped table-hover">
@@ -79,8 +79,8 @@
                     </div>
                     <div class="tab-pane fade" id="tabs-room-types" role="tabpanel" aria-labelledby="tab-room-types">
                         <button type="button" class="btn btn-primary mt-2 mb-4" data-mdb-toggle="modal"
-                                data-mdb-target="#new-room-type-modal">
-                            New Room Type
+                                data-mdb-target="#create-room-type-modal">
+                            Add Room Type
                         </button>
                         <div class="table-responsive">
                             <table id="room-types-tbl" class="table table-bordered table-striped table-hover">
@@ -110,7 +110,7 @@
                                                         </span>
                                                     </button>
                                                     <button type="button"
-                                                            class="btn btn-sm btn-outline-info d-inline-flex"
+                                                            class="btn btn-sm btn-outline-info btn-edit-room-type d-inline-flex"
                                                             title="Edit">
                                                         <span class="material-symbols-rounded"
                                                               style="font-size: 1rem;">
@@ -118,11 +118,11 @@
                                                         </span>
                                                     </button>
                                                     <button type="button"
-                                                            class="btn btn-sm btn-outline-danger d-inline-flex"
-                                                            title="Archive">
+                                                            class="btn btn-sm btn-outline-danger btn-remove-room-type d-inline-flex"
+                                                            title="Remove">
                                                         <span class="material-symbols-rounded"
                                                               style="font-size: 1rem;">
-                                                            archive
+                                                            delete
                                                         </span>
                                                     </button>
                                                 </div>
@@ -140,5 +140,6 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/Room.js"></script>
+    <script src="~/js/Room/Room.js"></script>
+    <script src="~/js/Room/RoomType/RoomType.js"></script>
 }

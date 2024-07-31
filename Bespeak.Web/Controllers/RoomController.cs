@@ -14,8 +14,8 @@ namespace Bespeak.Web.Controllers
         private readonly IRoomRepository roomRepository;
         private readonly IReservationRepository reservationRepository;
 
-        public RoomController(IMapper mapper, IRoomTypeRepository roomTypeRepository, IRoomRepository roomRepository,
-            IReservationRepository reservationRepository)
+        public RoomController(IMapper mapper, IRoomTypeRepository roomTypeRepository,
+            IRoomRepository roomRepository, IReservationRepository reservationRepository)
         {
             this.mapper = mapper;
             this.roomTypeRepository = roomTypeRepository;
@@ -70,41 +70,40 @@ namespace Bespeak.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetRoomType(Guid roomTypeId)
+        public async Task<ActionResult> ViewRoomType(Guid roomTypeId)
         {
             var roomTypeFromDb = await this.roomTypeRepository.GetByIdAsync(roomTypeId, false);
             var roomType = this.mapper.Map<RoomTypeDto>(roomTypeFromDb);
+            return PartialView("~/Views/Room/Modals/RoomType/ViewModal.cshtml", roomType);
+        }
 
-            return PartialView("~/Views/Room/ViewRoomTypeModal.cshtml", roomType);
+        [HttpGet]
+        public async Task<ActionResult> EditRoomType(Guid roomTypeId)
+        {
+            var roomTypeFromDb = await this.roomTypeRepository.GetByIdAsync(roomTypeId, false);
+            var roomType = this.mapper.Map<RoomTypeDtoForUpdate>(roomTypeFromDb);
+            return PartialView("~/Views/Room/Modals/RoomType/EditModal.cshtml", roomType);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateRoomType(RoomTypeDtoForUpdate roomTypeDtoForUpdate)
+        {
+            var roomTypeFromDb = await this.roomTypeRepository.GetByIdAsync(roomTypeDtoForUpdate.RoomTypeId);
+            this.mapper.Map(roomTypeDtoForUpdate, roomTypeFromDb);
+            await this.roomTypeRepository.UpdateAsync(roomTypeFromDb!);
+
+            return Json(new
+            {
+                result = true,
+                text = "Updated"
+            });
         }
 
         [HttpPost]
         public async Task<ActionResult> CreateRoom(RoomDtoForCreate roomDtoForCreate)
         {
             await this.roomRepository.AddAsync(this.mapper.Map<Room>(roomDtoForCreate));
-
-            return Json(new
-            {
-                text = "Saved"
-            });
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> EditRoom(int roomId)
-        {
-            // Get room object
-            var roomFromDb = await this.roomRepository.GetByIdAsync(roomId, true, false);
-            var room = this.mapper.Map<RoomDto>(roomFromDb);
-
-            // Get room type list
-            var roomTypesFromDb = await this.roomTypeRepository.GetListAsync(false);
-            var roomTypes = this.mapper.Map<List<RoomTypeDto>>(roomTypesFromDb);
-
-            return PartialView("~/Views/Room/EditRoomModal.cshtml", new EditRoomViewModel()
-            {
-                Room = room,
-                RoomTypes = roomTypes
-            });
+            return Json(new { text = "Saved" });
         }
     }
 }

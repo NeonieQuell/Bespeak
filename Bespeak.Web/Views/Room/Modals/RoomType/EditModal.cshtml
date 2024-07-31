@@ -1,0 +1,33 @@
+﻿@model RoomTypeDtoForUpdate
+
+<div class="modal fade" id="edit-room-type-modal" tabindex="-1" aria-labelledby="edit-room-type-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-room-type-modal-label">Edit Room Type</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form-edit-room-type" method="POST">
+                    <input type="hidden" class="form-control" value="@Model.RoomTypeId"
+                           name="@nameof(RoomTypeDtoForUpdate.RoomTypeId)" />
+                    <div class="mb-4">
+                        <label class="form-label" for="form-edit-room-type-name">Type</label>
+                        <input type="text" id="form-edit-room-type-name" name="@nameof(RoomTypeDtoForUpdate.Name)"
+                               class="form-control" maxlength="32" value="@Model.Name" required />
+                    </div>
+                    <div>
+                        <textarea id="form-edit-room-type-description" name="@nameof(RoomTypeDtoForUpdate.Description)"
+                                  class="form-control" rows="6" maxlength="512">@Model.Description</textarea>
+                        <label class="form-label" for="form-edit-room-type-description">Description</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="form-edit-room-type">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

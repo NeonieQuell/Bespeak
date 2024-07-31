@@ -32,5 +32,12 @@ namespace Bespeak.DataAccess.Repositories.Base
         /// <param name="name">The RoomType's Name</param>
         /// <returns>True or False</returns>
         Task<bool> IsRoomTypeExistsAsync(string name);
+
+        /// <summary>
+        /// Updates the RoomType entity in the database
+        /// </summary>
+        /// <param name="roomType">The RoomType to be updated</param>
+        /// <returns></returns>
+        Task UpdateAsync(RoomType roomType);
     }
 }

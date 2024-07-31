@@ -50,5 +50,11 @@ namespace Bespeak.DataAccess.Repositories
         {
             return await this.dbContext.RoomType.AnyAsync(rt => rt.Name.ToLower() == name.ToLower());
         }
+
+        public async Task UpdateAsync(RoomType roomType)
+        {
+            this.dbContext.Update(roomType);
+            await this.dbContext.SaveChangesAsync();
+        }
     }
 }

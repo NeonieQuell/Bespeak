@@ -3,7 +3,7 @@
     ViewData["Title"] = "Reservations";
 }
 
-<partial name="~/Views/Reservation/Modals/ReserveRoomModal.cshtml" />
+<partial name="~/Views/Reservation/Modals/Reserve.cshtml" />
 <div id="modal-container"></div>
 <div class="row">
     <div class="col-12">
@@ -67,8 +67,7 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/Reservation.js"></script>
-    <script src="~/js/ViewReservationModal.js"></script>
-    <script src="~/js/ArchiveReservation.js"></script>
-    @* <script src="~/js/EditReservationModal.js"></script> *@
+    <script src="~/js/Reservation/Reservation.js"></script>
+    <script src="~/js/Reservation/ViewModal.js"></script>
+    <script src="~/js/Reservation/ArchiveFunction.js"></script>
 }

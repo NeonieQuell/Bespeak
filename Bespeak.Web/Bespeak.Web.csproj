@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\js\Reservation.js" />
-    <None Include="wwwroot\js\Room.js" />
+    <None Include="wwwroot\js\Reservation\Reservation.js" />
+    <None Include="wwwroot\js\Room\Room.js" />
     <None Include="wwwroot\js\Dashboard.js" />
   </ItemGroup>
 

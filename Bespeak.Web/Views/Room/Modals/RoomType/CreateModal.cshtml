@@ -1,28 +1,28 @@
-﻿<div class="modal fade" id="new-room-type-modal" tabindex="-1" aria-labelledby="new-room-type-modal-label"
+﻿<div class="modal fade" id="create-room-type-modal" tabindex="-1" aria-labelledby="create-room-type-modal-label"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="new-room-type-modal-label">New Room Type</h5>
+                <h5 class="modal-title" id="create-room-type-modal-label">New Room Type</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" id="form-new-room-type">
+                <form method="POST" id="form-create-room-type">
                     <div class="form-outline mb-4">
-                        <input type="text" id="form-new-room-type-name" name="@nameof(RoomTypeDtoForCreate.Name)"
+                        <input type="text" id="form-create-room-type-name" name="@nameof(RoomTypeDtoForCreate.Name)"
                                class="form-control" maxlength="32" required />
-                        <label class="form-label" for="form-room-type-name">Type</label>
+                        <label class="form-label" for="form-create-room-type-name">Type</label>
                     </div>
                     <div class="form-outline">
-                        <textarea id="form-new-room-type-description" name="@nameof(RoomTypeDtoForCreate.Description)"
+                        <textarea id="form-create-room-type-description" name="@nameof(RoomTypeDtoForCreate.Description)"
                                   class="form-control" rows="6" maxlength="512"></textarea>
-                        <label class="form-label" for="form-new-room-type-description">Description</label>
+                        <label class="form-label" for="form-create-room-type-description">Description</label>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" form="form-new-room-type">Save</button>
+                <button type="submit" class="btn btn-primary" form="form-create-room-type">Save</button>
             </div>
         </div>
     </div>

@@ -1,13 +1,13 @@
-﻿<div class="modal fade" id="new-room-modal" tabindex="-1" aria-labelledby="new-room-modal-label"
+﻿<div class="modal fade" id="create-room-modal" tabindex="-1" aria-labelledby="create-room-modal-label"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="new-room-modal-label">New Room</h5>
+                <h5 class="modal-title" id="create-room-modal-label">New Room</h5>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" id="form-new-room">
+                <form method="post" id="form-create-room">
                     <select class="form-control mb-4" name="@nameof(RoomDtoForCreate.RoomTypeId)" required>
                         <option value="" disabled selected>Select Type</option>
                         @foreach (var rt in Model.RoomTypes)
@@ -16,15 +16,15 @@
                         }
                     </select>
                     <div class="form-outline">
-                        <input type="number" id="form-new-room-floor-num" name="@nameof(RoomDtoForCreate.FloorNumber)"
+                        <input type="number" id="form-create-room-floor-num" name="@nameof(RoomDtoForCreate.FloorNumber)"
                                class="form-control" required />
-                        <label class="form-label" for="form-new-room-floor-num">Floor Number</label>
+                        <label class="form-label" for="form-create-room-floor-num">Floor Number</label>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" form="form-new-room">Save</button>
+                <button type="submit" class="btn btn-primary" form="form-create-room">Save</button>
             </div>
         </div>
     </div>
