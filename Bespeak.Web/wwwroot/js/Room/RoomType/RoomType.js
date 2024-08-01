@@ -18,7 +18,7 @@
             },
             success: function (response) {
                 if (response.result) {
-                    swalSuccess(response.text);
+                    swalSuccessCustom(response.text);
                 } else {
                     swalErrorCustom(response.text);
                 }
@@ -85,11 +85,26 @@
                 swalInfoWait();
             },
             success: function (response) {
-                if (response.result) {
-                    swalSuccess(response.text);
-                } else {
-                    swalErrorCustom(response.text);
-                }
+                Swal.close();
+                swalSuccessDefault();
+            },
+            error: function () {
+                swalErrorDefault();
+            }
+        });
+    });
+
+    $('.btn-delete-room-type').click(function () {
+        $.ajax({
+            type: 'DELETE',
+            url: 'Room/DeleteRoomType',
+            data: { roomTypeId: $(this).closest('tr').attr('data-room-type-id') },
+            beforeSend: function () {
+                swalInfoWait();
+            },
+            success: function (response) {
+                Swal.close();
+                swalSuccessDefault();
             },
             error: function () {
                 swalErrorDefault();

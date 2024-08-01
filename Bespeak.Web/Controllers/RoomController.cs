@@ -91,12 +91,14 @@ namespace Bespeak.Web.Controllers
             var roomTypeFromDb = await this.roomTypeRepository.GetByIdAsync(roomTypeDtoForUpdate.RoomTypeId);
             this.mapper.Map(roomTypeDtoForUpdate, roomTypeFromDb);
             await this.roomTypeRepository.UpdateAsync(roomTypeFromDb!);
+            return Json(new { });
+        }
 
-            return Json(new
-            {
-                result = true,
-                text = "Updated"
-            });
+        [HttpDelete]
+        public async Task<ActionResult> DeleteRoomType(Guid roomTypeId)
+        {
+            await this.roomTypeRepository.DeleteAsync(roomTypeId);
+            return Json(new { });
         }
 
         [HttpPost]

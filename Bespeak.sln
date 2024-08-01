@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bespeak.Entity", "Bespeak.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bespeak.DataAccess", "Bespeak.DataAccess\Bespeak.DataAccess.csproj", "{E51484A3-D51A-4E8D-95AD-DB39FAE347BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespeak.Constants", "Bespeak.Constants\Bespeak.Constants.csproj", "{3D4C4122-70D9-486E-9255-8B777F39E097}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bespeak.Constants", "Bespeak.Constants\Bespeak.Constants.csproj", "{3D4C4122-70D9-486E-9255-8B777F39E097}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bespeak.ExtensionMethod", "Bespeak.ExtensionMethod\Bespeak.ExtensionMethod.csproj", "{1ED5D7F0-D1E8-4846-B518-3258025C0FB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3D4C4122-70D9-486E-9255-8B777F39E097}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D4C4122-70D9-486E-9255-8B777F39E097}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D4C4122-70D9-486E-9255-8B777F39E097}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ED5D7F0-D1E8-4846-B518-3258025C0FB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ED5D7F0-D1E8-4846-B518-3258025C0FB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ED5D7F0-D1E8-4846-B518-3258025C0FB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ED5D7F0-D1E8-4846-B518-3258025C0FB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

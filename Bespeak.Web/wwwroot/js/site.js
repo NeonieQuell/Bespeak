@@ -14,7 +14,19 @@ function swalInfoWait() {
     });
 }
 
-function swalSuccess(text) {
+function swalSuccessDefault() {
+    Swal.fire({
+        icon: 'success',
+        text: 'Success',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        confirmButtonColor: '#3b71ca'
+    }).then(() => {
+        location.reload(true);
+    });
+}
+
+function swalSuccessCustom(text) {
     Swal.fire({
         icon: 'success',
         text: text,

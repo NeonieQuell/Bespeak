@@ -22,6 +22,11 @@ namespace Bespeak.DataAccess.Repositories
             await this.dbContext.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(Guid roomTypeId)
+        {
+            await this.dbContext.RoomType.Where(rt => rt.RoomTypeId == roomTypeId).ExecuteDeleteAsync();
+        }
+
         public async Task<RoomType?> GetByIdAsync(Guid roomTypeId, bool trackEntity = true)
         {
             var query = this.dbContext.RoomType as IQueryable<RoomType>;

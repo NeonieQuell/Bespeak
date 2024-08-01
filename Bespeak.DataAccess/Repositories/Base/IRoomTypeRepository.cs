@@ -39,5 +39,12 @@ namespace Bespeak.DataAccess.Repositories.Base
         /// <param name="roomType">The RoomType to be updated</param>
         /// <returns></returns>
         Task UpdateAsync(RoomType roomType);
+
+        /// <summary>
+        /// Deletes a RoomType entity in the database
+        /// </summary>
+        /// <param name="roomTypeId">The RoomTypeId</param>
+        /// <returns></returns>
+        Task DeleteAsync(Guid roomTypeId);
     }
 }

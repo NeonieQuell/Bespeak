@@ -27,7 +27,7 @@
                 swalInfoWait();
             },
             success: function (response) {
-                swalSuccess(response.text);
+                swalSuccessCustom(response.text);
             },
             error: function () {
                 swalErrorDefault();

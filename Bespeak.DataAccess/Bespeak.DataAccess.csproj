@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bespeak.Entity\Bespeak.Entity.csproj" />
+    <ProjectReference Include="..\Bespeak.ExtensionMethod\Bespeak.ExtensionMethod.csproj" />
   </ItemGroup>
 
 </Project>
