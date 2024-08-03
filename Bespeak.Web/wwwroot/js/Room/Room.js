@@ -47,8 +47,7 @@
         });
     });
 
-    // Load edit room modal
-    /*$('.btn-edit-room').click(function () {
+    $('.btn-edit-room').click(function () {
         $.ajax({
             type: 'GET',
             url: 'Room/EditRoom',
@@ -62,5 +61,5 @@
                 $('#edit-room-modal').modal('show');
             }
         });
-    });*/
+    });
 });

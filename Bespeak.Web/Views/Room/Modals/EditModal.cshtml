@@ -1,0 +1,68 @@
+﻿@using Bespeak.Constants.Enums;
+@model EditRoomViewModel
+
+<div class="modal fade" id="edit-room-modal" tabindex="-1" aria-labelledby="edit-room-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-room-modal-label">Edit Room</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form-edit-room" method="POST">
+                    <input type="hidden" class="form-control" value="@Model.Room.RoomId"
+                           name="@nameof(RoomDtoForUpdate.RoomId)" />
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label asp-for="Room.RoomId" class="form-label">Room No.</label>
+                            <input asp-for="Room.RoomId" class="form-control" disabled />
+                        </div>
+                        <div class="col-6">
+                            <label for="form-edit-room-room-type" class="form-label">Room Type</label>
+                            <select class="form-control" id="form-edit-room-room-type"
+                                    name="@nameof(RoomDtoForUpdate.RoomTypeId)" required>
+                                <option value="" disabled>Select Room Type</option>
+                                @{
+                                    var roomTypeId = Model.Room.RoomType.RoomTypeId;
+                                    foreach (var rt in Model.RoomTypes)
+                                    {
+                                        var selectedRoomTypeId = roomTypeId == rt.RoomTypeId;
+                                        <option value="@rt.RoomTypeId" selected="@selectedRoomTypeId">
+                                            @rt.Name
+                                        </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="form-edit-room-status" class="form-label">Status</label>
+                            <select class="form-control" id="form-edit-room-status"
+                                    name="@nameof(RoomDtoForUpdate.RoomStatusId)" required>
+                                <option value="" disabled>Select Status</option>
+                                @{
+                                    var rsAvailableId = (int)RoomStatus.Available;
+                                    var rsOccupiedId = (int)RoomStatus.Occupied;
+                                }
+                                <option value="@rsAvailableId" selected="@(Model.Room.RoomStatusId == rsAvailableId)">
+                                    @RoomStatus.Available</option>
+                                <option value="@rsOccupiedId" selected="@(Model.Room.RoomStatusId == rsOccupiedId)">
+                                    @RoomStatus.Occupied</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="Room.FloorNumber" class="form-label">Floor Number</label>
+                            <input asp-for="Room.FloorNumber" class="form-control" disabled />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="form-edit-room">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

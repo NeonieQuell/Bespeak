@@ -115,5 +115,21 @@ namespace Bespeak.Web.Controllers
             var room = this.mapper.Map<RoomDto>(roomFromDb);
             return PartialView("~/Views/Room/Modals/ViewModal.cshtml", room);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> EditRoom(int roomId)
+        {
+            var roomFromDb = await this.roomRepository.GetByIdAsync(roomId, true, false);
+            var room = this.mapper.Map<RoomDto>(roomFromDb);
+
+            var roomTypesFromDb = await this.roomTypeRepository.GetListAsync(false);
+            var roomTypes = this.mapper.Map<List<RoomTypeDto>>(roomTypesFromDb);
+
+            return PartialView("~/Views/Room/Modals/EditModal.cshtml", new EditRoomViewModel()
+            {
+                Room = room,
+                RoomTypes = roomTypes
+            });
+        }
     }
 }

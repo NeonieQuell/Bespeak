@@ -14,7 +14,7 @@ namespace Bespeak.Web.Models
         /// <summary>
         /// The RoomTypeDto Object of RoomTypeId Property
         /// </summary>
-        public RoomTypeDto? RoomType { get; set; }
+        public RoomTypeDto RoomType { get; set; } = null!;
 
         /// <summary>
         /// The RoomStatusId of RoomStatusDto Object
@@ -24,7 +24,7 @@ namespace Bespeak.Web.Models
         /// <summary>
         /// The RoomStatusDto Object of RoomStatusId Property
         /// </summary>
-        public RoomStatusDto? RoomStatus { get; set; }
+        public RoomStatusDto RoomStatus { get; set; } = null!;
 
         public int FloorNumber { get; set; }
     }
@@ -44,10 +44,6 @@ namespace Bespeak.Web.Models
 
         public Guid RoomTypeId { get; set; }
 
-        public RoomTypeDto? RoomType { get; set; }
-
         public int RoomStatusId { get; set; }
-
-        public RoomStatusDto? RoomStatus { get; set; }
     }
 }
