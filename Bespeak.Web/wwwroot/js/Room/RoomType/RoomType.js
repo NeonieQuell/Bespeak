@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+    $('#room-types-tbl').DataTable();
+
     $('#form-create-room-type').submit(function (e) {
         e.preventDefault();
 

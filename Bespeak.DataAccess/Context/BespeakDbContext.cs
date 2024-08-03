@@ -43,57 +43,53 @@ namespace Bespeak.DataAccess.Context
                         RoomTypeId = Guid.NewGuid(),
                         Name = "Boardroom",
                         Description = @"The boardroom layout features a large central table with chairs surrounding it.
-                                        Participants face each other, which lends itself well to direct communication 
-                                        and encourages interaction.".MultilinePreserveContent().Trim()
+Participants face each other, which lends itself well to direct communication and encourages interaction."
+.ReplaceNewLineWithSpace().Trim()
                     },
                     new Entities.RoomType
                     {
                         RoomTypeId = Guid.NewGuid(),
                         Name = "U-shape",
                         Description = @"In this layout, tables are arranged in the shape of the letter ""U"" with 
-                                        chairs placed around the outer edges. Presenters or facilitators can move 
-                                        freely within the U-shape and engage with participants more directly."
-                                        .MultilinePreserveContent().Trim()
+chairs placed around the outer edges. Presenters or facilitators can move freely within the U-shape and engage with
+participants more directly.".ReplaceNewLineWithSpace().Trim()
                     },
                     new Entities.RoomType
                     {
                         RoomTypeId = Guid.NewGuid(),
                         Name = "Classroom",
                         Description = @"The classroom layout consists of rows of tables and chairs facing a visual 
-                                        focal point, such as a screen or whiteboard.".MultilinePreserveContent().Trim()
+focal point, such as a screen or whiteboard.".ReplaceNewLineWithSpace().Trim()
                     },
                     new Entities.RoomType
                     {
                         RoomTypeId = Guid.NewGuid(),
                         Name = "Auditorium",
                         Description = @"This layout is similar to the classroom style, but without tables. 
-                                        Chairs are arranged in rows facing a stage, screen, or presenter. 
-                                        The theater layout maximizes seating capacity.".MultilinePreserveContent().Trim()
+Chairs are arranged in rows facing a stage, screen, or presenter. The theater layout maximizes seating capacity."
+.ReplaceNewLineWithSpace().Trim()
                     },
                     new Entities.RoomType
                     {
                         RoomTypeId = Guid.NewGuid(),
                         Name = "Crescent",
                         Description = @"In this layout, round tables are partially surrounded by chairs, with one 
-                                        side of the table left open. This arrangement encourages interaction among 
-                                        smaller groups of attendees and provides clear sightlines to the presenter
-                                        or focal point.".MultilinePreserveContent().Trim()
+side of the table left open. This arrangement encourages interaction among smaller groups of attendees and provides 
+clear sightlines to the presenter or focal point.".ReplaceNewLineWithSpace().Trim()
                     },
                     new Entities.RoomType
                     {
                         RoomTypeId = Guid.NewGuid(),
                         Name = "Banquet",
                         Description = @"This layout consists of several round tables with seats all around them, 
-                                        allowing smaller groups to sit facing one another as part of a larger whole."
-                                        .MultilinePreserveContent().Trim()
+allowing smaller groups to sit facing one another as part of a larger whole.".ReplaceNewLineWithSpace().Trim()
                     },
                         new Entities.RoomType
                         {
                             RoomTypeId = Guid.NewGuid(),
                             Name = "Huddle",
-                            Description = @"This casual layout consists of a combination of side tables and 
-                                            comfortable seating options, such as sofas, armchairs, and bean bags, 
-                                            arranged in a relaxed manner.".MultilinePreserveContent().Trim()
+                            Description = @"This casual layout consists of a combination of side tables and comfortable 
+seating options, such as sofas, armchairs, and bean bags, arranged in a relaxed manner.".ReplaceNewLineWithSpace().Trim()
                         });
             });
 

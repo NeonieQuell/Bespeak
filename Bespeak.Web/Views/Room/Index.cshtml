@@ -54,6 +54,14 @@
                                             <td>
                                                 <div class="d-flex justify-content-center">
                                                     <button type="button"
+                                                            class="btn btn-sm btn-outline-primary btn-view-room d-inline-flex"
+                                                            title="View">
+                                                        <span class="material-symbols-rounded"
+                                                              style="font-size: 1rem;">
+                                                            visibility
+                                                        </span>
+                                                    </button>
+                                                    <button type="button"
                                                             class="btn btn-sm btn-outline-info btn-edit-room d-inline-flex"
                                                             title="Edit">
                                                         <span class="material-symbols-rounded" 
@@ -62,7 +70,7 @@
                                                         </span>
                                                     </button>
                                                     <button type="button"
-                                                            class="btn btn-sm btn-outline-danger d-inline-flex"
+                                                            class="btn btn-sm btn-outline-danger btn-archive-room d-inline-flex"
                                                             title="Archive">
                                                         <span class="material-symbols-rounded"
                                                               style="font-size: 1rem;">
@@ -142,4 +150,10 @@
 @section Scripts {
     <script src="~/js/Room/Room.js"></script>
     <script src="~/js/Room/RoomType/RoomType.js"></script>
+    <script>
+        // Change header on tab click
+        $('.nav-link').click(function () {
+            $('#header').html($(this).text());
+        });
+    </script>
 }

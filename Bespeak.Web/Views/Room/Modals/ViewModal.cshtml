@@ -1,0 +1,40 @@
+﻿@model RoomDto
+
+<div class="modal fade" id="view-room-modal" tabindex="-1" aria-labelledby="view-room-modal-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="view-room-modal-label">View Room</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label asp-for="RoomId" class="form-label">Room No.</label>
+                            <input asp-for="RoomId" class="form-control" disabled />
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="RoomType!.Name" class="form-label">Room Type</label>
+                            <input asp-for="RoomType!.Name" class="form-control" disabled />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label asp-for="RoomStatus!.Name" class="form-label">Status</label>
+                            <input asp-for="RoomStatus!.Name" class="form-control" disabled />
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="FloorNumber" class="form-label">Floor Number</label>
+                            <input asp-for="FloorNumber" class="form-control" disabled />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,12 +1,5 @@
 ﻿$(document).ready(function () {
-    // Data tables
     $('#all-rooms-tbl').DataTable();
-    $('#room-types-tbl').DataTable();
-
-    // Change header on tab click
-    $('.nav-link').click(function () {
-        $('#header').html($(this).text());
-    });
 
     // Submit for new room
     $('#form-create-room').submit(function (e) {
@@ -28,6 +21,25 @@
             },
             success: function (response) {
                 swalSuccessCustom(response.text);
+            },
+            error: function () {
+                swalErrorDefault();
+            }
+        });
+    });
+
+    $('.btn-view-room').click(function () {
+        $.ajax({
+            type: 'GET',
+            url: 'Room/ViewRoom',
+            data: { roomId: $(this).closest('tr').attr('data-room-id') },
+            beforeSend: function () {
+                swalInfoWait();
+            },
+            success: function (response) {
+                Swal.close();
+                $('#modal-container').html(response);
+                $('#view-room-modal').modal('show');
             },
             error: function () {
                 swalErrorDefault();

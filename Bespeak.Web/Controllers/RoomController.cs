@@ -107,5 +107,13 @@ namespace Bespeak.Web.Controllers
             await this.roomRepository.AddAsync(this.mapper.Map<Room>(roomDtoForCreate));
             return Json(new { text = "Saved" });
         }
+
+        [HttpGet]
+        public async Task<ActionResult> ViewRoom(int roomId)
+        {
+            var roomFromDb = await this.roomRepository.GetByIdAsync(roomId, true, false);
+            var room = this.mapper.Map<RoomDto>(roomFromDb);
+            return PartialView("~/Views/Room/Modals/ViewModal.cshtml", room);
+        }
     }
 }

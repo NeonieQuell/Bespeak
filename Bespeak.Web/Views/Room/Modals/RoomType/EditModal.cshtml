@@ -18,9 +18,9 @@
                                class="form-control" maxlength="32" value="@Model.Name" required />
                     </div>
                     <div>
+                        <label class="form-label" for="form-edit-room-type-description">Description</label>
                         <textarea id="form-edit-room-type-description" name="@nameof(RoomTypeDtoForUpdate.Description)"
                                   class="form-control" rows="6" maxlength="512">@Model.Description</textarea>
-                        <label class="form-label" for="form-edit-room-type-description">Description</label>
                     </div>
                 </form>
             </div>
