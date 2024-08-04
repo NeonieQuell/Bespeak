@@ -131,5 +131,14 @@ namespace Bespeak.Web.Controllers
                 RoomTypes = roomTypes
             });
         }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateRoom(RoomDtoForUpdate roomDtoForUpdate)
+        {
+            var roomFromDb = await this.roomRepository.GetByIdAsync(roomDtoForUpdate.RoomId, false);
+            this.mapper.Map(roomDtoForUpdate, roomFromDb);
+            await this.roomRepository.UpdateAsync(roomFromDb);
+            return Json(new { });
+        }
     }
 }
