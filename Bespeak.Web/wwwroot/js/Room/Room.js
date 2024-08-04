@@ -62,4 +62,31 @@
             }
         });
     });
+
+    $(document).on('submit', '#form-edit-room', function (e) {
+        e.preventDefault();
+
+        var formData = new FormData($(this)[0]);
+
+        $.ajax({
+            type: 'PUT',
+            url: 'Room/UpdateRoom',
+            cache: false,
+            processData: false,
+            contentType: false,
+            dataType: 'JSON',
+            data: formData,
+            beforeSend: function () {
+                $('#edit-room-modal').modal('hide');
+                swalInfoWait();
+            },
+            success: function (response) {
+                Swal.close();
+                swalSuccessDefault();
+            },
+            error: function () {
+                swalErrorDefault();
+            }
+        });
+    })
 });
