@@ -137,7 +137,7 @@ namespace Bespeak.Web.Controllers
         {
             var roomFromDb = await this.roomRepository.GetByIdAsync(roomDtoForUpdate.RoomId, false);
             this.mapper.Map(roomDtoForUpdate, roomFromDb);
-            await this.roomRepository.UpdateAsync(roomFromDb);
+            await this.roomRepository.UpdateAsync(roomFromDb!);
             return Json(new { });
         }
     }

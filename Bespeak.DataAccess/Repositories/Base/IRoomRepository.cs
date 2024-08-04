@@ -49,5 +49,7 @@ namespace Bespeak.DataAccess.Repositories.Base
         /// <param name="status">The Room's status</param>
         /// <returns></returns>
         Task UpdateStatusAsync(int roomId, Enums.RoomStatus status);
+
+        Task UpdateAsync(Entities.Room room);
     }
 }

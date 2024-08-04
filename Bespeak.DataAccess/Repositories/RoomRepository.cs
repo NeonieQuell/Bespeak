@@ -76,6 +76,12 @@ namespace Bespeak.DataAccess.Repositories
             return await this.dbContext.Room.CountAsync(r => r.RoomType!.RoomTypeId == roomTypeId);
         }
 
+        public async Task UpdateAsync(Room room)
+        {
+            this.dbContext.Update(room);
+            await this.dbContext.SaveChangesAsync();
+        }
+
         public async Task UpdateStatusAsync(int roomId, Enums.RoomStatus status)
         {
             await this.dbContext.Room
